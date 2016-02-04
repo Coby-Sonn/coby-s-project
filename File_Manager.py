@@ -3,7 +3,7 @@ import struct
 from ctypes import *
 from Crypto.Hash import SHA256
 from Crypto.Cipher import AES
-
+None
 
 MAGIC_NUMBER = 0xCB
 EXTENSION = '.cb'
