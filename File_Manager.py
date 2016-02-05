@@ -9,7 +9,7 @@ EXTENSION = '.cb'
 FILE_TYPE_CODE_DICTIONARY = {"txt": 1, "docx": 2, "ppt": 3, "mp3": 4, "jpeg": 5, "jpg": 6, "png": 7, "bmp": 8, "pdf": 9,
                              "mp4": 10, "xml": 11}
 
-
+hello
 class FileHeaderStruct(Structure):
     _fields_ = [("magicNumber"       , c_ubyte),
                 ("fileTypeCode"      , c_ubyte),
