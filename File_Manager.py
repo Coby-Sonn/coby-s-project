@@ -65,14 +65,32 @@ class Encryption:
         self.aux = aux
     def generate(self):
         return AES.new(self.original_key, AES.MODE_CBC, self.aux)
-    def validate(self, path, user_uid, uid_list):
+    def validate(self, path, user_uid, user_rbac):
         """recieves the list of users and the local users uid
             and send the path to get decrypted"""
-        if user_uid in uid_list:
+        """user_rbac = [(1, [12345678,23456789]), (0, [23544445, 87342914])]"""
+        uid_list = user_rbac[0][1]
+        print uid_list
+        string_uid_list = []
+        for uid in uid_list:
+            string_uid_list.append(str(uid))
+        print user_uid
+        if str(user_uid) in string_uid_list:
+            print "you made it!"
             self.decrypt_stripped_file_content(path)
+            print "Found, this user is allowed to do: " + str(user_rbac[0][0])
             return True
         else:
-            return False
+            try:
+                if len(user_rbac) == 1:
+                    return False
+                uid_list = user_rbac[1][1]
+                if user_uid in uid_list:
+                    self.decrypt_stripped_file_content(path)
+                    print "Found, this user is allowed to do: " + str(user_rbac[1][0])
+                    return True
+            except:
+                pass
     def encrypt_original_file_content(self, original_content):
         """recieves the content to encrypt"""
         key = self.generate()
@@ -181,8 +199,14 @@ class File_Manager():
             os.remove(path)
             b = AUXGenerator()
             aux = b.hash_generate(users_rbac)
+            print "created hash"
             a = Encryption(self.original_key, aux)
-            a.validate(new_path, self.user_uid, users_rbac)
+            validated = a.validate(new_path, self.user_uid, users_rbac)
+            if validated:
+                print "validated"
+            else:
+                print "the specified user is not allowed to open the file"
+            
 
 
 
@@ -247,11 +271,13 @@ class File_Manager():
 
 
 
-path1 = 'C:\Users\User\Desktop\coby.txt'
-path2 = 'C:\Users\User\Desktop\\coby.cb'
+path1 = 'C:\Users\David\Desktop\coby.txt'
+path2 = 'C:\Users\David\Desktop\\coby.cb'
 uid_list = [12345678, 23456789]
 user_uid = "12345678"
 original_key = "12345678909876543212345678909876"
-#File_Manager.Create_New_Format(File_Manager(user_uid, original_key), path1, uid_list, 1)
+print "starting... "
+File_Manager.Create_New_Format(File_Manager(user_uid, original_key), path1, uid_list, 1)
+raw_input("continue? ")
 File_Manager.Strip_File(File_Manager(user_uid, original_key), path2)
 
