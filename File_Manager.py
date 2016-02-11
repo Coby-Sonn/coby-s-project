@@ -25,75 +25,72 @@ class OptionalHeaderStructAdditions(Structure):
                 ]
 
 class AUXGenerator:
-    class __AUXGenerator:
-        def __init__(self, arg):
-            self.val = arg
-        def __str__(self):
-            return repr(self) + self.val
-    instance = None
-    def __init__(self, users_rbac):
-        #self.path = path
-        self.users_rbac = users_rbac
-        a = AUXGenerator(users_rbac)
-        self.my_hash_str = AUXGenerator.hash_generate(a, users_rbac)
-    def hash_generate(self, users_rbac = None):
 
-        users_rbac = self.users_rbac
-        a = AUXGenerator(self.path)
+    def hash_generate(self, users_rbac):
+        """users_rbac = [(1, [12345678,23456789]), (0, [23544445, 87342914])]"""
         first_UID_list = users_rbac[0][1]
         try:
             second_UID_List = users_rbac[1][1]
-            uid_string = AUXGenerator.uid_string_generate(a, first_UID_list, second_UID_List)
+            uid_string = self.uid_string_generate(first_UID_list, second_UID_List)
             aux_str = str(users_rbac[0][0]) + str(users_rbac[1][0]) + uid_string
         except:
-            uid_string = AUXGenerator.uid_string_generate(a, first_UID_list)
+            uid_string = self.uid_string_generate(first_UID_list)
             aux_str = str(users_rbac[0][0]) + uid_string
 
         my_hash = SHA256.new()
         my_hash.update(aux_str)
         first_hash_str = my_hash.hexdigest()
+
         my_hash_str = ''.join(chr(int(first_hash_str[i:i+2], 16)) for i in range(0, len(first_hash_str), 2))
+        middle = (len(my_hash_str)/2)
+        my_hash_str = my_hash_str[:middle]
         if len(my_hash_str) > 16:
-            my_hash_str = ''.join(chr(int(my_hash_str[i:i+2], 16)) for i in range(0, len(my_hash_str), 2))
+            middle = (len(my_hash_str)/2)
+            my_hash_str = my_hash_str[:middle]
         return my_hash_str
 
     def uid_string_generate(self, UID_List, second_UID_List=None):
         uid_string = ""
         for uid in UID_List:
-            uid_string += uid
+            uid_string += str(uid)
         if second_UID_List is not None:
             for uid in second_UID_List:
-                uid_string += uid
+                uid_string += str(uid)
         print uid_string
         return uid_string
 
 class Encryption:
-    class __Encryption:
-        def __init__(self, arg):
-            self.val = arg
-        def __str__(self):
-            return repr(self) + self.val
-    instance = None
-    def __init__(self, original_key):
-        if not Encryption.instance:
-            Encryption.instance = Encryption.__Encryption(original_key)
+    def __init__(self, original_key, aux):
         self.original_key = original_key
-        self.aux = AUXGenerator.my_hash_str
-
-
-    def generate(self, original_key, aux):
-        return AES.new(original_key, AES.MODE_CBC, aux)
-
+        self.aux = aux
+    def generate(self):
+        return AES.new(self.original_key, AES.MODE_CBC, self.aux)
+    def validate(self, path, user_uid, uid_list):
+        """recieves the list of users and the local users uid
+            and send the path to get decrypted"""
+        if user_uid in uid_list:
+            self.decrypt_stripped_file_content(path)
+            return True
+        else:
+            return False
     def encrypt_original_file_content(self, original_content):
-        """receivs the content to encrypt"""
-        #key = Encryption.generate(self, Encryption.original_key, Encryption.aux)
-        key = Encryption.generate(self, self.original_key, Encryption.aux)
-        content_to_insert = key.encrypt(original_content)
+        """recieves the content to encrypt"""
+        key = self.generate()
+        content_list = [original_content[i:i+16] for i in range(0, len(original_content), 16)]
+        encrypted_content_list = []
+        for chunk in content_list:
+            if len(chunk) < 16:
+                number_to_add = 16 - len(chunk)
+                chunk = chunk + (" " * number_to_add)
+            encrypted_chunk = key.encrypt(chunk)
+            encrypted_content_list.append(encrypted_chunk)
+        content_to_insert = ''.join(encrypted_content_list)
         return content_to_insert
-
     def decrypt_stripped_file_content(self, path):
-        """receivs the already stripped encrypted file in order to decrypt"""
-        key = Encryption.generate(Encryption.original_key, Encryption.aux)
+        """recieves the already stripped encrypted file in order to decrypt"""
+
+
+        key = self.generate()
         file_to_decrypt = open(path, "r")
         cipher_content = file_to_decrypt.read()
         file_to_decrypt.close()
@@ -103,16 +100,38 @@ class Encryption:
         insertion_file.close()
 
 class File_Manager():
+    def __init__(self, user_uid, original_key):
+        self.user_uid = user_uid
+        self.original_key = original_key
+    def Create_users_rbac(self, path):
+        current_file = open(path, "rb")
 
-    def validate(self, path, user_uid, uid_list):
-        """receivs the list of users and the local users uid
-            and send the path to get decrypted"""
-        if user_uid in uid_list:
-            Encryption.decrypt_stripped_file_content(path)
-            return True
-        else:
-            return False
+        """recieves the path of an encrypted file in order to strip the systems headers from it"""
+        file_header = FileHeaderStruct()
+        current_file.readinto(file_header)
+        UID_List = []
+        for i in xrange(file_header.lenUIDS):
+            uid_s = current_file.read(4)
+            UID_List.append(struct.unpack('<L', uid_s)[0])
 
+        first_rbac_users = (file_header.rBac, UID_List)
+        if file_header.optionalHeaderFlag:
+            file_optional_header = OptionalHeaderStructAdditions()
+            current_file.readinto(file_optional_header)
+            second_UID_List = []
+            for i in xrange(file_optional_header.secondLenUIDS):
+                uid_s = current_file.read(4)
+                second_UID_List.append(struct.unpack('<L', uid_s)[0])
+            second_rbac_users = (file_optional_header.secondRbac, second_UID_List)
+
+        try:
+            users_rbac = [first_rbac_users, second_rbac_users]
+            """users_rbac = [(1, [12345678,23456789]), (0, [23544445, 87342914])]"""
+        except:
+            users_rbac = [first_rbac_users]
+
+        current_file.close()
+        return users_rbac
     def Strip_File(self, path):
         print "start"
         try:
@@ -139,7 +158,6 @@ class File_Manager():
 
             first_rbac_users = (file_header.rBac, UID_List)
 
-            file_optional_header = None
             if file_header.optionalHeaderFlag:
                 file_optional_header = OptionalHeaderStructAdditions()
                 current_file.readinto(file_optional_header)
@@ -151,6 +169,7 @@ class File_Manager():
 
             try:
                 users_rbac = [first_rbac_users, second_rbac_users]
+                """users_rbac = [(1, [12345678,23456789]), (0, [23544445, 87342914])]"""
             except:
                 users_rbac = [first_rbac_users]
             print "lists made"
@@ -160,12 +179,14 @@ class File_Manager():
             new_file.write(content)
             new_file.close()
             os.remove(path)
-            a = Encryption("abcde123456789")
-            Encryption.decrypt_stripped_file_content(a, new_path)
+            b = AUXGenerator()
+            aux = b.hash_generate(users_rbac)
+            a = Encryption(self.original_key, aux)
+            a.validate(new_path, self.user_uid, users_rbac)
+
 
 
         except IOError: "here"
-
     def Create_New_Format(self, path, UID_List, rbac, second_UID_List = None, second_rbac = None):
         """receives the file path, a list of uids allowed to do what the rbac specifies, and a rbac
             attaches the header and uses Encryption's function to encrypt the data"""
@@ -203,16 +224,20 @@ class File_Manager():
             new_file.write(addition_to_file_header)
             for uid in second_UID_List:
                 new_file.write(struct.pack('i', uid))
-        print "seconed header and uids written"
+        print "second header and uids written"
         """reading the original content
             and putting it in the file"""
         content = current_file.read()
         print "content saved"
         current_file.close()
-        a = Encryption("abcde123456789")
-        insertion_content = Encryption.encrypt_original_file_content(a, content)
+        b = AUXGenerator()
+        users_rbac = self.Create_users_rbac(new_path)
+        aux = b.hash_generate(users_rbac)
+        print "aux created"
+        a = Encryption(self.original_key, aux)
+        #a.validate(new_path, self.user_uid, users_rbac)
+        insertion_content = a.encrypt_original_file_content(content)
         new_file.write(insertion_content)
-        new_file.write(content)
         print "content written"
         """saving new file and removing the old one which was replaced"""
         new_file.close()
@@ -222,10 +247,11 @@ class File_Manager():
 
 
 
-path1 = 'C:\Users\David\Desktop\coby.txt'
-path2 = 'C:\Users\David\Desktop\\roy.txt'
-File_Manager().Create_New_Format(path1, [12323478, 21236789], 1, [62728762, 45678902], 0)
-#File_Manager().Create_New_Format(path2, [12345678, 23456789], 1)
-
-#l = File_Manager().Strip_File('C:\Users\David\Desktop\coby.cb')
+path1 = 'C:\Users\User\Desktop\coby.txt'
+path2 = 'C:\Users\User\Desktop\\coby.cb'
+uid_list = [12345678, 23456789]
+user_uid = "12345678"
+original_key = "12345678909876543212345678909876"
+#File_Manager.Create_New_Format(File_Manager(user_uid, original_key), path1, uid_list, 1)
+File_Manager.Strip_File(File_Manager(user_uid, original_key), path2)
 
