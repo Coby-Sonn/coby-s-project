@@ -29,13 +29,16 @@ class AUXGenerator:
     def hash_generate(self, users_rbac):
         """users_rbac = [(1, [12345678,23456789]), (0, [23544445, 87342914])]"""
         first_UID_list = users_rbac[0][1]
+        print "first_UID_list " + str(first_UID_list)
         try:
             second_UID_List = users_rbac[1][1]
             uid_string = self.uid_string_generate(first_UID_list, second_UID_List)
             aux_str = str(users_rbac[0][0]) + str(users_rbac[1][0]) + uid_string
         except:
             uid_string = self.uid_string_generate(first_UID_list)
+
             aux_str = str(users_rbac[0][0]) + uid_string
+            print "aux_str " + aux_str
 
         my_hash = SHA256.new()
         my_hash.update(aux_str)
@@ -47,16 +50,18 @@ class AUXGenerator:
         if len(my_hash_str) > 16:
             middle = (len(my_hash_str)/2)
             my_hash_str = my_hash_str[:middle]
+            print "my hash str: " + my_hash_str
         return my_hash_str
 
     def uid_string_generate(self, UID_List, second_UID_List=None):
         uid_string = ""
+        print str(UID_List) + " uid list"
         for uid in UID_List:
             uid_string += str(uid)
         if second_UID_List is not None:
             for uid in second_UID_List:
                 uid_string += str(uid)
-        print uid_string
+        print "uid_string " + uid_string
         return uid_string
 
 class Encryption:
@@ -64,7 +69,9 @@ class Encryption:
         self.original_key = original_key
         self.aux = aux
     def generate(self):
-        return AES.new(self.original_key, AES.MODE_CBC, self.aux)
+        key = AES.new(self.original_key, AES.MODE_CBC, self.aux)
+        print "key: " + str(key)
+        return key
     def validate(self, path, user_uid, user_rbac):
         """recieves the list of users and the local users uid
             and send the path to get decrypted"""
@@ -101,6 +108,7 @@ class Encryption:
                 number_to_add = 16 - len(chunk)
                 chunk = chunk + (" " * number_to_add)
             encrypted_chunk = key.encrypt(chunk)
+            print "encrypted_chunk" + encrypted_chunk
             encrypted_content_list.append(encrypted_chunk)
         content_to_insert = ''.join(encrypted_content_list)
         return content_to_insert
@@ -122,17 +130,20 @@ class File_Manager():
         self.user_uid = user_uid
         self.original_key = original_key
     def Create_users_rbac(self, path):
-        current_file = open(path, "rb")
-
         """recieves the path of an encrypted file in order to strip the systems headers from it"""
+        print "starting Create users rbac func"
+        current_file = open(path, "rb")
         file_header = FileHeaderStruct()
         current_file.readinto(file_header)
+        print file_header.lenUIDS
         UID_List = []
         for i in xrange(file_header.lenUIDS):
             uid_s = current_file.read(4)
+            print uid_s
             UID_List.append(struct.unpack('<L', uid_s)[0])
 
         first_rbac_users = (file_header.rBac, UID_List)
+        print first_rbac_users
         if file_header.optionalHeaderFlag:
             file_optional_header = OptionalHeaderStructAdditions()
             current_file.readinto(file_optional_header)
@@ -190,7 +201,7 @@ class File_Manager():
                 """users_rbac = [(1, [12345678,23456789]), (0, [23544445, 87342914])]"""
             except:
                 users_rbac = [first_rbac_users]
-            print "lists made"
+            print "lists made: " + str(users_rbac)
             content = current_file.read()
             current_file.close()
             new_file = open(new_path, "wb")
@@ -207,9 +218,6 @@ class File_Manager():
             else:
                 print "the specified user is not allowed to open the file"
             
-
-
-
         except IOError: "here"
     def Create_New_Format(self, path, UID_List, rbac, second_UID_List = None, second_rbac = None):
         """receives the file path, a list of uids allowed to do what the rbac specifies, and a rbac
@@ -251,11 +259,12 @@ class File_Manager():
         print "second header and uids written"
         """reading the original content
             and putting it in the file"""
+        users_rbac = self.Create_users_rbac(new_path)
+        print users_rbac
         content = current_file.read()
         print "content saved"
         current_file.close()
         b = AUXGenerator()
-        users_rbac = self.Create_users_rbac(new_path)
         aux = b.hash_generate(users_rbac)
         print "aux created"
         a = Encryption(self.original_key, aux)
