@@ -101,16 +101,32 @@ class Encryption:
     def encrypt_original_file_content(self, original_content):
         """recieves the content to encrypt"""
         key = self.generate()
+        #print "o-g len: " + str(len(original_content)) + " " + original_content
+        content_list = []
         content_list = [original_content[i:i+16] for i in range(0, len(original_content), 16)]
+        i = 0
+        char_str = ""
+        for char in original_content:
+            ##print char
+            if len(char_str) < 16:
+                char_str += char
+                ##print char_str
+            else:
+                content_list.append(char_str)
+        
         encrypted_content_list = []
         for chunk in content_list:
             if len(chunk) < 16:
+                print  "length of chunk: " + str(len(chunk))
                 number_to_add = 16 - len(chunk)
                 chunk = chunk + (" " * number_to_add)
+                print  "length of chunk: " + str(len(chunk))
+
             encrypted_chunk = key.encrypt(chunk)
-            print "encrypted_chunk" + encrypted_chunk
+            ##print "encrypted_chunk" + encrypted_chunk
             encrypted_content_list.append(encrypted_chunk)
         content_to_insert = ''.join(encrypted_content_list)
+        print "content_to_insert: " + str(len(content_to_insert))
         return content_to_insert
     def decrypt_stripped_file_content(self, path):
         """recieves the already stripped encrypted file in order to decrypt"""
@@ -120,7 +136,9 @@ class Encryption:
         file_to_decrypt = open(path, "r")
         cipher_content = file_to_decrypt.read()
         file_to_decrypt.close()
+        print "cipher_content: " + cipher_content + " " + str(len(cipher_content))
         content_to_insert = key.decrypt(cipher_content)
+        print "content_to_insert: " + content_to_insert
         insertion_file = open(path, "w")
         insertion_file.write(content_to_insert)
         insertion_file.close()
@@ -132,7 +150,7 @@ class File_Manager():
     def Create_users_rbac(self, path):
         """recieves the path of an encrypted file in order to strip the systems headers from it"""
         print "starting Create users rbac func"
-        print "path: " + path
+        ##print "path: " + path
         current_file = open(path, "rb")
         file_header = FileHeaderStruct()
         current_file.readinto(file_header)
@@ -167,11 +185,11 @@ class File_Manager():
         try:
             """opening files"""
             current_file = open(path, "rb")
-            print "file opened"
+            ##print "file opened"
             """recieves the path of an encrypted file in order to strip the systems headers from it"""
             file_header = FileHeaderStruct()
             current_file.readinto(file_header)
-            print "header read into"
+            ##print "header read into"
             dict_1 = {}
             for ext, index in FILE_TYPE_CODE_DICTIONARY.items():
                 dict_1[index] = ext
@@ -180,7 +198,7 @@ class File_Manager():
                 and adding the new extension"""
             file_path_list = path.split(".")
             new_path = file_path_list[0]+"." + dict_1[file_header.fileTypeCode]
-            print "path saved"
+            ##print "path saved"
             UID_List = []
             for i in xrange(file_header.lenUIDS):
                 uid_s = current_file.read(4)
@@ -211,7 +229,7 @@ class File_Manager():
             os.remove(path)
             b = AUXGenerator()
             aux = b.hash_generate(users_rbac)
-            print "created hash"
+            ##print "created hash"
             a = Encryption(self.original_key, aux)
             validated = a.validate(new_path, self.user_uid, users_rbac)
             if validated:
@@ -223,13 +241,13 @@ class File_Manager():
     def Create_New_Format(self, path, UID_List, rbac, second_UID_List = None, second_rbac = None):
         """receives the file path, a list of uids allowed to do what the rbac specifies, and a rbac
             attaches the header and uses Encryption's function to encrypt the data"""
-
+        users_rbac = []
         """removing old extension and saving it
             and adding the new extension"""
         file_path_list = path.split(".")
         old_extension = file_path_list[1]
         new_path = file_path_list[0]+".cb"
-        print "ext changed"
+        ##print "ext changed"
         if second_rbac is None and second_UID_List is None:
             optional_header_flag = 0
         else:
@@ -239,44 +257,42 @@ class File_Manager():
                                        rbac,
                                        optional_header_flag,
                                        len(UID_List))
-
-        print "header created"
+        ##print "header created"
         """opening files"""
         new_file = open(new_path, "wb")
         current_file = open(path, "rb")
-        print "files open"
+        ##print "files open"
         """writing header to the file"""
         new_file.write(file_header)
-        print "header written"
+        ##print "header written"
         """adding hexed uids:"""
         for uid in UID_List:
             new_file.write(struct.pack('i', uid))
-        print "uids written"
+        ##print "uids written"
         if optional_header_flag == 1:
             addition_to_file_header = OptionalHeaderStructAdditions(second_rbac, len(second_UID_List))
             new_file.write(addition_to_file_header)
             for uid in second_UID_List:
                 new_file.write(struct.pack('i', uid))
-        print "second header and uids written"
+                users_rbac = [(rbac, UID_List), (second_rbac, second_UID_List)]
+        else:
+            users_rbac = [(rbac, UID_List)]
+        ##print "second header and uids written"
         """reading the original content
             and putting it in the file"""
-        print "-------------look here---------------"
-        ##new_file.close()
-        users_rbac = self.Create_users_rbac(new_path)
-        print "users_rbac: " + str(users_rbac)
-        ##new_file = open(new_path, "rb")
-        ##wanted_str = 
+        print "-------------look here--------------"
+        ##print "users_rbac: " + str(users_rbac)
         content = current_file.read()
-        print "content saved: " + content
+        print "content saved: " + content + "len: " + str(len(content))
         current_file.close()
         b = AUXGenerator()
         aux = b.hash_generate(users_rbac)
-        print "aux created"
+        ##print "aux created"
         a = Encryption(self.original_key, aux)
-        #a.validate(new_path, self.user_uid, users_rbac)
+
         insertion_content = a.encrypt_original_file_content(content)
         new_file.write(insertion_content)
-        print "content written"
+        ##print "content written"
         """saving new file and removing the old one which was replaced"""
         new_file.close()
         os.remove(path)
