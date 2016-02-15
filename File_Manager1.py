@@ -110,11 +110,11 @@ class File_Manager():
         try:
             """opening files"""
             current_file = open(path, "rb")
-            ##print "file opened"
+            
             """recieves the path of an encrypted file in order to strip the systems headers from it"""
             file_header = FileHeaderStruct()
             current_file.readinto(file_header)
-            ##print "header read into"
+            
             dict_1 = {}
             for ext, index in FILE_TYPE_CODE_DICTIONARY.items():
                 dict_1[index] = ext
@@ -149,23 +149,27 @@ class File_Manager():
             content = current_file.read()
             current_file.close()
             new_file = open(new_path, "wb")
-            new_file.write(content)
-
-       
-            new_file.close()
             os.remove(path)
-            b = AUXGenerator()
-            aux = b.hash_generate(users_rbac)
-            ##print "created hash"
+            aux_obj = AUXGenerator()
+            aux = aux_obj.hash_generate(users_rbac)
             crypto_obj = MyCrypto.MyCrypto(self.original_key, aux)
             crypto_obj.generator()
-            insertion_content = crypto_obj.decrypt_content(content)
-            #validated = a.validate(new_path, self.user_uid, users_rbac)
-            #if validated:
-            #    print "validated"
-            #else:
-            #    print "the specified user is not allowed to open the file"
-            print insertion_content
+            new_file = open(new_path, "w")
+            validated = crypto_obj.validate(self.user_uid, users_rbac)
+            if validated:
+                print "validated"
+                insertion_content = crypto_obj.decrypt_content(content)
+                new_file.write(insertion_content)
+                new_file.close()
+            else:
+                print "the specified user is not allowed to open the file"
+                new_file.write(content)
+                new_file.close()
+                os.rename(new_path, path)
+            
+            
+            
+            
             
         except IOError: "here"
     def Create_New_Format(self, path, UID_List, rbac, second_UID_List = None, second_rbac = None):

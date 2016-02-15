@@ -62,7 +62,7 @@ class  MyCrypto:
                 return decrypted_content
 
 
-        def validate(self, path, user_uid, user_rbac):
+        def validate(self, user_uid, user_rbac):
                 """recieves the list of users and the local users uid
                     and send the path to get decrypted"""
                 """user_rbac = [(1, [12345678,23456789]), (0, [23544445, 87342914])]"""
@@ -73,8 +73,6 @@ class  MyCrypto:
                     string_uid_list.append(str(uid))
                 print user_uid
                 if str(user_uid) in string_uid_list:
-                    print "you made it!"
-                    self.decrypt_stripped_file_content(path)
                     print "Found, this user is allowed to do: " + str(user_rbac[0][0])
                     return True
                 else:
@@ -83,7 +81,6 @@ class  MyCrypto:
                             return False
                         uid_list = user_rbac[1][1]
                         if user_uid in uid_list:
-                            self.decrypt_stripped_file_content(path)
                             print "Found, this user is allowed to do: " + str(user_rbac[1][0])
                             return True
                     except:
