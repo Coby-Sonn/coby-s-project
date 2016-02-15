@@ -2,7 +2,7 @@ import os
 import struct
 from ctypes import *
 from Crypto.Hash import SHA256
-from Crypto.Cipher import AES
+import MyCrypto
 
 MAGIC_NUMBER = 0xCB
 EXTENSION = '.cb'
@@ -63,85 +63,9 @@ class AUXGenerator:
                 uid_string += str(uid)
         print "uid_string " + uid_string
         return uid_string
-
-class Encryption:
-    def __init__(self, original_key, aux):
-        self.original_key = original_key
-        self.aux = aux
-    def generate(self):
-        key = AES.new(self.original_key, AES.MODE_CBC, self.aux)
-        print "key: " + str(key)
-        return key
-    def validate(self, path, user_uid, user_rbac):
-        """recieves the list of users and the local users uid
-            and send the path to get decrypted"""
-        """user_rbac = [(1, [12345678,23456789]), (0, [23544445, 87342914])]"""
-        uid_list = user_rbac[0][1]
-        print uid_list
-        string_uid_list = []
-        for uid in uid_list:
-            string_uid_list.append(str(uid))
-        print user_uid
-        if str(user_uid) in string_uid_list:
-            print "you made it!"
-            self.decrypt_stripped_file_content(path)
-            print "Found, this user is allowed to do: " + str(user_rbac[0][0])
-            return True
-        else:
-            try:
-                if len(user_rbac) == 1:
-                    return False
-                uid_list = user_rbac[1][1]
-                if user_uid in uid_list:
-                    self.decrypt_stripped_file_content(path)
-                    print "Found, this user is allowed to do: " + str(user_rbac[1][0])
-                    return True
-            except:
-                pass
-    def encrypt_original_file_content(self, original_content):
-        """recieves the content to encrypt"""
-        key = self.generate()
-        #print "o-g len: " + str(len(original_content)) + " " + original_content
-        content_list = []
-        content_list = [original_content[i:i+16] for i in range(0, len(original_content), 16)]
-        i = 0
-        char_str = ""
-        for char in original_content:
-            ##print char
-            if len(char_str) < 16:
-                char_str += char
-                ##print char_str
-            else:
-                content_list.append(char_str)
-        
-        encrypted_content_list = []
-        for chunk in content_list:
-            if len(chunk) < 16:
-                print  "length of chunk: " + str(len(chunk))
-                number_to_add = 16 - len(chunk)
-                chunk = chunk + (" " * number_to_add)
-                print  "length of chunk: " + str(len(chunk))
-
-            encrypted_chunk = key.encrypt(chunk)
-            ##print "encrypted_chunk" + encrypted_chunk
-            encrypted_content_list.append(encrypted_chunk)
-        content_to_insert = ''.join(encrypted_content_list)
-        print "content_to_insert: " + str(len(content_to_insert))
-        return content_to_insert
-    def decrypt_stripped_file_content(self, path):
-        """recieves the already stripped encrypted file in order to decrypt"""
-
-
-        key = self.generate()
-        file_to_decrypt = open(path, "r")
-        cipher_content = file_to_decrypt.read()
-        file_to_decrypt.close()
-        print "cipher_content: " + cipher_content + " " + str(len(cipher_content))
-        content_to_insert = key.decrypt(cipher_content)
-        print "content_to_insert: " + content_to_insert
-        insertion_file = open(path, "w")
-        insertion_file.write(content_to_insert)
-        insertion_file.close()
+  
+            
+   
 
 class File_Manager():
     def __init__(self, user_uid, original_key):
@@ -165,7 +89,7 @@ class File_Manager():
         print first_rbac_users
         if file_header.optionalHeaderFlag:
             file_optional_header = OptionalHeaderStructAdditions()
-            current_file.readinto(file_optional_header)
+            current_file.readinto(file_optiMyCryptoonal_header)
             second_UID_List = []
             for i in xrange(file_optional_header.secondLenUIDS):
                 uid_s = current_file.read(4)
@@ -180,6 +104,7 @@ class File_Manager():
 
         current_file.close()
         return users_rbac
+    
     def Strip_File(self, path):
         print "start"
         try:
@@ -225,17 +150,22 @@ class File_Manager():
             current_file.close()
             new_file = open(new_path, "wb")
             new_file.write(content)
+
+       
             new_file.close()
             os.remove(path)
             b = AUXGenerator()
             aux = b.hash_generate(users_rbac)
             ##print "created hash"
-            a = Encryption(self.original_key, aux)
-            validated = a.validate(new_path, self.user_uid, users_rbac)
-            if validated:
-                print "validated"
-            else:
-                print "the specified user is not allowed to open the file"
+            crypto_obj = MyCrypto.MyCrypto(self.original_key, aux)
+            crypto_obj.generator()
+            insertion_content = crypto_obj.decrypt_content(content)
+            #validated = a.validate(new_path, self.user_uid, users_rbac)
+            #if validated:
+            #    print "validated"
+            #else:
+            #    print "the specified user is not allowed to open the file"
+            print insertion_content
             
         except IOError: "here"
     def Create_New_Format(self, path, UID_List, rbac, second_UID_List = None, second_rbac = None):
@@ -288,9 +218,9 @@ class File_Manager():
         b = AUXGenerator()
         aux = b.hash_generate(users_rbac)
         ##print "aux created"
-        a = Encryption(self.original_key, aux)
-
-        insertion_content = a.encrypt_original_file_content(content)
+        crypto_obj = MyCrypto.MyCrypto(self.original_key, aux)
+        crypto_obj.generator()
+        insertion_content = crypto_obj.encrypt_content(content)
         new_file.write(insertion_content)
         ##print "content written"
         """saving new file and removing the old one which was replaced"""
