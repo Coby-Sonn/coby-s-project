@@ -132,6 +132,7 @@ class File_Manager():
     def Create_users_rbac(self, path):
         """recieves the path of an encrypted file in order to strip the systems headers from it"""
         print "starting Create users rbac func"
+        print "path: " + path
         current_file = open(path, "rb")
         file_header = FileHeaderStruct()
         current_file.readinto(file_header)
@@ -259,10 +260,14 @@ class File_Manager():
         print "second header and uids written"
         """reading the original content
             and putting it in the file"""
+        print "-------------look here---------------"
+        ##new_file.close()
         users_rbac = self.Create_users_rbac(new_path)
-        print users_rbac
+        print "users_rbac: " + str(users_rbac)
+        ##new_file = open(new_path, "rb")
+        ##wanted_str = 
         content = current_file.read()
-        print "content saved"
+        print "content saved: " + content
         current_file.close()
         b = AUXGenerator()
         aux = b.hash_generate(users_rbac)
