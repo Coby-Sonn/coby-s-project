@@ -22,18 +22,19 @@ class ThreadedServer(object):
         self.sock.listen(5)
         while True:
             client, address = self.sock.accept()
-            client.settimeout(60)
+            client.settimeout(1500) #timeout after 25 minutes of no activity
             threading.Thread(target=self.listenToClient, args=(client, address)).start()
     def KeyExchange(self, client_socket):
         generator_obj = mg.generate()
         private_key, public_key = generator_obj.generate_rsa()
         client_socket.send(public_key)#1
         client_public_key = client_socket.recv(1024)#2
+        client_public_key =  RSA.importKey(client_public_key) #turning keys back into the right type <key>
         symmetric_key = generator_obj.generate_aes()
         self.key = symmetric_key
-        private_key =  RSA.importKey(private_key) #turning keys back into the right type <key>
-        public_key = RSA.importKey(public_key)
-        encrypted = public_key.encrypt(str(symmetric_key), 32)
+        #private_key =  RSA.importKey(private_key) #turning keys back into the right type <key>
+        #public_key = RSA.importKey(public_key)
+        encrypted = client_public_key.encrypt(str(symmetric_key), 32)
         client_socket.send(encrypted)#3
 
 

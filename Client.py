@@ -18,9 +18,11 @@ class Client:
         private_key, public_key = generator_obj.generate_rsa()
         server_public_key = c_socket.recv(1024)#1
         server_public_key = RSA.importKey(server_public_key)
+        private_key = RSA.importKey(private_key)
         c_socket.send(public_key)#2
         symmetric_key_string = c_socket.recv(1024)#3
-        self.symmetric_key = server_public_key.decrypt(symmetric_key_string) # problem with this line!!
+        self.key = private_key.decrypt(symmetric_key_string)
+        print "done"
 
 
 
@@ -34,9 +36,9 @@ class Client:
 
 
 client_obj = Client()
-client_obj.connect('10.92.5.51', 5000)
+client_obj.connect('192.168.4.116', 5000)
 
-client_obj.Send("hello there")
+##client_obj.Send("hello there")
 
 
 
