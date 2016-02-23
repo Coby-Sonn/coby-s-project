@@ -53,6 +53,6 @@ client_obj.connect('192.168.4.116', 5000)
 ##    print "2"
 ##    symmetric_key = my_socket.recv(1024)#3
 ##    print "symmetric_key: " + symmetric_key
-    
+
 
 my_socket.close()
