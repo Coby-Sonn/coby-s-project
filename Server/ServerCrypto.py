@@ -19,7 +19,8 @@ from Crypto.Random.random import getrandbits, randint
 from Crypto import Random
 from Crypto.Hash import SHA256
 from base64 import b64encode, b64decode
-import pickle, time
+import time
+import pickle
 from AES import *
 
 # endregion
@@ -47,13 +48,13 @@ class Crypto:
     # Description: 
     #-----------------------------------------------------------------------------------------------
     def key_exchange(self, client_socket):
+         print "starting key exchange"
          if self.private_key.can_encrypt():
              #--------------------  1 ------------------------------------------------------------------------
              # ------------  Send  server publicKey
-             print "level 1"
              client_socket.send(pickle.dumps(self.private_key.publickey()) + END_LINE)
              time.sleep(0.5)
-
+             client_socket.recv(LEN_UNIT_BUF)
              # -----------  send  Base64 Hash of self.crypto.private_key.publickey()
              client_socket.send(b64encode(SHA256.new(pickle.dumps(self.private_key.publickey())).hexdigest()) + END_LINE)
              time.sleep(0.5)
@@ -61,7 +62,7 @@ class Crypto:
              #--------------------  2 ------------------------------------------------------------------------
              # --------------  Wait client private key  --------------------------------------------------------
              # get Pickled private  key
-             print "level 2"
+
              pickled_client_private_key = client_socket.recv(LEN_UNIT_BUF).split(END_LINE)[0]
              client_private_key = pickle.loads(pickled_client_private_key)
 
@@ -85,7 +86,7 @@ class Crypto:
              #  -------------- Receive from client in parts message
              #  -------------- encrypted by server public key info containing symmetric key and
              #  -------------- hash symmetric key encrypted by client public key
-             print "level 3"
+
              pickled_client_key = ''
              pickled_encrypted_client_key = ''
              #   Recieve from client number of encrypted message parts
@@ -103,7 +104,6 @@ class Crypto:
              #--------   Extract Client Hash Sym Key
              client_encrypted_hash_sym_key = b64decode(items[1])
              client_encrypted_hash_sym_key = pickle.loads(client_encrypted_hash_sym_key)
-
              splitted_client_encrypted_hash_sym_key = [client_encrypted_hash_sym_key[i:i+MAX_ENCRYPTED_MSG_SIZE]
                                   for i in xrange(0, len(client_encrypted_hash_sym_key), MAX_ENCRYPTED_MSG_SIZE)]
              msg_parts = len(splitted_client_encrypted_hash_sym_key)
@@ -112,12 +112,11 @@ class Crypto:
                     # Decryption current part of encrypt client_key
                     part_client_encrypted_hash_sym_key = client_private_key.decrypt(splitted_client_encrypted_hash_sym_key[i])
                     client_hash_sym_key += part_client_encrypted_hash_sym_key
-             print 'Client Hash Sym Key  :     ' + client_hash_sym_key
              calculated_client_sym_key_original = SHA256.new(client_sym_key_original).hexdigest()
              if calculated_client_sym_key_original != client_hash_sym_key:
                    print "Error : hash and original"
                    return   None
-             return  calculated_client_sym_key_original
+             return  client_sym_key_original
          else:
              return  None
 

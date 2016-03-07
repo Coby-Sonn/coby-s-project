@@ -52,7 +52,7 @@ class  PythonServer(threading.Thread):
             #self.gui.guiSock.send("Listening to clients...#")   # to GUI
 
             while True:
-                print "here"
+
                 clientSock, addr = listenerSock.accept()
                 print "accepted"
                 # Thread creating loop

@@ -80,7 +80,11 @@ class  SessionWithClient(threading.Thread):
   
     #-----------------------------------------------------------------------------------------------
     # the main function of the THREAD sessionWithClient class  
-    #-----------------------------------------------------------------------------------------------  
+    #-----------------------------------------------------------------------------------------------
+    def send(self, message):
+        self.clientSock.send(AESCrypt().encryptAES(self.key, message))
+    def recv(self):
+        return AESCrypt().decryptAES(self.key, self.clientSock.recv(LEN_UNIT_BUF))
     def run(self):
         try:               
             # Wait message beginning of communication from client
@@ -91,11 +95,12 @@ class  SessionWithClient(threading.Thread):
             #self.pythonServer.gui.guiSock.send("Hello " +  self.addr[0] + "#")   # to GUI
 
             self.key = self.crypto.key_exchange(self.clientSock)   #  in Crypto
+            #print 'KEY=', b64encode(self.key)
             if self.key:
-                while True:
-                    encrypted_data_ = self.clientSock.recv(LEN_UNIT_BUF)
-                    data = AESCrypt().decryptAES(self.key, encrypted_data_)
-                    print "data from client: " + data
+                #while True:
+
+                    print "data from client: " + self.recv()
+                    self.send("Shalom faggotron = Ethan")
 
 
             self.clientSock.close()
