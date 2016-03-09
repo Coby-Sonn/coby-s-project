@@ -1,4 +1,3 @@
-import struct
 from Crypto.Cipher import AES
 
 

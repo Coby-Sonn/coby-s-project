@@ -1,8 +1,7 @@
-import os
-import struct
+import os, random, string, struct, MyCrypto
 from ctypes import *
 from Crypto.Hash import SHA256
-import MyCrypto
+
 
 MAGIC_NUMBER = 0xCB
 EXTENSION = '.cb'
@@ -12,6 +11,7 @@ FILE_TYPE_CODE_DICTIONARY = {"txt": 1, "docx": 2, "ppt": 3, "mp3": 4, "jpeg": 5,
 
 class FileHeaderStruct(Structure):
     _fields_ = [("magicNumber"       , c_ubyte),
+                ("fileID"            , c_ushort),
                 ("fileTypeCode"      , c_ubyte),
                 ("rBac"              , c_ubyte),
                 ("optionalHeaderFlag", c_ubyte),
@@ -68,16 +68,19 @@ class AUXGenerator:
    
 
 class File_Manager():
-    def __init__(self, user_uid, original_key):
+
+    def __init__(self, user_uid):
         self.user_uid = user_uid
-        self.original_key = original_key
+        #self.original_key = original_key
+
     def Create_users_rbac(self, path):
-        """recieves the path of an encrypted file in order to strip the systems headers from it"""
+        """receives the path of an encrypted file in order to strip the systems headers from it"""
         print "starting Create users rbac func"
         ##print "path: " + path
         current_file = open(path, "rb")
         file_header = FileHeaderStruct()
         current_file.readinto(file_header)
+
         print file_header.lenUIDS
         UID_List = []
         for i in xrange(file_header.lenUIDS):
@@ -89,7 +92,7 @@ class File_Manager():
         print first_rbac_users
         if file_header.optionalHeaderFlag:
             file_optional_header = OptionalHeaderStructAdditions()
-            current_file.readinto(file_optiMyCryptoonal_header)
+            current_file.readinto(file_optional_header)
             second_UID_List = []
             for i in xrange(file_optional_header.secondLenUIDS):
                 uid_s = current_file.read(4)
@@ -104,14 +107,20 @@ class File_Manager():
 
         current_file.close()
         return users_rbac
-    
+
+    def get_original_key(self, fileid):
+        """sends a message to the server asking for the file opener key"""
+        received_key =""
+
+        return received_key
+
     def Strip_File(self, path):
-        print "start"
+
         try:
             """opening files"""
             current_file = open(path, "rb")
             
-            """recieves the path of an encrypted file in order to strip the systems headers from it"""
+            """receives the path of an encrypted file in order to strip the systems headers from it"""
             file_header = FileHeaderStruct()
             current_file.readinto(file_header)
             
@@ -123,7 +132,10 @@ class File_Manager():
                 and adding the new extension"""
             file_path_list = path.split(".")
             new_path = file_path_list[0]+"." + dict_1[file_header.fileTypeCode]
-            ##print "path saved"
+
+            fileid = file_header.fileID
+            """now the system asks the server for the key to open the file which is written in the file header"""
+            original_key = self.get_original_key(fileid)
             UID_List = []
             for i in xrange(file_header.lenUIDS):
                 uid_s = current_file.read(4)
@@ -145,14 +157,14 @@ class File_Manager():
                 """users_rbac = [(1, [12345678,23456789]), (0, [23544445, 87342914])]"""
             except:
                 users_rbac = [first_rbac_users]
-            print "lists made: " + str(users_rbac)
+
             content = current_file.read()
             current_file.close()
             new_file = open(new_path, "wb")
             os.remove(path)
             aux_obj = AUXGenerator()
             aux = aux_obj.hash_generate(users_rbac)
-            crypto_obj = MyCrypto.MyCrypto(self.original_key, aux)
+            crypto_obj = MyCrypto.MyCrypto(original_key, aux)
             crypto_obj.generator()
             new_file = open(new_path, "w")
             validated = crypto_obj.validate(self.user_uid, users_rbac)
@@ -171,7 +183,8 @@ class File_Manager():
             
             
             
-        except IOError: "here"
+        except IOError: "Could not strip the file"
+
     def Create_New_Format(self, path, UID_List, rbac, second_UID_List = None, second_rbac = None):
         """receives the file path, a list of uids allowed to do what the rbac specifies, and a rbac
             attaches the header and uses Encryption's function to encrypt the data"""
@@ -181,12 +194,14 @@ class File_Manager():
         file_path_list = path.split(".")
         old_extension = file_path_list[1]
         new_path = file_path_list[0]+".cb"
-        ##print "ext changed"
+
         if second_rbac is None and second_UID_List is None:
             optional_header_flag = 0
         else:
             optional_header_flag = 1
+        fileid = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(8))
         file_header = FileHeaderStruct(MAGIC_NUMBER,
+                                       fileid,
                                        FILE_TYPE_CODE_DICTIONARY[old_extension],
                                        rbac,
                                        optional_header_flag,
@@ -202,7 +217,7 @@ class File_Manager():
         """adding hexed uids:"""
         for uid in UID_List:
             new_file.write(struct.pack('i', uid))
-        ##print "uids written"
+
         if optional_header_flag == 1:
             addition_to_file_header = OptionalHeaderStructAdditions(second_rbac, len(second_UID_List))
             new_file.write(addition_to_file_header)
@@ -221,12 +236,13 @@ class File_Manager():
         current_file.close()
         b = AUXGenerator()
         aux = b.hash_generate(users_rbac)
-        ##print "aux created"
-        crypto_obj = MyCrypto.MyCrypto(self.original_key, aux)
+
+        original_key = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(32))
+        crypto_obj = MyCrypto.MyCrypto(original_key, aux)
         crypto_obj.generator()
         insertion_content = crypto_obj.encrypt_content(content)
         new_file.write(insertion_content)
-        ##print "content written"
+
         """saving new file and removing the old one which was replaced"""
         new_file.close()
         os.remove(path)
@@ -240,9 +256,10 @@ path2 = 'C:\Users\User\Desktop\\coby.cb'
 uid_list = [12345678, 23456789, 67423972]
 second_uid_list = [45454545, 75642985]
 user_uid = "12345678"
-original_key = "12345678909876543212345678909876"
+
 print "starting... "
-File_Manager.Create_New_Format(File_Manager(user_uid, original_key), path1, uid_list, 1, second_uid_list, 0)
+File_Manager.Create_New_Format(File_Manager(user_uid), path1, uid_list, 1, second_uid_list, 0)
 raw_input("continue? ")
-File_Manager.Strip_File(File_Manager(user_uid, original_key), path2)
+File_Manager.Strip_File(File_Manager(user_uid), path2)
+
 
