@@ -1,4 +1,5 @@
-import sqlite3
+import sqlite3, DbCreator, os.path
+import DbCreator
 
 SQLITE_FILE_PATH = 'mydb.sqlite'    # name of the sqlite database file
 USERINFO = 'UserInfo'  # name of the table to be created
@@ -18,13 +19,16 @@ COLUMN_LIST = [FIRST_NAME, UID, LAST_NAME, USERNAME, PASSWORD_HASH]
 def CheckifExists():
     """checks if the db exists
         if it does not then it will create it"""
-
+    if not os.path.isfile(SQLITE_FILE_PATH):
+        DbCreator.CreateTable()
 
 def AddInfo(fname, uid, lname, uname, ph):
     conn = sqlite3.connect(SQLITE_FILE_PATH)
     c = conn.cursor()
     row = uid, "'"+fname+"'", "'"+lname+"'", "'"+uname+"'", "'"+ph+"'"
+
     c.execute('insert or ignore into UserInfo values (?,?,?,?,?)', row)
+
     conn.commit()
     conn.close()
 
@@ -50,20 +54,34 @@ def DeleteInfo(uid):
     conn.commit()
     conn.close()
 
+def ReadAllRows():
+    conn = sqlite3.connect(SQLITE_FILE_PATH)
+    c = conn.cursor()
+    c.execute("SELECT * FROM UserInfo")
+    rows = c.fetchall()
+    temp = rows
+    rows = []
+    for row in temp:
+        data_string = str(row[0]) + "#" + row[1][1:-1] + "#" + row[2][1:-1] + \
+              "#" + row[3][1:-1] + "#" + row[4][1:-1]
+        rows.append(data_string)
 
-def ReadInfo(uid):
+    conn.commit()
+    conn.close()
+    return rows
+
+def ReadInfoByUID(uid):
     """recvs a user uid in order to read all info about a specific user,
      if he exists then func will return a string with his information else it will return False"""
     if UIDExists:
         conn = sqlite3.connect(SQLITE_FILE_PATH)
         c = conn.cursor()
         execution_string = "SELECT * FROM UserInfo WHERE UID = %d" %uid
+
         c.execute(execution_string)
         read_info = c.fetchone()
-
-
-        data_string =  str(read_info[0]) + "#" + read_info[1][1:-1] + "#" + read_info[2][1:-1] + \
-              "#" + read_info[1][1:-1] + "#" + read_info[4][1:-1]
+        data_string = str(read_info[0]) + "#" + read_info[1][1:-1] + "#" + read_info[2][1:-1] + \
+              "#" + read_info[3][1:-1] + "#" + read_info[4][1:-1]
 
         conn.commit()
         conn.close()
@@ -77,19 +95,39 @@ def UIDExists(uid):
     c.execute("SELECT * FROM UserInfo WHERE UID = %d" %uid)
     read_info = c.fetchone()
     if read_info:
+        conn.commit()
+        conn.close()
         return True
     else:
+        conn.commit()
+        conn.close()
         return False
 
-def ReadPassByUname(uname):
-    """for sign-in purposes"""
+def UnameExists(uname):
+    rows = ReadAllRows()
+    for row in rows:
+        if uname in row:
+            return (True, row)
+    return (False, )
+
+def GetPassHashByUname(uname):
+    """receives a username (that was entered by the user and returns the hash of the compatible password"""
+    checked = UnameExists(uname)
+    if checked[0]:
+        row = checked[1]
+        return row.split("#")[4]
+    return "the user name does not exist"
 
 
-#AddInfo("ethan", 1234, "ben", "hello", "DFghdfh")
+
+#AddInfo("ethan2", 12343, "ben4", "hel4lo", "DFghd4fh")
 #UpdateInfo(1, "coby", 1234)
 #DeleteInfo(12345)
 #x = ReadInfo(1234)
 #print x
+#x = GetPassHashByUname('hello')
+#print x
 #UIDExists(123)
 #UIDExists(1234)
+GetPassHashByUname('ethan')
 

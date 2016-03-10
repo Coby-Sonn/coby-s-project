@@ -8,6 +8,7 @@ STRING_TYPE = 'TEXT'
 """name of the columns"""
 FIRST_NAME = 'FNAME'
 UID = 'UID'
+
 LAST_NAME = 'LNAME'
 USERNAME = 'UNAME'
 PASSWORD_HASH = 'PH'
@@ -24,6 +25,7 @@ def CreateTable():
     c.execute("ALTER TABLE {tn} ADD COLUMN '{cn}' {ct}".format(tn=USERINFO, cn=LAST_NAME, ct=STRING_TYPE))
     c.execute("ALTER TABLE {tn} ADD COLUMN '{cn}' {ct}".format(tn=USERINFO, cn=USERNAME, ct=STRING_TYPE))
     c.execute("ALTER TABLE {tn} ADD COLUMN '{cn}' {ct}".format(tn=USERINFO, cn=PASSWORD_HASH, ct=STRING_TYPE))
+
 
 
 
