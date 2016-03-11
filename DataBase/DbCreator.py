@@ -34,4 +34,4 @@ def CreateTable():
     conn.commit()
     conn.close()
 
-CreateTable()
+#CreateTable()

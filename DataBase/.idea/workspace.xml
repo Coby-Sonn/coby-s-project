@@ -24,19 +24,40 @@
       <file leaf-file-name="DbManager.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/DbManager.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.42131147">
-              <caret line="103" column="20" selection-start-line="103" selection-start-column="20" selection-end-line="103" selection-end-column="20" />
+            <state vertical-scroll-proportion="0.9159802">
+              <caret line="132" column="0" selection-start-line="132" selection-start-column="0" selection-end-line="132" selection-end-column="0" />
               <folding>
-                <element signature="e#0#34#0" expanded="true" />
-                <element signature="e#469#621#0" expanded="false" />
-                <element signature="e#670#912#0" expanded="false" />
-                <element signature="e#970#1460#0" expanded="false" />
-                <element signature="e#1487#1682#0" expanded="false" />
-                <element signature="e#1707#2103#0" expanded="false" />
-                <element signature="e#2133#2801#0" expanded="false" />
-                <element signature="e#2827#3133#0" expanded="false" />
-                <element signature="e#3163#3281#0" expanded="false" />
-                <element signature="e#3318#3573#0" expanded="false" />
+                <element signature="e#461#613#0" expanded="false" />
+                <element signature="e#662#904#0" expanded="false" />
+                <element signature="e#1479#1674#0" expanded="false" />
+                <element signature="e#1699#2095#0" expanded="false" />
+                <element signature="e#2125#2793#0" expanded="false" />
+                <element signature="e#2819#3125#0" expanded="false" />
+                <element signature="e#3155#3273#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="piper.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/piper.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Hasher.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Hasher.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+              <folding>
+                <element signature="e#65#176#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -65,6 +86,7 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/DbCreator.py" />
+        <option value="$PROJECT_DIR$/Hasher.py" />
         <option value="$PROJECT_DIR$/DbManager.py" />
       </list>
     </option>
@@ -99,8 +121,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -121,6 +141,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -128,7 +150,7 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
   </component>
-  <component name="RunManager" selected="Python.DbManager">
+  <component name="RunManager" selected="Python.piper">
     <configuration default="false" name="DbCreator" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -159,6 +181,23 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="DataBase" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DbManager.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="piper" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="DataBase" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/piper.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -285,14 +324,16 @@
       <option name="USE_KEYWORD" value="false" />
       <method />
     </configuration>
-    <list size="2">
+    <list size="3">
       <item index="0" class="java.lang.String" itemvalue="Python.DbCreator" />
       <item index="1" class="java.lang.String" itemvalue="Python.DbManager" />
+      <item index="2" class="java.lang.String" itemvalue="Python.piper" />
     </list>
     <recent_temporary>
-      <list size="2">
-        <item index="0" class="java.lang.String" itemvalue="Python.DbManager" />
-        <item index="1" class="java.lang.String" itemvalue="Python.DbCreator" />
+      <list size="3">
+        <item index="0" class="java.lang.String" itemvalue="Python.piper" />
+        <item index="1" class="java.lang.String" itemvalue="Python.DbManager" />
+        <item index="2" class="java.lang.String" itemvalue="Python.DbCreator" />
       </list>
     </recent_temporary>
   </component>
@@ -311,15 +352,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-2" y="0" width="1620" height="1056" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32982087" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32876712" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32875264" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -329,6 +369,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32982087" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -353,16 +394,37 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#34#0" expanded="true" />
-            <element signature="e#469#621#0" expanded="false" />
-            <element signature="e#670#912#0" expanded="false" />
-            <element signature="e#970#1460#0" expanded="false" />
-            <element signature="e#1487#1682#0" expanded="false" />
-            <element signature="e#1707#2103#0" expanded="false" />
-            <element signature="e#2133#2801#0" expanded="false" />
-            <element signature="e#2827#3133#0" expanded="false" />
-            <element signature="e#3163#3281#0" expanded="false" />
-            <element signature="e#3318#3573#0" expanded="false" />
+            <element signature="e#461#613#0" expanded="false" />
+            <element signature="e#662#904#0" expanded="false" />
+            <element signature="e#1479#1674#0" expanded="false" />
+            <element signature="e#1699#2095#0" expanded="false" />
+            <element signature="e#2125#2793#0" expanded="false" />
+            <element signature="e#2819#3125#0" expanded="false" />
+            <element signature="e#3155#3273#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DbCreator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="2" column="24" selection-start-line="2" selection-start-column="24" selection-end-line="2" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DbManager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#461#613#0" expanded="false" />
+            <element signature="e#662#904#0" expanded="false" />
+            <element signature="e#1479#1674#0" expanded="false" />
+            <element signature="e#1699#2095#0" expanded="false" />
+            <element signature="e#2125#2793#0" expanded="false" />
+            <element signature="e#2819#3125#0" expanded="false" />
+            <element signature="e#3155#3273#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -383,21 +445,38 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Hasher.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding>
+            <element signature="e#65#176#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/piper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/DbManager.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.42131147">
-          <caret line="103" column="20" selection-start-line="103" selection-start-column="20" selection-end-line="103" selection-end-column="20" />
+        <state vertical-scroll-proportion="0.9159802">
+          <caret line="132" column="0" selection-start-line="132" selection-start-column="0" selection-end-line="132" selection-end-column="0" />
           <folding>
-            <element signature="e#0#34#0" expanded="true" />
-            <element signature="e#469#621#0" expanded="false" />
-            <element signature="e#670#912#0" expanded="false" />
-            <element signature="e#970#1460#0" expanded="false" />
-            <element signature="e#1487#1682#0" expanded="false" />
-            <element signature="e#1707#2103#0" expanded="false" />
-            <element signature="e#2133#2801#0" expanded="false" />
-            <element signature="e#2827#3133#0" expanded="false" />
-            <element signature="e#3163#3281#0" expanded="false" />
-            <element signature="e#3318#3573#0" expanded="false" />
+            <element signature="e#461#613#0" expanded="false" />
+            <element signature="e#662#904#0" expanded="false" />
+            <element signature="e#1479#1674#0" expanded="false" />
+            <element signature="e#1699#2095#0" expanded="false" />
+            <element signature="e#2125#2793#0" expanded="false" />
+            <element signature="e#2819#3125#0" expanded="false" />
+            <element signature="e#3155#3273#0" expanded="false" />
           </folding>
         </state>
       </provider>

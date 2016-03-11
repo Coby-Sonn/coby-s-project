@@ -1,5 +1,5 @@
-import sqlite3, DbCreator, os.path
-import DbCreator
+import sqlite3, DbCreator, os.path, Hasher
+
 
 SQLITE_FILE_PATH = 'mydb.sqlite'    # name of the sqlite database file
 USERINFO = 'UserInfo'  # name of the table to be created
@@ -119,9 +119,8 @@ def GetPassHashByUname(uname):
     return "the user name does not exist"
 
 
-
-#AddInfo("ethan2", 12343, "ben4", "hel4lo", "DFghd4fh")
-#UpdateInfo(1, "coby", 1234)
+password_hash = Hasher.Hash_Password("hellocoby")
+AddInfo("coby", 12347868, "sonnenberg", "coby567", password_hash)
 #DeleteInfo(12345)
 #x = ReadInfo(1234)
 #print x
@@ -129,5 +128,5 @@ def GetPassHashByUname(uname):
 #print x
 #UIDExists(123)
 #UIDExists(1234)
-GetPassHashByUname('ethan')
+#GetPassHashByUname('ethan')
 

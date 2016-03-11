@@ -4,6 +4,7 @@ using System.Text.RegularExpressions;
 using System.IO.Pipes;
 using System.IO;
 using System.Threading.Tasks;
+using System.Text;
 
 namespace Server
 {
@@ -13,19 +14,63 @@ namespace Server
         {
             InitializeComponent();
         }
-       
+        static string sha256(string password)
+        {
+            System.Security.Cryptography.SHA256Managed crypt = new System.Security.Cryptography.SHA256Managed();
+            System.Text.StringBuilder hash = new System.Text.StringBuilder();
+            byte[] crypto = crypt.ComputeHash(Encoding.UTF8.GetBytes(password), 0, Encoding.UTF8.GetByteCount(password));
+            foreach (byte theByte in crypto)
+            {
+                hash.Append(theByte.ToString("x2"));
+            }
+            return hash.ToString();
+        }
+        private void send(BinaryWriter bw, string info)
+        {
+            var buf = Encoding.ASCII.GetBytes(info);     // Get ASCII byte array     
+            bw.Write((uint)buf.Length);                // Write string length
+            bw.Write(buf);                              // Write string
+            
+        }
+        private string recv(BinaryReader br)
+        {
+            var len = (int)br.ReadUInt32();            // Read string length
+            var str = new string(br.ReadChars(len));    // Read string
+
+            Console.WriteLine("Read: \"{0}\"", str);
+            
+            return str;
+        }
         private void UserSignIn(string username, string password)
         {
+            string hashed_password = sha256(password);
+            MessageBox.Show(hashed_password);
             //send username and password to python and checks if correct
-            string info = username + "#" + password;
+            string info = username + "#" + hashed_password;
+            // Open the named pipe.
+
+            var server = new NamedPipeServerStream("Communicate");
+            server.WaitForConnection();     
+            var br = new BinaryReader(server);
+            var bw = new BinaryWriter(server); 
+            send(bw, info);
+            string message = recv(br); 
+            server.Close();
+            server.Dispose();
+
             //if receives true then send the user to the next gui.
-            string received = "1";
-            if (received == "1")
+            if (message == "1")
             {
-                this.Hide();
+                
                 SaveFile form = new SaveFile();
                 form.Show();
+
+            }
+            else
+            {
                 
+                MessageBox.Show("incorrect password or username");
+                this.Show();
             }
             
             
@@ -79,6 +124,7 @@ namespace Server
 
         private void SignInButton_Click(object sender, EventArgs e)
         {
+            this.Hide();
             UserSignIn(LoginUname.Text, LoginPassword.Text);
         }
 
