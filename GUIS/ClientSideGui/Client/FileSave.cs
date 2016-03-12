@@ -20,5 +20,20 @@ namespace Client
         {
 
         }
+
+        private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.ShowDialog();
+            openFileDialog1.InitialDirectory = @"C:\";
+            openFileDialog1.Title = "Browse Files";
+            MessageBox.Show(openFileDialog1.FileName);
+
+        }
     }
 }
