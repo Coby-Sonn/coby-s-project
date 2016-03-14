@@ -1,0 +1,28 @@
+C:\Users\User\Desktop\Server\Server\bin\Debug\Server.exe
+C:\Users\User\Desktop\Server\Server\bin\Debug\Server.pdb
+C:\Users\User\Desktop\Server\Server\obj\x86\Debug\Server.Form1.resources
+C:\Users\User\Desktop\Server\Server\obj\x86\Debug\Server.Properties.Resources.resources
+C:\Users\User\Desktop\Server\Server\obj\x86\Debug\Server.csproj.GenerateResource.Cache
+C:\Users\User\Desktop\Server\Server\obj\x86\Debug\Server.exe
+C:\Users\User\Desktop\Server\Server\obj\x86\Debug\Server.pdb
+C:\Users\User\Desktop\Server\Server\obj\x86\Debug\Server.SaveFile.resources
+C:\Users\David\Desktop\coby-s-project\GUIS\Server\obj\x86\Debug\Server.exe
+C:\Users\David\Desktop\coby-s-project\GUIS\Server\obj\x86\Debug\Server.pdb
+C:\Users\David\Desktop\coby-s-project\GUIS\Server\bin\Debug\Server.exe
+C:\Users\David\Desktop\coby-s-project\GUIS\Server\bin\Debug\Server.pdb
+C:\Users\David\Desktop\coby-s-project\GUIS\Server\obj\x86\Debug\Server.csprojResolveAssemblyReference.cache
+C:\Users\David\Desktop\coby-s-project\GUIS\Server\obj\x86\Debug\Server.Form1.resources
+C:\Users\David\Desktop\coby-s-project\GUIS\Server\obj\x86\Debug\Server.Properties.Resources.resources
+C:\Users\David\Desktop\coby-s-project\GUIS\Server\obj\x86\Debug\Server.SaveFile.resources
+C:\Users\David\Desktop\coby-s-project\GUIS\Server\obj\x86\Debug\Server.csproj.GenerateResource.Cache
+D:\coby's project\coby-s-project\GUIS\ServerSideGui\Server\obj\x86\Debug\Server.exe
+D:\coby's project\coby-s-project\GUIS\ServerSideGui\Server\obj\x86\Debug\Server.pdb
+D:\coby's project\coby-s-project\GUIS\ServerSideGui\Server\bin\Debug\Server.exe
+D:\coby's project\coby-s-project\GUIS\ServerSideGui\Server\bin\Debug\Server.pdb
+D:\coby's project\coby-s-project\GUIS\ServerSideGui\Server\obj\x86\Debug\Server.csprojResolveAssemblyReference.cache
+D:\coby's project\coby-s-project\GUIS\ServerSideGui\Server\obj\x86\Debug\Server.Form1.resources
+D:\coby's project\coby-s-project\GUIS\ServerSideGui\Server\obj\x86\Debug\Server.Properties.Resources.resources
+D:\coby's project\coby-s-project\GUIS\ServerSideGui\Server\obj\x86\Debug\Server.SaveFile.resources
+D:\coby's project\coby-s-project\GUIS\ServerSideGui\Server\obj\x86\Debug\Server.csproj.GenerateResource.Cache
+C:\Users\User\Desktop\project\Server\ServerSideGui\Server\obj\x86\Debug\Server.exe
+C:\Users\User\Desktop\project\Server\ServerSideGui\Server\obj\x86\Debug\Server.pdb

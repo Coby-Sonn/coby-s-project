@@ -28,29 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.button1 = new System.Windows.Forms.Button();
+            this.Locker = new System.Windows.Forms.OpenFileDialog();
+            this.browse2lock = new System.Windows.Forms.Button();
             this.TabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.Browse2unlock = new System.Windows.Forms.Button();
+            this.Unlocker = new System.Windows.Forms.OpenFileDialog();
             this.TabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // openFileDialog1
+            // Locker
             // 
-            this.openFileDialog1.FileName = "openFileDialog1";
-            this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
+            this.Locker.FileName = "openFileDialog1";
+            this.Locker.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
             // 
-            // button1
+            // browse2lock
             // 
-            this.button1.Location = new System.Drawing.Point(45, 178);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Browse Files";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.browse2lock.Location = new System.Drawing.Point(316, 277);
+            this.browse2lock.Name = "browse2lock";
+            this.browse2lock.Size = new System.Drawing.Size(75, 23);
+            this.browse2lock.TabIndex = 0;
+            this.browse2lock.Text = "Browse Files";
+            this.browse2lock.UseVisualStyleBackColor = true;
             // 
             // TabControl1
             // 
@@ -64,7 +66,7 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.button1);
+            this.tabPage1.Controls.Add(this.browse2lock);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -75,6 +77,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.Browse2unlock);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -82,6 +85,20 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Unlock";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // Browse2unlock
+            // 
+            this.Browse2unlock.Location = new System.Drawing.Point(321, 272);
+            this.Browse2unlock.Name = "Browse2unlock";
+            this.Browse2unlock.Size = new System.Drawing.Size(75, 23);
+            this.Browse2unlock.TabIndex = 0;
+            this.Browse2unlock.Text = "Browse Files";
+            this.Browse2unlock.UseVisualStyleBackColor = true;
+            this.Browse2unlock.Click += new System.EventHandler(this.Browse2unlock_Click);
+            // 
+            // Unlocker
+            // 
+            this.Unlocker.FileName = "openFileDialog2";
             // 
             // FileSave
             // 
@@ -93,17 +110,20 @@
             this.Text = "FileSave";
             this.TabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.OpenFileDialog Locker;
+        private System.Windows.Forms.Button browse2lock;
         private System.Windows.Forms.TabControl TabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.Button Browse2unlock;
+        private System.Windows.Forms.OpenFileDialog Unlocker;
 
     }
 }

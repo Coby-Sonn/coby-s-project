@@ -16,24 +16,36 @@ namespace Client
             InitializeComponent();
         }
 
-        private void folderBrowserDialog1_HelpRequest(object sender, EventArgs e)
-        {
-
-        }
+        
 
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void browse2lock_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.ShowDialog();
-            openFileDialog1.InitialDirectory = @"C:\";
-            openFileDialog1.Title = "Browse Files";
-            MessageBox.Show(openFileDialog1.FileName);
+            OpenFileDialog Locker = new OpenFileDialog();
+
+            Locker.ShowDialog();
+            Locker.InitialDirectory = @"C:\";
+            Locker.Title = "Browse Files";
+            string file_to_lock = Locker.FileName;
 
         }
+
+        private void Browse2unlock_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog Unlocker = new OpenFileDialog();
+
+            Unlocker.ShowDialog();
+            Unlocker.InitialDirectory = @"C:\";
+            Unlocker.Title = "Browse Files to Unlock";
+            string file_to_lock = Unlocker.FileName;
+        }
+
+        
+
+        
     }
 }

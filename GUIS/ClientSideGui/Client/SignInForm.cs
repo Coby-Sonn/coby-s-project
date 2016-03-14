@@ -42,16 +42,15 @@ namespace Client
             var len = (int)br.ReadUInt32();            // Read string length
             var str = new string(br.ReadChars(len));    // Read string
 
-            Console.WriteLine("Read: \"{0}\"", str);
+            //Console.WriteLine("Read: \"{0}\"", str);
 
             return str;
         }
         private void UserSignIn(string username, string password)
         {
             string hashed_password = sha256(password);
-            MessageBox.Show(hashed_password);
             //send username and password to python and checks if correct
-            string info = username + "#" + hashed_password;
+            string info = "login#" + username + "#" + hashed_password;
             // Open the named pipe.
 
             var server = new NamedPipeServerStream("Communicate");
@@ -59,7 +58,9 @@ namespace Client
             var br = new BinaryReader(server);
             var bw = new BinaryWriter(server); 
             send(bw, info);
+
             string message = recv(br); 
+
             server.Close();
             server.Dispose();
 
