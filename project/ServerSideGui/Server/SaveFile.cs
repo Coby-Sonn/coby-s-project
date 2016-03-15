@@ -6,14 +6,140 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.IO.Pipes;
+using System.IO;
 
 namespace Server
 {
     public partial class SaveFile : Form
     {
-        public SaveFile()
+        private string my_uid;
+        private string my_fname;
+        private string my_lname;
+        
+        public SaveFile(string user_info)
         {
             InitializeComponent();
+            this.my_uid = user_info.Split('#')[0];
+            this.my_fname = user_info.Split('#')[1];
+            this.my_lname = user_info.Split('#')[2];
+            string greeting_str = "Hello, " + this.my_lname + " " + this.my_fname + ".";
+            greeting_str = this.GreetingLabel.Text;
+
+        }
+
+
+        static string sha256(string password)
+        {
+            System.Security.Cryptography.SHA256Managed crypt = new System.Security.Cryptography.SHA256Managed();
+            System.Text.StringBuilder hash = new System.Text.StringBuilder();
+            byte[] crypto = crypt.ComputeHash(Encoding.UTF8.GetBytes(password), 0, Encoding.UTF8.GetByteCount(password));
+            foreach (byte theByte in crypto)
+            {
+                hash.Append(theByte.ToString("x2"));
+            }
+            return hash.ToString();
+        }
+        private void send(BinaryWriter bw, string info)
+        {
+            var buf = Encoding.ASCII.GetBytes(info);     // Get ASCII byte array     
+            bw.Write((uint)buf.Length);                // Write string length
+            bw.Write(buf);                              // Write string
+
+        }
+        private string recv(BinaryReader br)
+        {
+            var len = (int)br.ReadUInt32();            // Read string length
+            var str = new string(br.ReadChars(len));    // Read string
+
+            //Console.WriteLine("Read: \"{0}\"", str);
+
+            return str;
+        }
+
+        private void browse2lock_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog Locker = new OpenFileDialog();
+
+            Locker.ShowDialog();
+            Locker.InitialDirectory = @"C:\";
+            Locker.Title = "Browse Files";
+            string file_to_lock = Locker.FileName;
+            file_to_lock = ChosenFileView.Text;
+            var server = new NamedPipeServerStream("Communicate");
+            server.WaitForConnection();
+            var br = new BinaryReader(server);
+            var bw = new BinaryWriter(server);
+            send(bw, "Lock");
+
+            string user_info_string = recv(br); // user_info_string = uid@fname@lname@uname#.....
+            string[] users = user_info_string.Split('#');
+            UserData.SelectionMode = SelectionMode.MultiExtended;
+
+            // Shutdown the painting of the ListBox as items are added.
+            UserData.BeginUpdate();
+            // Loop through and add items to the listbox
+            foreach(string user_string in users)
+            {
+                string name = user_string.Split('@')[1] + " " + user_string.Split('@')[2];
+                UserData.Items.Add("Item " + name);
+            }
+            // Allow the ListBox to repaint and display the new items.
+            UserData.EndUpdate();
+            UserData.Show();
+
+
+
+            
+
+
+
+
+
+            //need to continue!!!!
+        }
+
+        private void browse2unlock_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog Unlocker = new OpenFileDialog();
+
+            Unlocker.ShowDialog();
+            Unlocker.InitialDirectory = @"C:\";
+            Unlocker.Title = "Browse Files to Unlock";
+            string file_to_unlock = Unlocker.FileName;
+
+            string uid = this.my_uid; // need to get the current user uid
+            string information_string = "Unlock#" + uid + "#" + file_to_unlock;
+            var server = new NamedPipeServerStream("Communicate");
+            server.WaitForConnection();
+            var br = new BinaryReader(server);
+            var bw = new BinaryWriter(server);
+            send(bw, information_string);
+
+            string message = recv(br);
+
+            if (message == "File Unlocked")
+            {
+                MessageBox.Show(message);
+            }
+            else if (message == "The specified user is not allowed to open the file")
+            {
+                MessageBox.Show(message);
+            }
+            else if (message == "path error, can only unlock .cb files")
+            {
+                MessageBox.Show(message);
+            }
+
+
+            server.Close();
+            server.Dispose();
+
+        }
+
+        private void UserData_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
         }
     }
 }

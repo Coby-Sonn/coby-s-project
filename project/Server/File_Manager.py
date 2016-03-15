@@ -251,15 +251,15 @@ class File_Manager():
 
 
 
-path1 = 'C:\Users\User\Desktop\coby.txt'
-path2 = 'C:\Users\User\Desktop\\coby.cb'
-uid_list = [12345678, 23456789, 67423972]
-second_uid_list = [45454545, 75642985]
-user_uid = "12345678"
+##path1 = 'C:\Users\User\Desktop\coby.txt'
+##path2 = 'C:\Users\User\Desktop\\coby.cb'
+##uid_list = [12345678, 23456789, 67423972]
+##second_uid_list = [45454545, 75642985]
+##user_uid = "12345678"
 
-print "starting... "
-File_Manager.Create_New_Format(File_Manager(user_uid), path1, uid_list, 1, second_uid_list, 0)
-raw_input("continue? ")
-File_Manager.Strip_File(File_Manager(user_uid), path2)
+##print "starting... "
+##File_Manager.Create_New_Format(File_Manager(user_uid), path1, uid_list, 1, second_uid_list, 0)
+##raw_input("continue? ")
+##File_Manager.Strip_File(File_Manager(user_uid), path2)
 
 

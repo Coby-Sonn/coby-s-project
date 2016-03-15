@@ -63,7 +63,8 @@ def ReadAllRows():
     rows = []
     for row in temp:
         data_string = str(row[0]) + "@" + row[1][1:-1] + "@" + row[2][1:-1] + \
-              "@" + row[3][1:-1]
+              "@" + row[3][1:-1] + "@" + row[4][1:-1]
+        ##uid@fname@lname@uname#.....
         rows.append(data_string)
 
     conn.commit()
@@ -115,7 +116,8 @@ def GetPassHashByUname(uname):
     checked = UnameExists(uname)
     if checked[0]:
         row = checked[1]
-        return row.split("#")[4]
+        print row
+        return row.split("@")[4]
     return "the user name does not exist"
 
 def GetInfoForLock():
@@ -125,6 +127,17 @@ def GetInfoForLock():
         rows_string += row + "#"
     return rows_string[:-1]
 
+def GetLoginInfo(uname):
+    checked = UnameExists(uname)
+    if checked[0]:
+        row = checked[1]
+        uid = row.split("@")[1]
+        fname = row.split("@")[0]
+        lname = row.split("@")[2]
+        print uid, fname, lname
+        return uid + "#" + fname + "#" + lname
+    else:
+        return "user not found"
 
 
 #password_hash = Hasher.Hash_Password("hellocoby")

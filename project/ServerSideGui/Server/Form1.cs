@@ -10,10 +10,15 @@ namespace Server
 {
     public partial class Form1 : Form
     {
+        public string my_uid;
+        public string firstname;
+        public string lastname;
         public Form1()
         {
             InitializeComponent();
         }
+
+        
         static string sha256(string password)
         {
             System.Security.Cryptography.SHA256Managed crypt = new System.Security.Cryptography.SHA256Managed();
@@ -56,37 +61,51 @@ namespace Server
             else
             {
 
-            string hashed_password = sha256(password);
-            //send username and password to python and checks if correct
-            string info = "login#" + username + "#" + hashed_password;
-            // Open the named pipe.
+                string hashed_password = sha256(password);
+                //send username and password to python and checks if correct
+                string info = "login#" + username + "#" + hashed_password;
+                // Open the named pipe.
 
-            var server = new NamedPipeServerStream("Communicate");
-            server.WaitForConnection();     
-            var br = new BinaryReader(server);
-            var bw = new BinaryWriter(server); 
-            send(bw, info);
-            string message = recv(br); 
-            server.Close();
-            server.Dispose();
-
-            //if receives true then send the user to the next gui.
-            if (message == "Signed in")
-            {
+                var server = new NamedPipeServerStream("Communicate");
+                server.WaitForConnection();     
+                var br = new BinaryReader(server);
+                var bw = new BinaryWriter(server); 
+                send(bw, info);
+                string message_to_split = recv(br);
+                string message = message_to_split.Split('#')[0];
+                if (message_to_split.Split('#')[1] != "0")
+                {
+                    this.my_uid = message_to_split.Split('#')[1];
+                    this.firstname = message_to_split.Split('#')[2];
+                    this.lastname = message_to_split.Split('#')[3];
+                }
+                server.Close();
+                server.Dispose();
                 
-                SaveFile form = new SaveFile();
-                form.Show();
+                //if receives true then send the user to the next gui.
+                if (message == "Signed in")
+                {
+                    string user_info = this.my_uid + "#" + this.firstname + "#" + this.lastname;
+                    SaveFile form = new SaveFile(user_info);
+                    form.Show();
+                    
+                    
 
-            }
-            else
-            {
+                    
+                    
+
+
+                }
+                else
+                {
                 
-                MessageBox.Show("incorrect password or username");
-                this.Show();
-            }
+                    MessageBox.Show("incorrect password or username");
+                    this.Show();
+                }
             
             
-        }
+            
+            }
         }
         private void AddUser(string firstname, string lastname, string username, string password, string confirmPass)
         {

@@ -51,6 +51,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.LoginPassword = new System.Windows.Forms.TextBox();
             this.LoginUname = new System.Windows.Forms.TextBox();
+            this.UserData = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -204,6 +205,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.UserData);
             this.tabPage2.Controls.Add(this.resetbuttonregister);
             this.tabPage2.Controls.Add(this.SignInButton);
             this.tabPage2.Controls.Add(this.label8);
@@ -281,6 +283,14 @@
             this.LoginUname.Size = new System.Drawing.Size(100, 20);
             this.LoginUname.TabIndex = 0;
             // 
+            // UserData
+            // 
+            this.UserData.Location = new System.Drawing.Point(365, 310);
+            this.UserData.Name = "UserData";
+            this.UserData.Size = new System.Drawing.Size(100, 20);
+            this.UserData.TabIndex = 7;
+            this.UserData.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -323,6 +333,7 @@
         private System.Windows.Forms.Button SignInButton;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button resetbuttonregister;
+        private System.Windows.Forms.TextBox UserData;
     }
 }
 

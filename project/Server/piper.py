@@ -30,9 +30,10 @@ if state == "login":
     password = info[2]
     password_hash = dbm.GetPassHashByUname(username)
     if password_hash == password:
-        message = "Signed in"
+        info_str = dbm.GetLoginInfo(username)
+        message = "Signed in#" + info_str
     else:
-        message = "Not"
+        message = "Not#0"
 
 elif state == "register":
     uid = info[1]

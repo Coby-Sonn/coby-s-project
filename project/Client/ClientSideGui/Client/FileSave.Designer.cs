@@ -43,7 +43,6 @@
             // Locker
             // 
             this.Locker.FileName = "openFileDialog1";
-            this.Locker.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
             // 
             // browse2lock
             // 
@@ -94,7 +93,7 @@
             this.browse2unlock.TabIndex = 0;
             this.browse2unlock.Text = "Browse Files";
             this.browse2unlock.UseVisualStyleBackColor = true;
-            this.browse2unlock.Click += new System.EventHandler(this.Browse2unlock_Click);
+            this.browse2unlock.Click += new System.EventHandler(this.browse2unlock_Click_1);
             // 
             // Unlocker
             // 
