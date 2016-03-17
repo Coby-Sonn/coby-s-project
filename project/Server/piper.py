@@ -71,8 +71,12 @@ elif state == "Unlock":
 elif state == "Lock":
     AllUserInfo = GetUserInfoForLock()
     send(pipe, AllUserInfo)
-    info = recv(pipe) # info = LockReady#uid#path#uid@uid@...#rbac#optionality
+    print "sent all user info"
+    info = recv(pipe)# info = LockReady#uid#path#uid@uid@...#rbac#optionality
+    send(pipe, "ok")
+    info = info + recv(pipe)
     info = info.split("#")
+    print info
     if info[0] == "LockReady":
         uid = info[1]
         path = info[2]

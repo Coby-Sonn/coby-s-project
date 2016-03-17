@@ -19,6 +19,9 @@ namespace Server
         private string file_to_lock;
         private List<string> uid_list = new List<string>();
         private string to_send;
+        private BinaryReader br;
+        private BinaryWriter bw;
+        private NamedPipeServerStream server; 
         
         public SaveFile(string user_info)
         {
@@ -70,10 +73,11 @@ namespace Server
             string file_to_lock = Locker.FileName;
             file_to_lock = ChosenFileView.Text;
             this.file_to_lock = file_to_lock;
-            var server = new NamedPipeServerStream("Communicate");
+            //var server = new NamedPipeServerStream("Communicate");
+            this.server = new NamedPipeServerStream("Communicate");
             server.WaitForConnection();
-            var br = new BinaryReader(server);
-            var bw = new BinaryWriter(server);
+            this.br = new BinaryReader(server);
+            this.bw = new BinaryWriter(server);
             send(bw, "Lock");
 
             string user_info_string = recv(br); // user_info_string = uid@fname@lname@uname#.....
@@ -93,18 +97,42 @@ namespace Server
             UserData.EndUpdate();
             UserData.Show();
             
+
+            
+
+            
         }
 
 
         private void continue_lock()
         {
-            var server = new NamedPipeServerStream("Communicate");
-            server.WaitForConnection();
-            var br = new BinaryReader(server);
-            var bw = new BinaryWriter(server);
-            send(bw, this.to_send);
+            MessageBox.Show(this.to_send);
 
-            string ack = recv(br); // user_info_string = uid@fname@lname@uname#.....
+            BinaryWriter bw = this.bw;
+            BinaryReader br = this.br;
+
+            string message = this.to_send;
+            string first_part, second_part;
+            MessageBox.Show("splitting parts");
+            if (message.Length % 2 == 0)
+            {
+                first_part = message.Substring(0, message.Length / 2);
+                second_part = message.Substring(message.Length);
+            }
+            else
+            {
+                int n = (message.Length / 2) + 1;
+                first_part = message.Substring(0, n);
+                second_part = message.Substring(n);
+            }
+            this.send(bw, first_part);
+            string ack = this.recv(br);
+            ack += this.recv(br);
+            MessageBox.Show(ack);
+            this.send(bw, second_part);
+
+            MessageBox.Show("sent both parts");
+            ack = recv(br); 
             ack += recv(br);
             MessageBox.Show(ack);
 
@@ -132,6 +160,7 @@ namespace Server
             str_to_send = str_to_send + uid_str + "#" + rbac + "#" + optionality;
             this.to_send = str_to_send;
             this.continue_lock();
+            
 
 
 

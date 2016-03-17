@@ -44,6 +44,7 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.button1 = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.UserData = new System.Windows.Forms.TextBox();
             this.resetbuttonregister = new System.Windows.Forms.Button();
             this.SignInButton = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
@@ -51,7 +52,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.LoginPassword = new System.Windows.Forms.TextBox();
             this.LoginUname = new System.Windows.Forms.TextBox();
-            this.UserData = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -221,6 +221,14 @@
             this.tabPage2.Text = "Sign-In";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // UserData
+            // 
+            this.UserData.Location = new System.Drawing.Point(365, 310);
+            this.UserData.Name = "UserData";
+            this.UserData.Size = new System.Drawing.Size(100, 20);
+            this.UserData.TabIndex = 7;
+            this.UserData.Visible = false;
+            // 
             // resetbuttonregister
             // 
             this.resetbuttonregister.Location = new System.Drawing.Point(244, 233);
@@ -275,6 +283,7 @@
             this.LoginPassword.PasswordChar = '●';
             this.LoginPassword.Size = new System.Drawing.Size(100, 20);
             this.LoginPassword.TabIndex = 1;
+            this.LoginPassword.Text = "hellocoby";
             // 
             // LoginUname
             // 
@@ -282,14 +291,8 @@
             this.LoginUname.Name = "LoginUname";
             this.LoginUname.Size = new System.Drawing.Size(100, 20);
             this.LoginUname.TabIndex = 0;
-            // 
-            // UserData
-            // 
-            this.UserData.Location = new System.Drawing.Point(365, 310);
-            this.UserData.Name = "UserData";
-            this.UserData.Size = new System.Drawing.Size(100, 20);
-            this.UserData.TabIndex = 7;
-            this.UserData.Visible = false;
+            this.LoginUname.Text = "coby567";
+            this.LoginUname.TextChanged += new System.EventHandler(this.LoginUname_TextChanged);
             // 
             // Form1
             // 
