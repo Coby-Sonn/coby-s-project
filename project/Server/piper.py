@@ -5,13 +5,20 @@ import File_Manager as fm
 
 """server side"""
 def send(f, s):
-    f.write(struct.pack('I', len(s)) + s)   # Write str length and str
+    if len(s) % 2 == 0 :
+        first_part = s[:len(s)/2]
+        second_part = s[len(s)/2:]
+    else:
+        first_part = s[:len(s)/2+1]
+        second_part = s[len(s)/2+1:]
+    f.write(struct.pack('I', len(first_part)) + first_part)
+    f.write(struct.pack('I', len(second_part)) + second_part)   # Write str length and str
     f.seek(0)                               # EDIT: This is also necessary
 def recv(f):
     n = struct.unpack('I', f.read(4))[0]    # Read str length
-    message = f.read(n)                           # Read str
+    recv_message = f.read(n)                           # Read str
     f.seek(0)
-    return message
+    return recv_message
 def GetUserInfoForLock():
     """gets a long string built like this: uid@fname@lname#uid@fname@lname#uid@fname@lname#... about all users"""
     return dbm.GetInfoForLock()
@@ -64,7 +71,8 @@ elif state == "Unlock":
 elif state == "Lock":
     AllUserInfo = GetUserInfoForLock()
     send(pipe, AllUserInfo)
-    info = recv(pipe)
+    info = recv(pipe) # info = LockReady#uid#path#uid@uid@...#rbac#optionality
+    info = info.split("#")
     if info[0] == "LockReady":
         uid = info[1]
         path = info[2]

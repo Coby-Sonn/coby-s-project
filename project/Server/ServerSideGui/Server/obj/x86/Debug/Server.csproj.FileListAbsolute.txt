@@ -26,3 +26,5 @@ D:\coby's project\coby-s-project\GUIS\ServerSideGui\Server\obj\x86\Debug\Server.
 D:\coby's project\coby-s-project\GUIS\ServerSideGui\Server\obj\x86\Debug\Server.csproj.GenerateResource.Cache
 C:\Users\User\Desktop\project\Server\ServerSideGui\Server\obj\x86\Debug\Server.exe
 C:\Users\User\Desktop\project\Server\ServerSideGui\Server\obj\x86\Debug\Server.pdb
+C:\Users\User\Desktop\coby-s-project\project\Server\ServerSideGui\Server\obj\x86\Debug\Server.exe
+C:\Users\User\Desktop\coby-s-project\project\Server\ServerSideGui\Server\obj\x86\Debug\Server.pdb

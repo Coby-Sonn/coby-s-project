@@ -16,6 +16,9 @@ namespace Server
         private string my_uid;
         private string my_fname;
         private string my_lname;
+        private string file_to_lock;
+        private List<string> uid_list = new List<string>();
+        private string to_send;
         
         public SaveFile(string user_info)
         {
@@ -66,6 +69,7 @@ namespace Server
             Locker.Title = "Browse Files";
             string file_to_lock = Locker.FileName;
             file_to_lock = ChosenFileView.Text;
+            this.file_to_lock = file_to_lock;
             var server = new NamedPipeServerStream("Communicate");
             server.WaitForConnection();
             var br = new BinaryReader(server);
@@ -73,22 +77,65 @@ namespace Server
             send(bw, "Lock");
 
             string user_info_string = recv(br); // user_info_string = uid@fname@lname@uname#.....
+            user_info_string = user_info_string + recv(br);
             string[] users = user_info_string.Split('#');
-            UserData.SelectionMode = SelectionMode.MultiExtended;
+
 
             // Shutdown the painting of the ListBox as items are added.
             UserData.BeginUpdate();
             // Loop through and add items to the listbox
-            foreach(string user_string in users)
+            foreach (string user_string in users)
             {
-                string name = user_string.Split('@')[1] + " " + user_string.Split('@')[2];
-                UserData.Items.Add("Item " + name);
+                string name = user_string.Split('@')[1] + " " + user_string.Split('@')[2] + " " + user_string.Split('@')[0];
+                UserData.Items.Add(name);
             }
             // Allow the ListBox to repaint and display the new items.
             UserData.EndUpdate();
             UserData.Show();
+            
+        }
 
 
+        private void continue_lock()
+        {
+            var server = new NamedPipeServerStream("Communicate");
+            server.WaitForConnection();
+            var br = new BinaryReader(server);
+            var bw = new BinaryWriter(server);
+            send(bw, this.to_send);
+
+            string ack = recv(br); // user_info_string = uid@fname@lname@uname#.....
+            ack += recv(br);
+            MessageBox.Show(ack);
+
+        }
+        private void namesender_Click(object sender, EventArgs e)
+        {
+            //str_to_send = LockReady#uid#path#uid@uid@...#rbac#optionality
+            UserData.Enabled = false;
+            for (int i = 0; i < UserData.Items.Count; i++)
+                if (UserData.GetItemCheckState(i) == CheckState.Checked)
+                {
+                   this.uid_list.Add(UserData.Items[i].ToString().Split(' ')[2]);
+                }
+           
+            string path = this.file_to_lock;
+            string rbac = "1";
+            string optionality = "0";
+            string str_to_send = "LockReady#" + this.my_uid + "#" + this.file_to_lock + "#";
+            string uid_str = "";
+            foreach (string uid in this.uid_list)
+            {
+                uid_str += uid + "@";
+            }
+            uid_str = uid_str.Remove(uid_str.Length - 1);
+            str_to_send = str_to_send + uid_str + "#" + rbac + "#" + optionality;
+            this.to_send = str_to_send;
+            this.continue_lock();
+
+
+
+        }
 
             
 
@@ -97,7 +144,7 @@ namespace Server
 
 
             //need to continue!!!!
-        }
+        
 
         private void browse2unlock_Click(object sender, EventArgs e)
         {
@@ -141,5 +188,7 @@ namespace Server
         {
             
         }
+        
+
     }
 }

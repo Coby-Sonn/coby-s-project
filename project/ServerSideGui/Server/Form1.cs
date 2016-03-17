@@ -13,6 +13,7 @@ namespace Server
         public string my_uid;
         public string firstname;
         public string lastname;
+
         public Form1()
         {
             InitializeComponent();
@@ -72,6 +73,7 @@ namespace Server
                 var bw = new BinaryWriter(server); 
                 send(bw, info);
                 string message_to_split = recv(br);
+                message_to_split = message_to_split + recv(br);
                 string message = message_to_split.Split('#')[0];
                 if (message_to_split.Split('#')[1] != "0")
                 {
@@ -88,13 +90,6 @@ namespace Server
                     string user_info = this.my_uid + "#" + this.firstname + "#" + this.lastname;
                     SaveFile form = new SaveFile(user_info);
                     form.Show();
-                    
-                    
-
-                    
-                    
-
-
                 }
                 else
                 {
@@ -175,15 +170,11 @@ namespace Server
         {
             AddUser(Fname.Text, Lname.Text, Uname.Text, Password.Text, ConfirmPass.Text);
         }
-
         private void SignInButton_Click(object sender, EventArgs e)
         {
             this.Hide();
             UserSignIn(LoginUname.Text, LoginPassword.Text);
-        }
-
-       
-
+        } 
         private void resetbutton_Click(object sender, EventArgs e)
         {
             LoginPassword.Clear();
