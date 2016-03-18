@@ -70,9 +70,12 @@ namespace Server
             Locker.ShowDialog();
             Locker.InitialDirectory = @"C:\";
             Locker.Title = "Browse Files";
-            string file_to_lock = Locker.FileName;
-            file_to_lock = ChosenFileView.Text;
-            this.file_to_lock = file_to_lock;
+            string filename = "";
+            filename += Locker.FileName;
+            this.file_to_lock = filename;
+            filename = ChosenFileView.Text;
+            ChosenFileView.Show();
+           
             //var server = new NamedPipeServerStream("Communicate");
             this.server = new NamedPipeServerStream("Communicate");
             server.WaitForConnection();
@@ -90,8 +93,11 @@ namespace Server
             // Loop through and add items to the listbox
             foreach (string user_string in users)
             {
-                string name = user_string.Split('@')[1] + " " + user_string.Split('@')[2] + " " + user_string.Split('@')[0];
-                UserData.Items.Add(name);
+                if (!(this.my_uid == user_string.Split('@')[0]))
+                {
+                    string user_data = user_string.Split('@')[1] + " " + user_string.Split('@')[2] + " " + user_string.Split('@')[0];
+                    UserData.Items.Add(user_data);
+                }
             }
             // Allow the ListBox to repaint and display the new items.
             UserData.EndUpdate();
@@ -106,7 +112,7 @@ namespace Server
 
         private void continue_lock()
         {
-            MessageBox.Show(this.to_send);
+            //MessageBox.Show(this.to_send);
 
             BinaryWriter bw = this.bw;
             BinaryReader br = this.br;
@@ -117,7 +123,7 @@ namespace Server
             if (message.Length % 2 == 0)
             {
                 first_part = message.Substring(0, message.Length / 2);
-                second_part = message.Substring(message.Length);
+                second_part = message.Substring(message.Length / 2);
             }
             else
             {
@@ -125,10 +131,13 @@ namespace Server
                 first_part = message.Substring(0, n);
                 second_part = message.Substring(n);
             }
+            MessageBox.Show(first_part);
+            MessageBox.Show(second_part);
             this.send(bw, first_part);
             string ack = this.recv(br);
             ack += this.recv(br);
             MessageBox.Show(ack);
+            
             this.send(bw, second_part);
 
             MessageBox.Show("sent both parts");
@@ -150,13 +159,13 @@ namespace Server
             string path = this.file_to_lock;
             string rbac = "1";
             string optionality = "0";
-            string str_to_send = "LockReady#" + this.my_uid + "#" + this.file_to_lock + "#";
+            string str_to_send = "LockReady#" + this.my_uid + "#" + path + "#";
             string uid_str = "";
             foreach (string uid in this.uid_list)
             {
                 uid_str += uid + "@";
             }
-            uid_str = uid_str.Remove(uid_str.Length - 1);
+            //uid_str = uid_str.Remove(uid_str.Length - 1);
             str_to_send = str_to_send + uid_str + "#" + rbac + "#" + optionality;
             this.to_send = str_to_send;
             this.continue_lock();
@@ -213,10 +222,6 @@ namespace Server
 
         }
 
-        private void UserData_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
-        }
         
 
     }

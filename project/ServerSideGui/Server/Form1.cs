@@ -77,9 +77,10 @@ namespace Server
                 string message = message_to_split.Split('#')[0];
                 if (message_to_split.Split('#')[1] != "0")
                 {
-                    this.my_uid = message_to_split.Split('#')[1];
-                    this.firstname = message_to_split.Split('#')[2];
+                    this.my_uid = message_to_split.Split('#')[2];
+                    this.firstname = message_to_split.Split('#')[1];
                     this.lastname = message_to_split.Split('#')[3];
+                    MessageBox.Show(my_uid + firstname + lastname);
                 }
                 server.Close();
                 server.Dispose();

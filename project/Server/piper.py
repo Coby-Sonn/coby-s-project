@@ -77,14 +77,16 @@ elif state == "Lock":
     info = info + recv(pipe)
     info = info.split("#")
     print info
+
     if info[0] == "LockReady":
         uid = info[1]
         path = info[2]
         uid_list = info[3].split("@")
+        uid_list = uid_list[:-1]
         rbac = info[4]
         optionality = info[5]#0 or 1
         file_obj = fm.File_Manager(uid)
-        if optionality:
+        if optionality == "1":
             second_uid_list = info[6].split("@")
             second_rbac = info[7]
             file_obj.Create_New_Format(path, uid_list, rbac, second_uid_list, second_rbac)

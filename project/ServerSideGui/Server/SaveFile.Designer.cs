@@ -30,6 +30,8 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.UserData = new System.Windows.Forms.CheckedListBox();
+            this.namesender = new System.Windows.Forms.Button();
             this.ChosenFileView = new System.Windows.Forms.Label();
             this.browse2lock = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -37,8 +39,6 @@
             this.browse2unlock = new System.Windows.Forms.Button();
             this.Locker = new System.Windows.Forms.OpenFileDialog();
             this.Unlocker = new System.Windows.Forms.OpenFileDialog();
-            this.namesender = new System.Windows.Forms.Button();
-            this.UserData = new System.Windows.Forms.CheckedListBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -67,6 +67,27 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Lock";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // UserData
+            // 
+            this.UserData.CheckOnClick = true;
+            this.UserData.FormattingEnabled = true;
+            this.UserData.Location = new System.Drawing.Point(39, 65);
+            this.UserData.Name = "UserData";
+            this.UserData.Size = new System.Drawing.Size(196, 154);
+            this.UserData.Sorted = true;
+            this.UserData.TabIndex = 4;
+            this.UserData.ThreeDCheckBoxes = true;
+            // 
+            // namesender
+            // 
+            this.namesender.Location = new System.Drawing.Point(75, 244);
+            this.namesender.Name = "namesender";
+            this.namesender.Size = new System.Drawing.Size(84, 23);
+            this.namesender.TabIndex = 3;
+            this.namesender.Text = "Send Names";
+            this.namesender.UseVisualStyleBackColor = true;
+            this.namesender.Click += new System.EventHandler(this.namesender_Click);
             // 
             // ChosenFileView
             // 
@@ -123,28 +144,6 @@
             // 
             this.Unlocker.FileName = "openFileDialog1";
             this.Unlocker.Filter = "CB files|*.cb|All files|*.*";
-            // 
-            // namesender
-            // 
-            this.namesender.Location = new System.Drawing.Point(75, 244);
-            this.namesender.Name = "namesender";
-            this.namesender.Size = new System.Drawing.Size(84, 23);
-            this.namesender.TabIndex = 3;
-            this.namesender.Text = "Send Names";
-            this.namesender.UseVisualStyleBackColor = true;
-            this.namesender.Click += new System.EventHandler(this.namesender_Click);
-            // 
-            // UserData
-            // 
-            this.UserData.CheckOnClick = true;
-            this.UserData.FormattingEnabled = true;
-            this.UserData.Location = new System.Drawing.Point(39, 65);
-            this.UserData.MultiColumn = true;
-            this.UserData.Name = "UserData";
-            this.UserData.Size = new System.Drawing.Size(196, 154);
-            this.UserData.Sorted = true;
-            this.UserData.TabIndex = 4;
-            this.UserData.ThreeDCheckBoxes = true;
             // 
             // SaveFile
             // 

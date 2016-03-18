@@ -6,7 +6,7 @@ from Crypto.Hash import SHA256
 MAGIC_NUMBER = 0xCB
 EXTENSION = '.cb'
 FILE_TYPE_CODE_DICTIONARY = {"txt": 1, "docx": 2, "ppt": 3, "mp3": 4, "jpeg": 5, "jpg": 6, "png": 7, "bmp": 8, "pdf": 9,
-                             "mp4": 10, "xml": 11}
+                             "mp4": 10, "xml": 11, "doc": 12, "html": 13}
 
 
 class FileHeaderStruct(Structure):
@@ -189,6 +189,8 @@ class File_Manager():
         """receives the file path, a list of uids allowed to do what the rbac specifies, and a rbac
             attaches the header and uses Encryption's function to encrypt the data"""
         users_rbac = []
+        if self.user_uid not in UID_List:
+            UID_List.append(str(self.user_uid))
         """removing old extension and saving it
             and adding the new extension"""
         file_path_list = path.split(".")
@@ -199,6 +201,7 @@ class File_Manager():
             optional_header_flag = 0
         else:
             optional_header_flag = 1
+
         fileid = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(8))
         file_header = FileHeaderStruct(MAGIC_NUMBER,
                                        fileid,
