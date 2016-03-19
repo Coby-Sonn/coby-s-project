@@ -108,8 +108,6 @@ namespace Server
 
             
         }
-
-
         private void continue_lock()
         {
             //MessageBox.Show(this.to_send);
@@ -202,6 +200,7 @@ namespace Server
             send(bw, information_string);
 
             string message = recv(br);
+            message = message + recv(br);
 
             if (message == "File Unlocked")
             {
