@@ -39,15 +39,21 @@
             this.browse2unlock = new System.Windows.Forms.Button();
             this.Locker = new System.Windows.Forms.OpenFileDialog();
             this.Unlocker = new System.Windows.Forms.OpenFileDialog();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.DeleteUser = new System.Windows.Forms.Button();
+            this.UserDatadel = new System.Windows.Forms.CheckedListBox();
+            this.UserButton = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Location = new System.Drawing.Point(-1, -1);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -145,6 +151,49 @@
             this.Unlocker.FileName = "openFileDialog1";
             this.Unlocker.Filter = "CB files|*.cb|All files|*.*";
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.UserButton);
+            this.tabPage3.Controls.Add(this.UserDatadel);
+            this.tabPage3.Controls.Add(this.DeleteUser);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(488, 347);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Delete User";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            
+            // 
+            // DeleteUser
+            // 
+            this.DeleteUser.Location = new System.Drawing.Point(181, 213);
+            this.DeleteUser.Name = "DeleteUser";
+            this.DeleteUser.Size = new System.Drawing.Size(75, 23);
+            this.DeleteUser.TabIndex = 0;
+            this.DeleteUser.Text = "Delete User";
+            this.DeleteUser.UseVisualStyleBackColor = true;
+            this.DeleteUser.Click += new System.EventHandler(this.DeleteUser_Click);
+            // 
+            // UserDatadel
+            // 
+            this.UserDatadel.FormattingEnabled = true;
+            this.UserDatadel.Location = new System.Drawing.Point(160, 113);
+            this.UserDatadel.Name = "UserDatadel";
+            this.UserDatadel.ScrollAlwaysVisible = true;
+            this.UserDatadel.Size = new System.Drawing.Size(120, 94);
+            this.UserDatadel.TabIndex = 1;
+            // 
+            // UserButton
+            // 
+            this.UserButton.Location = new System.Drawing.Point(181, 84);
+            this.UserButton.Name = "UserButton";
+            this.UserButton.Size = new System.Drawing.Size(75, 23);
+            this.UserButton.TabIndex = 2;
+            this.UserButton.Text = "Show Users";
+            this.UserButton.UseVisualStyleBackColor = true;
+            this.UserButton.Click += new System.EventHandler(this.UserButton_Click);
+            // 
             // SaveFile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -158,6 +207,7 @@
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -175,6 +225,10 @@
         private System.Windows.Forms.Label ChosenFileView;
         private System.Windows.Forms.Button namesender;
         private System.Windows.Forms.CheckedListBox UserData;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.CheckedListBox UserDatadel;
+        private System.Windows.Forms.Button DeleteUser;
+        private System.Windows.Forms.Button UserButton;
 
     }
 }

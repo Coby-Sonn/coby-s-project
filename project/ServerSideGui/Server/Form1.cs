@@ -186,6 +186,11 @@ namespace Server
             ConfirmPass.Clear();
         }
 
+        private void Fname_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
        
         
 

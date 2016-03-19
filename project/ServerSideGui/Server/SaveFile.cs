@@ -221,6 +221,56 @@ namespace Server
 
         }
 
+        private void DeleteUser_Click(object sender, EventArgs e)
+        {
+            UserDatadel.Enabled = false;
+            
+            for (int i = 0; i < UserDatadel.Items.Count; i++)
+                if (UserDatadel.GetItemCheckState(i) == CheckState.Checked)
+                {
+                    this.uid_list.Add(UserDatadel.Items[i].ToString().Split(' ')[2]);
+                }
+
+
+            string uid_str = "";
+            foreach (string uid in this.uid_list)
+            {
+                uid_str += uid + "@";
+            }
+            string user_to_del = uid_str;
+            send(this.bw, user_to_del);
+        }
+
+       
+        private void UserButton_Click(object sender, EventArgs e)
+        {
+            this.server = new NamedPipeServerStream("Communicate");
+            server.WaitForConnection();
+            this.br = new BinaryReader(server);
+            this.bw = new BinaryWriter(server);
+            send(bw, "Delete#");
+
+            string user_info_string = recv(br); // user_info_string = uid@fname@lname@uname#.....
+            user_info_string = user_info_string + recv(br);
+            string[] users = user_info_string.Split('#');
+
+
+            // Shutdown the painting of the ListBox as items are added.
+            UserDatadel.BeginUpdate();
+            // Loop through and add items to the listbox
+            foreach (string user_string in users)
+            {
+                if (!(this.my_uid == user_string.Split('@')[0]))
+                {
+                    string user_data = user_string.Split('@')[1] + " " + user_string.Split('@')[2] + " " + user_string.Split('@')[0];
+                    UserDatadel.Items.Add(user_data);
+                }
+            }
+            // Allow the ListBox to repaint and display the new items.
+            UserDatadel.EndUpdate();
+            UserDatadel.Show();
+        }
+
         
 
     }

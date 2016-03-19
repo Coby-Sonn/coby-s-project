@@ -5,15 +5,15 @@ import File_Manager as fm
 
 """server side"""
 def send(f, s):
-    if len(s) % 2 == 0 :
+    if len(s) % 2 == 0:
         first_part = s[:len(s)/2]
         second_part = s[len(s)/2:]
     else:
         first_part = s[:len(s)/2+1]
         second_part = s[len(s)/2+1:]
     f.write(struct.pack('I', len(first_part)) + first_part)
-    f.write(struct.pack('I', len(second_part)) + second_part)   # Write str length and str
-    f.seek(0)                               # EDIT: This is also necessary
+    f.write(struct.pack('I', len(second_part)) + second_part)
+    f.seek(0)
 def recv(f):
     n = struct.unpack('I', f.read(4))[0]    # Read str length
     recv_message = f.read(n)                           # Read str
@@ -30,7 +30,7 @@ i = 1
 info = recv(pipe)
 info = info.split("#")
 state = info[0]
-
+print state
 message = ""
 if state == "login":
     username = info[1]
@@ -100,6 +100,20 @@ elif state == "Lock":
         else:
             file_obj.Create_New_Format(path, uid_list, rbac)
         message = "Locked"
+
+elif state == "Delete":
+    print "here"
+    AllUserInfo = GetUserInfoForLock()
+    send(pipe, AllUserInfo)
+    user_to_del = recv(pipe)
+    print user_to_del
+    if dbm.DeleteInfo(user_to_del[:-1]):
+        print "user deleted"
+        send(pipe, "User %s Deleted" % user_to_del)
+    else:
+        print "user not deleted"
+        send(pipe, "User %s can not be deleted, or does not exist" % user_to_del)
+
 
 
 

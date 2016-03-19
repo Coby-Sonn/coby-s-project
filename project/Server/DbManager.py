@@ -41,18 +41,22 @@ def UpdateInfo(serial_number, what_to_change, uid):
     c = conn.cursor()
     execution_string = 'UPDATE UserInfo SET %s' %COLUMN_LIST[serial_number-1]
     execution_string = execution_string + " = '%s'" %what_to_change
-    execution_string = execution_string + " WHERE UID = %d" %uid
+    execution_string = execution_string + " WHERE UID = %s" %uid
     c.execute(execution_string)
     conn.commit()
     conn.close()
 
 def DeleteInfo(uid):
-    conn = sqlite3.connect(SQLITE_FILE_PATH)
-    c = conn.cursor()
-    execution_string = "DELETE FROM UserInfo WHERE UID = %d" %uid
-    c.execute(execution_string)
-    conn.commit()
-    conn.close()
+    try:
+        conn = sqlite3.connect(SQLITE_FILE_PATH)
+        c = conn.cursor()
+        execution_string = "DELETE FROM UserInfo WHERE UID = %s" %uid
+        c.execute(execution_string)
+        conn.commit()
+        conn.close()
+        return True
+    except:
+        return False
 
 def ReadAllRows():
     conn = sqlite3.connect(SQLITE_FILE_PATH)
@@ -77,7 +81,7 @@ def ReadInfoByUID(uid):
     if UIDExists:
         conn = sqlite3.connect(SQLITE_FILE_PATH)
         c = conn.cursor()
-        execution_string = "SELECT * FROM UserInfo WHERE UID = %d" %uid
+        execution_string = "SELECT * FROM UserInfo WHERE UID = %s" %uid
 
         c.execute(execution_string)
         read_info = c.fetchone()
@@ -93,7 +97,7 @@ def ReadInfoByUID(uid):
 def UIDExists(uid):
     conn = sqlite3.connect(SQLITE_FILE_PATH)
     c = conn.cursor()
-    c.execute("SELECT * FROM UserInfo WHERE UID = %d" %uid)
+    c.execute("SELECT * FROM UserInfo WHERE UID = %s" %uid)
     read_info = c.fetchone()
     if read_info:
         conn.commit()

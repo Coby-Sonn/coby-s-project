@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.RegisterLabel = new System.Windows.Forms.Label();
             this.registerbutton = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
@@ -177,7 +178,6 @@
             this.ConfirmPass.PasswordChar = '•';
             this.ConfirmPass.Size = new System.Drawing.Size(100, 20);
             this.ConfirmPass.TabIndex = 18;
-            this.ConfirmPass.Text = "Kingdori1";
             // 
             // Password
             // 
@@ -186,7 +186,6 @@
             this.Password.PasswordChar = '•';
             this.Password.Size = new System.Drawing.Size(100, 20);
             this.Password.TabIndex = 17;
-            this.Password.Text = "Kingdori1";
             // 
             // Uname
             // 
@@ -194,7 +193,6 @@
             this.Uname.Name = "Uname";
             this.Uname.Size = new System.Drawing.Size(100, 20);
             this.Uname.TabIndex = 16;
-            this.Uname.Text = "Kobeman";
             // 
             // Lname
             // 
@@ -202,7 +200,6 @@
             this.Lname.Name = "Lname";
             this.Lname.Size = new System.Drawing.Size(100, 20);
             this.Lname.TabIndex = 15;
-            this.Lname.Text = "Sonn";
             // 
             // Fname
             // 
@@ -210,7 +207,7 @@
             this.Fname.Name = "Fname";
             this.Fname.Size = new System.Drawing.Size(100, 20);
             this.Fname.TabIndex = 14;
-            this.Fname.Text = "Kobe";
+            this.Fname.TextChanged += new System.EventHandler(this.Fname_TextChanged);
             // 
             // button1
             // 
@@ -318,6 +315,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(470, 353);
             this.Controls.Add(this.tabControl1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Form1";
             this.tabControl1.ResumeLayout(false);
