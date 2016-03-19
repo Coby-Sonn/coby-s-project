@@ -103,9 +103,9 @@ namespace Server
             
             }
         }
-        private void AddUser(string firstname, string lastname, string username, string password, string confirmPass)
+        private void Register(string firstname, string lastname, string username, string password, string confirmPass)
         {
-            string pattern = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.* ).{8,15}$";
+            string pattern = @"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{8,15}$";
             
             //asks the database if the username exists already
             if (password != confirmPass)
@@ -113,10 +113,8 @@ namespace Server
                 MessageBox.Show("Passwords do not match");
             }
             else if (!Regex.IsMatch(password, pattern))
-            {
-                MessageBox.Show(password);
-                
-                MessageBox.Show("Password must be between 8-15 characters and must contain at least one uppercase letter, one lowercase letter, one number and no special characters besides space");
+            {  
+                MessageBox.Show("Password must be between 8-15 characters and must contain at least one uppercase letter, one lowercase letter and one number");
             }
             //Password must be at least 8 characters long
             else if (password.Length < 8)
@@ -151,6 +149,7 @@ namespace Server
                 var bw = new BinaryWriter(server);
                 send(bw, information_string);
                 string message = recv(br);
+                message = message + recv(br);
                 server.Close();
                 server.Dispose();
                 if (message == "Signed up")
@@ -169,7 +168,7 @@ namespace Server
         }
         private void registerbutton_Click(object sender, EventArgs e)
         {
-            AddUser(Fname.Text, Lname.Text, Uname.Text, Password.Text, ConfirmPass.Text);
+            Register(Fname.Text, Lname.Text, Uname.Text, Password.Text, ConfirmPass.Text);
         }
         private void SignInButton_Click(object sender, EventArgs e)
         {
@@ -187,10 +186,8 @@ namespace Server
             ConfirmPass.Clear();
         }
 
-        private void LoginUname_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+       
+        
 
         
 

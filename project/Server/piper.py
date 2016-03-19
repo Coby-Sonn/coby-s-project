@@ -39,10 +39,13 @@ if state == "login":
     if password_hash == password:
         info_str = dbm.GetLoginInfo(username)
         message = "Signed in#" + info_str
+        send(pipe, message)
     else:
         message = "Not#0"
+        send(pipe, message)
 
 elif state == "register":
+    print info
     uid = info[1]
     firstname = info[2]
     lastname = info[3]
@@ -50,11 +53,14 @@ elif state == "register":
     password = info[5]
 
     uname_exists = dbm.UnameExists(username)[0]
+
     if not uname_exists:
         dbm.AddInfo(firstname, uid, lastname, username, password)
         message = "Signed up"
+        send(pipe, message)
     else:
         message = "username exists"
+        send(pipe, message)
 
 elif state == "Unlock":
     uid = info[1]
@@ -68,6 +74,7 @@ elif state == "Unlock":
             message = ack
     else:
         message = "path error, can only unlock .cb files"
+    send(pipe, message)
 elif state == "Lock":
     AllUserInfo = GetUserInfoForLock()
     send(pipe, AllUserInfo)
@@ -105,7 +112,7 @@ elif state == "Lock":
 
 
 
-send(pipe, message)
+#send(pipe, message)
 
 
 

@@ -28,20 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.RegisterLabel = new System.Windows.Forms.Label();
             this.registerbutton = new System.Windows.Forms.Button();
-            this.Password = new System.Windows.Forms.TextBox();
-            this.Uname = new System.Windows.Forms.TextBox();
-            this.Lname = new System.Windows.Forms.TextBox();
-            this.Fname = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.ConfirmPass = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.PassHelp = new System.Windows.Forms.Label();
+            this.ConfirmPass = new System.Windows.Forms.TextBox();
+            this.Password = new System.Windows.Forms.TextBox();
+            this.Uname = new System.Windows.Forms.TextBox();
+            this.Lname = new System.Windows.Forms.TextBox();
+            this.Fname = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.UserData = new System.Windows.Forms.TextBox();
@@ -52,6 +54,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.LoginPassword = new System.Windows.Forms.TextBox();
             this.LoginUname = new System.Windows.Forms.TextBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -76,39 +79,10 @@
             this.registerbutton.UseVisualStyleBackColor = true;
             this.registerbutton.Click += new System.EventHandler(this.registerbutton_Click);
             // 
-            // Password
-            // 
-            this.Password.Location = new System.Drawing.Point(224, 148);
-            this.Password.Name = "Password";
-            this.Password.PasswordChar = '●';
-            this.Password.Size = new System.Drawing.Size(100, 20);
-            this.Password.TabIndex = 2;
-            // 
-            // Uname
-            // 
-            this.Uname.Location = new System.Drawing.Point(224, 116);
-            this.Uname.Name = "Uname";
-            this.Uname.Size = new System.Drawing.Size(100, 20);
-            this.Uname.TabIndex = 3;
-            // 
-            // Lname
-            // 
-            this.Lname.Location = new System.Drawing.Point(224, 85);
-            this.Lname.Name = "Lname";
-            this.Lname.Size = new System.Drawing.Size(100, 20);
-            this.Lname.TabIndex = 4;
-            // 
-            // Fname
-            // 
-            this.Fname.Location = new System.Drawing.Point(224, 54);
-            this.Fname.Name = "Fname";
-            this.Fname.Size = new System.Drawing.Size(100, 20);
-            this.Fname.TabIndex = 5;
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(116, 88);
+            this.label3.Location = new System.Drawing.Point(115, 91);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(58, 13);
             this.label3.TabIndex = 7;
@@ -126,7 +100,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(115, 123);
+            this.label5.Location = new System.Drawing.Point(115, 119);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(55, 13);
             this.label5.TabIndex = 9;
@@ -135,20 +109,11 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(117, 57);
+            this.label6.Location = new System.Drawing.Point(115, 60);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(57, 13);
             this.label6.TabIndex = 10;
             this.label6.Text = "First Name";
-            // 
-            // ConfirmPass
-            // 
-            this.ConfirmPass.Location = new System.Drawing.Point(224, 174);
-            this.ConfirmPass.Name = "ConfirmPass";
-            this.ConfirmPass.PasswordChar = '●';
-            this.ConfirmPass.Size = new System.Drawing.Size(100, 20);
-            this.ConfirmPass.TabIndex = 11;
-            this.ConfirmPass.UseSystemPasswordChar = true;
             // 
             // label1
             // 
@@ -172,19 +137,20 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.PassHelp);
+            this.tabPage1.Controls.Add(this.ConfirmPass);
+            this.tabPage1.Controls.Add(this.Password);
+            this.tabPage1.Controls.Add(this.Uname);
+            this.tabPage1.Controls.Add(this.Lname);
+            this.tabPage1.Controls.Add(this.Fname);
             this.tabPage1.Controls.Add(this.button1);
             this.tabPage1.Controls.Add(this.label6);
             this.tabPage1.Controls.Add(this.registerbutton);
-            this.tabPage1.Controls.Add(this.ConfirmPass);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.RegisterLabel);
-            this.tabPage1.Controls.Add(this.Fname);
-            this.tabPage1.Controls.Add(this.Password);
             this.tabPage1.Controls.Add(this.label4);
             this.tabPage1.Controls.Add(this.label5);
-            this.tabPage1.Controls.Add(this.Uname);
             this.tabPage1.Controls.Add(this.label3);
-            this.tabPage1.Controls.Add(this.Lname);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -192,6 +158,59 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Register";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // PassHelp
+            // 
+            this.PassHelp.AutoSize = true;
+            this.PassHelp.Location = new System.Drawing.Point(330, 147);
+            this.PassHelp.Name = "PassHelp";
+            this.PassHelp.Size = new System.Drawing.Size(13, 13);
+            this.PassHelp.TabIndex = 19;
+            this.PassHelp.Text = "?";
+            this.toolTip1.SetToolTip(this.PassHelp, "Password must be between 8-15 characters and must contain at least one uppercase " +
+        "letter, one lowercase letter and one number");
+            // 
+            // ConfirmPass
+            // 
+            this.ConfirmPass.Location = new System.Drawing.Point(224, 174);
+            this.ConfirmPass.Name = "ConfirmPass";
+            this.ConfirmPass.PasswordChar = '•';
+            this.ConfirmPass.Size = new System.Drawing.Size(100, 20);
+            this.ConfirmPass.TabIndex = 18;
+            this.ConfirmPass.Text = "Kingdori1";
+            // 
+            // Password
+            // 
+            this.Password.Location = new System.Drawing.Point(224, 144);
+            this.Password.Name = "Password";
+            this.Password.PasswordChar = '•';
+            this.Password.Size = new System.Drawing.Size(100, 20);
+            this.Password.TabIndex = 17;
+            this.Password.Text = "Kingdori1";
+            // 
+            // Uname
+            // 
+            this.Uname.Location = new System.Drawing.Point(224, 116);
+            this.Uname.Name = "Uname";
+            this.Uname.Size = new System.Drawing.Size(100, 20);
+            this.Uname.TabIndex = 16;
+            this.Uname.Text = "Kobeman";
+            // 
+            // Lname
+            // 
+            this.Lname.Location = new System.Drawing.Point(224, 88);
+            this.Lname.Name = "Lname";
+            this.Lname.Size = new System.Drawing.Size(100, 20);
+            this.Lname.TabIndex = 15;
+            this.Lname.Text = "Sonn";
+            // 
+            // Fname
+            // 
+            this.Fname.Location = new System.Drawing.Point(224, 57);
+            this.Fname.Name = "Fname";
+            this.Fname.Size = new System.Drawing.Size(100, 20);
+            this.Fname.TabIndex = 14;
+            this.Fname.Text = "Kobe";
             // 
             // button1
             // 
@@ -292,7 +311,6 @@
             this.LoginUname.Size = new System.Drawing.Size(100, 20);
             this.LoginUname.TabIndex = 0;
             this.LoginUname.Text = "coby567";
-            this.LoginUname.TextChanged += new System.EventHandler(this.LoginUname_TextChanged);
             // 
             // Form1
             // 
@@ -315,15 +333,10 @@
 
         private System.Windows.Forms.Label RegisterLabel;
         private System.Windows.Forms.Button registerbutton;
-        private System.Windows.Forms.TextBox Password;
-        private System.Windows.Forms.TextBox Uname;
-        private System.Windows.Forms.TextBox Lname;
-        private System.Windows.Forms.TextBox Fname;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox ConfirmPass;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
@@ -337,6 +350,13 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button resetbuttonregister;
         private System.Windows.Forms.TextBox UserData;
+        private System.Windows.Forms.TextBox ConfirmPass;
+        private System.Windows.Forms.TextBox Password;
+        private System.Windows.Forms.TextBox Uname;
+        private System.Windows.Forms.TextBox Lname;
+        private System.Windows.Forms.TextBox Fname;
+        private System.Windows.Forms.Label PassHelp;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
 
