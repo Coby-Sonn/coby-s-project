@@ -11,16 +11,16 @@ FILE_TYPE_CODE_DICTIONARY = {"txt": 1, "docx": 2, "ppt": 3, "mp3": 4, "jpeg": 5,
 
 class FileHeaderStruct(Structure):
     _fields_ = [("magicNumber"       , c_ubyte),
-                ("fileID"            , c_ushort),
-                ("fileTypeCode"      , c_ubyte),
-                ("rBac"              , c_ubyte),
-                ("optionalHeaderFlag", c_ubyte),
-                ("lenUIDS"           , c_ushort)
+                ("fileID"            , c_char_p),
+                ("fileTypeCode"      , c_uint),
+                ("rBac"              , c_uint),
+                ("optionalHeaderFlag", c_uint),
+                ("lenUIDS"           , c_uint)
                 ]
 
 class OptionalHeaderStructAdditions(Structure):
-    _fields_ = [("secondRbac"        , c_ubyte),
-                ("secondLenUIDS"     , c_ushort)
+    _fields_ = [("secondRbac"        , c_uint),
+                ("secondLenUIDS"     , c_uint)
 
                 ]
 
@@ -203,11 +203,14 @@ class File_Manager():
             optional_header_flag = 1
 
         fileid = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(8))
+        print  '111111111     ', FILE_TYPE_CODE_DICTIONARY[old_extension]
+        print  '222222222     ', rbac
+        print  '333333333     ', optional_header_flag
         file_header = FileHeaderStruct(MAGIC_NUMBER,
                                        fileid,
-                                       FILE_TYPE_CODE_DICTIONARY[old_extension],
-                                       rbac,
-                                       optional_header_flag,
+                                       int(FILE_TYPE_CODE_DICTIONARY[old_extension]),
+                                       int(rbac),
+                                       int(optional_header_flag),
                                        len(UID_List))
         ##print "header created"
         """opening files"""
@@ -219,13 +222,13 @@ class File_Manager():
         ##print "header written"
         """adding hexed uids:"""
         for uid in UID_List:
-            new_file.write(struct.pack('i', uid))
+            new_file.write(struct.pack('i', int(uid)))
 
         if optional_header_flag == 1:
             addition_to_file_header = OptionalHeaderStructAdditions(second_rbac, len(second_UID_List))
             new_file.write(addition_to_file_header)
             for uid in second_UID_List:
-                new_file.write(struct.pack('i', uid))
+                new_file.write(struct.pack('i', int(uid)))
                 users_rbac = [(rbac, UID_List), (second_rbac, second_UID_List)]
         else:
             users_rbac = [(rbac, UID_List)]
