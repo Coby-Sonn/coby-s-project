@@ -24,7 +24,39 @@ D:\coby's project\coby-s-project\GUIS\ServerSideGui\Server\obj\x86\Debug\Server.
 D:\coby's project\coby-s-project\GUIS\ServerSideGui\Server\obj\x86\Debug\Server.Properties.Resources.resources
 D:\coby's project\coby-s-project\GUIS\ServerSideGui\Server\obj\x86\Debug\Server.SaveFile.resources
 D:\coby's project\coby-s-project\GUIS\ServerSideGui\Server\obj\x86\Debug\Server.csproj.GenerateResource.Cache
-C:\Users\User\Desktop\project\Server\ServerSideGui\Server\obj\x86\Debug\Server.exe
-C:\Users\User\Desktop\project\Server\ServerSideGui\Server\obj\x86\Debug\Server.pdb
+C:\Users\David\Desktop\coby-s-project\project\ServerSideGui\Server\obj\x86\Debug\Server.exe
+C:\Users\David\Desktop\coby-s-project\project\ServerSideGui\Server\obj\x86\Debug\Server.pdb
+C:\Users\David\Desktop\coby-s-project\project\ServerSideGui\Server\obj\x86\Debug\Server.csprojResolveAssemblyReference.cache
+C:\Users\David\Desktop\coby-s-project\project\ServerSideGui\Server\obj\x86\Debug\Server.Form1.resources
+C:\Users\David\Desktop\coby-s-project\project\ServerSideGui\Server\obj\x86\Debug\Server.Properties.Resources.resources
+C:\Users\David\Desktop\coby-s-project\project\ServerSideGui\Server\obj\x86\Debug\Server.SaveFile.resources
+C:\Users\David\Desktop\coby-s-project\project\ServerSideGui\Server\obj\x86\Debug\Server.csproj.GenerateResource.Cache
+C:\Users\David\Desktop\coby-s-project\project\ServerSideGui\Server\bin\Debug\Server.exe
+C:\Users\David\Desktop\coby-s-project\project\ServerSideGui\Server\bin\Debug\Server.pdb
+C:\Users\User\Desktop\coby-s-project\project\ServerSideGui\Server\obj\x86\Debug\Server.exe
+C:\Users\User\Desktop\coby-s-project\project\ServerSideGui\Server\obj\x86\Debug\Server.pdb
+C:\Users\User\Desktop\coby-s-project\project\ServerSideGui\Server\bin\Debug\Server.exe
+C:\Users\User\Desktop\coby-s-project\project\ServerSideGui\Server\bin\Debug\Server.pdb
+C:\Users\User\Desktop\coby-s-project\project\ServerSideGui\Server\obj\x86\Debug\Server.csprojResolveAssemblyReference.cache
+C:\Users\User\Desktop\coby-s-project\project\ServerSideGui\Server\obj\x86\Debug\Server.Form1.resources
+C:\Users\User\Desktop\coby-s-project\project\ServerSideGui\Server\obj\x86\Debug\Server.Properties.Resources.resources
+C:\Users\User\Desktop\coby-s-project\project\ServerSideGui\Server\obj\x86\Debug\Server.SaveFile.resources
+C:\Users\User\Desktop\coby-s-project\project\ServerSideGui\Server\obj\x86\Debug\Server.csproj.GenerateResource.Cache
+C:\Users\User\Desktop\ServerSideGui\Server\obj\x86\Debug\Server.exe
+C:\Users\User\Desktop\ServerSideGui\Server\obj\x86\Debug\Server.csprojResolveAssemblyReference.cache
+C:\Users\User\Desktop\ServerSideGui\Server\obj\x86\Debug\Server.Form1.resources
+C:\Users\User\Desktop\ServerSideGui\Server\obj\x86\Debug\Server.Properties.Resources.resources
+C:\Users\User\Desktop\ServerSideGui\Server\obj\x86\Debug\Server.SaveFile.resources
+C:\Users\User\Desktop\ServerSideGui\Server\obj\x86\Debug\Server.csproj.GenerateResource.Cache
+C:\Users\User\Desktop\ServerSideGui\Server\bin\Debug\Server.exe
+C:\Users\User\Desktop\ServerSideGui\Server\bin\Debug\Server.pdb
+C:\Users\User\Desktop\ServerSideGui\Server\obj\x86\Debug\Server.pdb
 C:\Users\User\Desktop\coby-s-project\project\Server\ServerSideGui\Server\obj\x86\Debug\Server.exe
 C:\Users\User\Desktop\coby-s-project\project\Server\ServerSideGui\Server\obj\x86\Debug\Server.pdb
+C:\Users\User\Desktop\coby-s-project\project\Server\ServerSideGui\Server\bin\Debug\Server.exe
+C:\Users\User\Desktop\coby-s-project\project\Server\ServerSideGui\Server\bin\Debug\Server.pdb
+C:\Users\User\Desktop\coby-s-project\project\Server\ServerSideGui\Server\obj\x86\Debug\Server.csprojResolveAssemblyReference.cache
+C:\Users\User\Desktop\coby-s-project\project\Server\ServerSideGui\Server\obj\x86\Debug\Server.Form1.resources
+C:\Users\User\Desktop\coby-s-project\project\Server\ServerSideGui\Server\obj\x86\Debug\Server.Properties.Resources.resources
+C:\Users\User\Desktop\coby-s-project\project\Server\ServerSideGui\Server\obj\x86\Debug\Server.SaveFile.resources
+C:\Users\User\Desktop\coby-s-project\project\Server\ServerSideGui\Server\obj\x86\Debug\Server.csproj.GenerateResource.Cache

@@ -6,16 +6,49 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.IO.Pipes;
+using System.IO;
 
 namespace Server
 {
     public partial class SaveFile : Form
     {
-        public SaveFile()
+        private string my_uid;
+        private string my_fname;
+        private string my_lname;
+        private string file_to_lock;
+        private List<string> uid_list = new List<string>();
+        private string to_send;
+        public SocketClient sock_obj;
+        
+        
+        public SaveFile(string user_info)
         {
             InitializeComponent();
+            this.my_uid = user_info.Split('#')[0];
+            this.my_fname = user_info.Split('#')[1];
+            this.my_lname = user_info.Split('#')[2];
+            string greeting_str = "Hello, " + this.my_lname + " " + this.my_fname + ".";
+            greeting_str = this.GreetingLabel.Text;
+            this.GreetingLabel.Show();
+            SocketClient sock_obj = new SocketClient();
+            this.sock_obj = sock_obj;
+
         }
 
+
+        static string sha256(string password)
+        {
+            System.Security.Cryptography.SHA256Managed crypt = new System.Security.Cryptography.SHA256Managed();
+            System.Text.StringBuilder hash = new System.Text.StringBuilder();
+            byte[] crypto = crypt.ComputeHash(Encoding.UTF8.GetBytes(password), 0, Encoding.UTF8.GetByteCount(password));
+            foreach (byte theByte in crypto)
+            {
+                hash.Append(theByte.ToString("x2"));
+            }
+            return hash.ToString();
+        }
+        
 
         private void browse2lock_Click(object sender, EventArgs e)
         {
@@ -24,7 +57,91 @@ namespace Server
             Locker.ShowDialog();
             Locker.InitialDirectory = @"C:\";
             Locker.Title = "Browse Files";
-            string file_to_lock = Locker.FileName;
+            string filename = "";
+            filename += Locker.FileName;
+            this.file_to_lock = filename;
+            filename = ChosenFileView.Text;
+            ChosenFileView.Show();
+           
+            
+            this.sock_obj.StartClient();
+            this.sock_obj.Send("Lock");
+            
+
+            string user_info_string = this.sock_obj.Recv(); // user_info_string = uid@fname@lname@uname@ph#.....
+            MessageBox.Show(user_info_string);
+            string[] users = user_info_string.Split('#');
+
+
+            // Shutdown the painting of the ListBox as items are added.
+            UserData.BeginUpdate();
+            // Loop through and add items to the listbox
+            
+            foreach (string user_string in users)
+            {
+                
+                if (user_string != "")
+                {
+                    if (!(this.my_uid == user_string.Split('@')[0]))
+                    {
+                        string user_data = user_string.Split('@')[1] + " " + user_string.Split('@')[2] + " " + user_string.Split('@')[0];
+                        UserData.Items.Add(user_data);
+                    }
+                }
+            }
+            // Allow the ListBox to repaint and display the new items.
+            UserData.EndUpdate();
+            UserData.Show();
+            
+
+            
+
+            
+        }
+        private void continue_lock()
+        {
+            //MessageBox.Show(this.to_send);
+
+            
+
+            string message = this.to_send;
+            MessageBox.Show(message);
+            this.sock_obj.Send(message);
+            string ack = this.sock_obj.Recv();
+            MessageBox.Show(ack);
+            this.sock_obj.CloseClient();
+            
+            
+
+            
+
+        }
+        private void namesender_Click(object sender, EventArgs e)
+        {
+            //str_to_send = LockReady#uid#path#uid@uid@...#rbac#optionality
+            UserData.Enabled = false;
+            for (int i = 0; i < UserData.Items.Count; i++)
+                if (UserData.GetItemCheckState(i) == CheckState.Checked)
+                {
+                   this.uid_list.Add(UserData.Items[i].ToString().Split(' ')[2]);
+                }
+           
+            string path = this.file_to_lock;
+            string rbac = "1";
+            string optionality = "0";
+            string str_to_send = "LockReady#" + this.my_uid + "#" + path + "#";
+            string uid_str = "";
+            foreach (string uid in this.uid_list)
+            {
+                uid_str += uid + "@";
+            }
+            //uid_str = uid_str.Remove(uid_str.Length - 1);
+            str_to_send = str_to_send + uid_str + "#" + rbac + "#" + optionality;
+            this.to_send = str_to_send;
+            this.continue_lock();
+            
+
+
 
         }
 
@@ -37,8 +154,92 @@ namespace Server
             Unlocker.InitialDirectory = @"C:\";
             Unlocker.Title = "Browse Files to Unlock";
             string file_to_unlock = Unlocker.FileName;
+
+            string uid = this.my_uid; // need to get the current user uid
+            string information_string = "Unlock#" + uid + "#" + file_to_unlock;
+            this.sock_obj.StartClient();
+            this.sock_obj.Send(information_string);
+            
+
+            string message = this.sock_obj.Recv();
+            
+
+            if (message == "File Unlocked")
+            {
+                MessageBox.Show(message);
+            }
+            else if (message == "The specified user is not allowed to open the file")
+            {
+                MessageBox.Show(message);
+            }
+            else if (message == "path error, can only unlock .cb files")
+            {
+                MessageBox.Show(message);
+            }
+
+
+            this.sock_obj.CloseClient();
+
+        }
+
+        private void DeleteUser_Click(object sender, EventArgs e)
+        {
+            UserDatadel.Enabled = false;
+            
+            for (int i = 0; i < UserDatadel.Items.Count; i++)
+                if (UserDatadel.GetItemCheckState(i) == CheckState.Checked)
+                {
+                    this.uid_list.Add(UserDatadel.Items[i].ToString().Split(' ')[2]);
+                }
+
+
+            string uid_str = "";
+            foreach (string uid in this.uid_list)
+            {
+                uid_str += uid;
+            }
+
+            string user_to_del = uid_str;
+            MessageBox.Show(user_to_del);
+
+            this.sock_obj.StartClient();
+            this.sock_obj.Send(user_to_del);
+            MessageBox.Show(this.sock_obj.Recv());
+            this.sock_obj.CloseClient();
+            
+        }
+  
+        private void UserButton_Click(object sender, EventArgs e)
+        {
+            this.sock_obj.StartClient();
+            this.sock_obj.Send("Delete#");
+            string user_info_string = this.sock_obj.Recv(); // user_info_string = uid@fname@lname@uname#.....
+            this.sock_obj.CloseClient();
+
+            string[] users = user_info_string.Split('#');
+
+
+            // Shutdown the painting of the ListBox as items are added.
+            UserDatadel.BeginUpdate();
+            // Loop through and add items to the listbox
+            foreach (string user_string in users)
+            {
+                if (!(this.my_uid == user_string.Split('@')[0]))
+                {
+                    string user_data = user_string.Split('@')[1] + " " + user_string.Split('@')[2] + " " + user_string.Split('@')[0];
+                    UserDatadel.Items.Add(user_data);
+                }
+            }
+            // Allow the ListBox to repaint and display the new items.
+            UserDatadel.EndUpdate();
+            UserDatadel.Show();
+            DeleteUser.Visible = true;
+            
+            
+
         }
 
         
+
     }
 }

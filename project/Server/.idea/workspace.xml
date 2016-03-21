@@ -21,15 +21,18 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="piper.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/piper.py">
+      <file leaf-file-name="SocketServer.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/SocketServer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.3678161">
-              <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+            <state vertical-scroll-proportion="0.69168025">
+              <caret line="109" column="0" selection-start-line="109" selection-start-column="0" selection-end-line="109" selection-end-column="0" />
               <folding>
-                <element signature="e#115#422#0" expanded="false" />
-                <element signature="e#440#601#0" expanded="false" />
-                <element signature="e#632#773#0" expanded="false" />
+                <element signature="e#0#13#0" expanded="true" />
+                <element signature="e#140#203#0" expanded="false" />
+                <element signature="e#335#361#0" expanded="false" />
+                <element signature="e#390#423#0" expanded="false" />
+                <element signature="e#459#510#0" expanded="false" />
+                <element signature="e#553#698#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -39,27 +42,47 @@
         <entry file="file://$PROJECT_DIR$/DbManager.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="49" column="8" selection-start-line="49" selection-start-column="8" selection-end-line="49" selection-end-column="8" />
-              <folding />
+              <caret line="126" column="21" selection-start-line="126" selection-start-column="21" selection-end-line="126" selection-end-column="21" />
+              <folding>
+                <element signature="e#461#613#0" expanded="false" />
+                <element signature="e#662#904#0" expanded="false" />
+                <element signature="e#962#1452#0" expanded="false" />
+                <element signature="e#1479#1760#0" expanded="false" />
+                <element signature="e#1785#2219#0" expanded="false" />
+                <element signature="e#2249#2917#0" expanded="false" />
+                <element signature="e#2943#3249#0" expanded="false" />
+                <element signature="e#3279#3397#0" expanded="false" />
+                <element signature="e#3434#3707#0" expanded="false" />
+                <element signature="e#3735#3859#0" expanded="false" />
+                <element signature="e#3890#4186#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/File_Manager.py" />
-        <option value="$PROJECT_DIR$/DbManager.py" />
         <option value="$PROJECT_DIR$/piper.py" />
+        <option value="$PROJECT_DIR$/DbManager.py" />
+        <option value="$PROJECT_DIR$/SocketServer.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1936" />
+    <option name="width" value="1620" />
     <option name="height" value="1056" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
@@ -112,11 +135,11 @@
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="full.screen.before.presentation.mode" value="false" />
   </component>
-  <component name="RunManager" selected="Python.piper">
+  <component name="RunManager" selected="Python.SocketServer">
     <configuration default="false" name="DbManager" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -147,6 +170,23 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="Server" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/piper.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="SocketServer" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Server" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/SocketServer.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -273,14 +313,16 @@
       <option name="USE_KEYWORD" value="false" />
       <method />
     </configuration>
-    <list size="2">
+    <list size="3">
       <item index="0" class="java.lang.String" itemvalue="Python.DbManager" />
       <item index="1" class="java.lang.String" itemvalue="Python.piper" />
+      <item index="2" class="java.lang.String" itemvalue="Python.SocketServer" />
     </list>
     <recent_temporary>
-      <list size="2">
-        <item index="0" class="java.lang.String" itemvalue="Python.piper" />
-        <item index="1" class="java.lang.String" itemvalue="Python.DbManager" />
+      <list size="3">
+        <item index="0" class="java.lang.String" itemvalue="Python.SocketServer" />
+        <item index="1" class="java.lang.String" itemvalue="Python.piper" />
+        <item index="2" class="java.lang.String" itemvalue="Python.DbManager" />
       </list>
     </recent_temporary>
   </component>
@@ -298,7 +340,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1620" height="1056" extended-state="1" />
     <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -306,7 +348,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3266385" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3256059" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -359,7 +401,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="3" />
+      <option name="time" value="6" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -371,22 +413,15 @@
           <folding>
             <element signature="e#115#422#0" expanded="false" />
             <element signature="e#440#601#0" expanded="false" />
-            <element signature="e#632#773#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/File_Manager.py">
+    <entry file="file://$PROJECT_DIR$/DbManager.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="257" column="42" selection-start-line="257" selection-start-column="42" selection-end-line="257" selection-end-column="42" />
-          <folding>
-            <element signature="e#873#2371#0" expanded="false" />
-            <element signature="e#2458#2524#0" expanded="false" />
-            <element signature="e#2573#3922#0" expanded="false" />
-            <element signature="e#3972#4092#0" expanded="false" />
-            <element signature="e#4135#6974#0" expanded="false" />
-          </folding>
+          <caret line="49" column="8" selection-start-line="49" selection-start-column="8" selection-end-line="49" selection-end-column="8" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -397,7 +432,24 @@
           <folding>
             <element signature="e#115#422#0" expanded="false" />
             <element signature="e#440#601#0" expanded="false" />
-            <element signature="e#632#773#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/File_Manager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="257" column="42" selection-start-line="257" selection-start-column="42" selection-end-line="257" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/piper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#115#422#0" expanded="false" />
+            <element signature="e#440#601#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -409,7 +461,6 @@
           <folding>
             <element signature="e#115#422#0" expanded="false" />
             <element signature="e#440#601#0" expanded="false" />
-            <element signature="e#632#773#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -418,12 +469,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/piper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#873#2371#0" expanded="false" />
-            <element signature="e#2458#2524#0" expanded="false" />
-            <element signature="e#2573#3922#0" expanded="false" />
-            <element signature="e#3972#4092#0" expanded="false" />
-            <element signature="e#4135#6974#0" expanded="false" />
+            <element signature="e#115#422#0" expanded="false" />
+            <element signature="e#440#601#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -435,7 +490,6 @@
           <folding>
             <element signature="e#115#422#0" expanded="false" />
             <element signature="e#440#601#0" expanded="false" />
-            <element signature="e#632#773#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -447,7 +501,6 @@
           <folding>
             <element signature="e#115#422#0" expanded="false" />
             <element signature="e#440#601#0" expanded="false" />
-            <element signature="e#632#773#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -459,19 +512,6 @@
           <folding>
             <element signature="e#115#422#0" expanded="false" />
             <element signature="e#440#601#0" expanded="false" />
-            <element signature="e#632#773#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/piper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#115#422#0" expanded="false" />
-            <element signature="e#440#601#0" expanded="false" />
-            <element signature="e#632#773#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -497,7 +537,6 @@
           <folding>
             <element signature="e#115#422#0" expanded="false" />
             <element signature="e#440#601#0" expanded="false" />
-            <element signature="e#632#773#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -520,12 +559,24 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.09561305">
           <caret line="7" column="14" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PythonServer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/piper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.22185971">
+          <caret line="27" column="5" selection-start-line="26" selection-start-column="1" selection-end-line="27" selection-end-column="5" />
           <folding>
-            <element signature="e#873#2371#0" expanded="false" />
-            <element signature="e#2458#2524#0" expanded="false" />
-            <element signature="e#2573#3922#0" expanded="false" />
-            <element signature="e#3972#4092#0" expanded="false" />
-            <element signature="e#4135#6974#0" expanded="false" />
+            <element signature="e#115#422#0" expanded="false" />
+            <element signature="e#440#601#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -533,19 +584,34 @@
     <entry file="file://$PROJECT_DIR$/DbManager.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="49" column="8" selection-start-line="49" selection-start-column="8" selection-end-line="49" selection-end-column="8" />
-          <folding />
+          <caret line="126" column="21" selection-start-line="126" selection-start-column="21" selection-end-line="126" selection-end-column="21" />
+          <folding>
+            <element signature="e#461#613#0" expanded="false" />
+            <element signature="e#662#904#0" expanded="false" />
+            <element signature="e#962#1452#0" expanded="false" />
+            <element signature="e#1479#1760#0" expanded="false" />
+            <element signature="e#1785#2219#0" expanded="false" />
+            <element signature="e#2249#2917#0" expanded="false" />
+            <element signature="e#2943#3249#0" expanded="false" />
+            <element signature="e#3279#3397#0" expanded="false" />
+            <element signature="e#3434#3707#0" expanded="false" />
+            <element signature="e#3735#3859#0" expanded="false" />
+            <element signature="e#3890#4186#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/piper.py">
+    <entry file="file://$PROJECT_DIR$/SocketServer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.3678161">
-          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+        <state vertical-scroll-proportion="0.69168025">
+          <caret line="109" column="0" selection-start-line="109" selection-start-column="0" selection-end-line="109" selection-end-column="0" />
           <folding>
-            <element signature="e#115#422#0" expanded="false" />
-            <element signature="e#440#601#0" expanded="false" />
-            <element signature="e#632#773#0" expanded="false" />
+            <element signature="e#0#13#0" expanded="true" />
+            <element signature="e#140#203#0" expanded="false" />
+            <element signature="e#335#361#0" expanded="false" />
+            <element signature="e#390#423#0" expanded="false" />
+            <element signature="e#459#510#0" expanded="false" />
+            <element signature="e#553#698#0" expanded="false" />
           </folding>
         </state>
       </provider>

@@ -129,6 +129,7 @@ def GetInfoForLock():
     rows = ReadAllRows()
     for row in rows:
         rows_string += row + "#"
+
     return rows_string[:-1]
 
 def GetLoginInfo(uname):

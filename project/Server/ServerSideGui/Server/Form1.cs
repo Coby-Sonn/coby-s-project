@@ -10,10 +10,20 @@ namespace Server
 {
     public partial class Form1 : Form
     {
+        public string my_uid;
+        public string firstname;
+        public string lastname;
+        public SocketClient sock_obj;
+
         public Form1()
         {
             InitializeComponent();
+            SocketClient sock_obj = new SocketClient();
+            this.sock_obj = sock_obj;
+            
         }
+
+        
         static string sha256(string password)
         {
             System.Security.Cryptography.SHA256Managed crypt = new System.Security.Cryptography.SHA256Managed();
@@ -25,22 +35,7 @@ namespace Server
             }
             return hash.ToString();
         }
-        private void send(BinaryWriter bw, string info)
-        {
-            var buf = Encoding.ASCII.GetBytes(info);     // Get ASCII byte array     
-            bw.Write((uint)buf.Length);                // Write string length
-            bw.Write(buf);                              // Write string
-            
-        }
-        private string recv(BinaryReader br)
-        {
-            var len = (int)br.ReadUInt32();            // Read string length
-            var str = new string(br.ReadChars(len));    // Read string
 
-            
-            
-            return str;
-        }
         private void UserSignIn(string username, string password)
         {
             if (username == "")
@@ -56,41 +51,45 @@ namespace Server
             else
             {
 
-            string hashed_password = sha256(password);
-            //send username and password to python and checks if correct
-            string info = "login#" + username + "#" + hashed_password;
-            // Open the named pipe.
+                string hashed_password = sha256(password);
+                //send username and password to python and checks if correct
+                string info = "login#" + username + "#" + hashed_password;
+                // Open the named pipe.
 
-            var server = new NamedPipeServerStream("Communicate");
-            server.WaitForConnection();     
-            var br = new BinaryReader(server);
-            var bw = new BinaryWriter(server); 
-            send(bw, info);
-            string message = recv(br); 
-            server.Close();
-            server.Dispose();
-
-            //if receives true then send the user to the next gui.
-            if (message == "Signed in")
-            {
+                this.sock_obj.StartClient();
+                this.sock_obj.Send(info);
+                string message_to_split = this.sock_obj.Recv();
+                string message = message_to_split.Split('#')[0];
+                if (message_to_split.Split('#')[1] != "0")
+                {
+                    this.my_uid = message_to_split.Split('#')[2];
+                    this.firstname = message_to_split.Split('#')[1];
+                    this.lastname = message_to_split.Split('#')[3];
+                    //MessageBox.Show(my_uid + firstname + lastname);
+                }
+                sock_obj.CloseClient();
                 
-                SaveFile form = new SaveFile();
-                form.Show();
-
-            }
-            else
-            {
+                //if receives true then send the user to the next gui.
+                if (message == "Signed in")
+                {
+                    string user_info = this.my_uid + "#" + this.firstname + "#" + this.lastname;
+                    SaveFile form = new SaveFile(user_info);
+                    form.Show();
+                }
+                else
+                {
                 
-                MessageBox.Show("incorrect password or username");
-                this.Show();
-            }
+                    MessageBox.Show("incorrect password or username");
+                    this.Show();
+                }
             
             
+            
+            }
         }
-        }
-        private void AddUser(string firstname, string lastname, string username, string password, string confirmPass)
+        private void Register(string firstname, string lastname, string username, string password, string confirmPass)
         {
-            string pattern = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.* ).{8,15}$";
+            string pattern = @"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{8,15}$";
             
             //asks the database if the username exists already
             if (password != confirmPass)
@@ -98,10 +97,8 @@ namespace Server
                 MessageBox.Show("Passwords do not match");
             }
             else if (!Regex.IsMatch(password, pattern))
-            {
-                MessageBox.Show(password);
-                
-                MessageBox.Show("Password must be between 8-15 characters and must contain at least one uppercase letter, one lowercase letter, one number and no special characters besides space");
+            {  
+                MessageBox.Show("Password must be between 8-15 characters and must contain at least one uppercase letter, one lowercase letter and one number");
             }
             //Password must be at least 8 characters long
             else if (password.Length < 8)
@@ -129,15 +126,11 @@ namespace Server
                 string hashed_password = sha256(password);
                 string information_string = "register#" + UID + "#" + firstname + "#" + lastname + "#" + username + "#" + hashed_password;
                 //send python all the information for registration
+                this.sock_obj.StartClient();
+                this.sock_obj.Send(information_string);
+                string message = this.sock_obj.Recv();
 
-                var server = new NamedPipeServerStream("Communicate");
-                server.WaitForConnection();
-                var br = new BinaryReader(server);
-                var bw = new BinaryWriter(server);
-                send(bw, information_string);
-                string message = recv(br);
-                server.Close();
-                server.Dispose();
+                this.sock_obj.CloseClient();
                 if (message == "Signed up")
                 {
                     MessageBox.Show("User Signed Up");
@@ -154,17 +147,13 @@ namespace Server
         }
         private void registerbutton_Click(object sender, EventArgs e)
         {
-            AddUser(Fname.Text, Lname.Text, Uname.Text, Password.Text, ConfirmPass.Text);
+            Register(Fname.Text, Lname.Text, Uname.Text, Password.Text, ConfirmPass.Text);
         }
-
         private void SignInButton_Click(object sender, EventArgs e)
         {
             this.Hide();
             UserSignIn(LoginUname.Text, LoginPassword.Text);
-        }
-
-       
-
+        } 
         private void resetbutton_Click(object sender, EventArgs e)
         {
             LoginPassword.Clear();
@@ -175,6 +164,11 @@ namespace Server
             Password.Clear();
             ConfirmPass.Clear();
         }
+
+        
+
+       
+        
 
         
 
