@@ -160,7 +160,6 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Register";
             this.tabPage1.UseVisualStyleBackColor = true;
-            
             // 
             // PassHelp
             // 
@@ -171,7 +170,7 @@
             this.PassHelp.TabIndex = 19;
             this.PassHelp.Text = "?";
             this.toolTip1.SetToolTip(this.PassHelp, "Password must be between 8-15 characters and must contain at least one uppercase " +
-        "letter, one lowercase letter and one number");
+                    "letter, one lowercase letter and one number");
             // 
             // ConfirmPass
             // 
@@ -209,7 +208,6 @@
             this.Fname.Name = "Fname";
             this.Fname.Size = new System.Drawing.Size(100, 20);
             this.Fname.TabIndex = 14;
-            
             // 
             // button1
             // 
@@ -301,7 +299,7 @@
             this.LoginPassword.PasswordChar = '●';
             this.LoginPassword.Size = new System.Drawing.Size(100, 20);
             this.LoginPassword.TabIndex = 1;
-            this.LoginPassword.Text = "hellocoby";
+            this.LoginPassword.Text = "Hellocoby1";
             // 
             // LoginUname
             // 

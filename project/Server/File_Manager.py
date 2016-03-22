@@ -1,6 +1,7 @@
 import os, random, string, struct, MyCrypto
 from ctypes import *
 from Crypto.Hash import SHA256
+import DbManager as dbm
 
 
 MAGIC_NUMBER = 0xCB
@@ -75,21 +76,20 @@ class File_Manager():
 
     def Create_users_rbac(self, path):
         """receives the path of an encrypted file in order to strip the systems headers from it"""
-        print "starting Create users rbac func"
+
         ##print "path: " + path
         current_file = open(path, "rb")
         file_header = FileHeaderStruct()
         current_file.readinto(file_header)
 
-        print file_header.lenUIDS
+
         UID_List = []
         for i in xrange(file_header.lenUIDS):
             uid_s = current_file.read(4)
-            print uid_s
             UID_List.append(struct.unpack('<L', uid_s)[0])
 
         first_rbac_users = (file_header.rBac, UID_List)
-        print first_rbac_users
+
         if file_header.optionalHeaderFlag:
             file_optional_header = OptionalHeaderStructAdditions()
             current_file.readinto(file_optional_header)
@@ -108,9 +108,9 @@ class File_Manager():
         current_file.close()
         return users_rbac
 
-    def get_original_key(self, fileid):
+    def get_original_key(self, file_id):
         """sends a message to the server asking for the file opener key"""
-        received_key =""
+        received_key = dbm.GetKeyByID(file_id)
 
         return received_key
 
@@ -133,9 +133,9 @@ class File_Manager():
             file_path_list = path.split(".")
             new_path = file_path_list[0]+"." + dict_1[file_header.fileTypeCode]
 
-            fileid = file_header.fileID
+            file_id = file_header.fileID
             """now the system asks the server for the key to open the file which is written in the file header"""
-            original_key = self.get_original_key(fileid)
+            original_key = self.get_original_key(file_id)
             UID_List = []
             for i in xrange(file_header.lenUIDS):
                 uid_s = current_file.read(4)
@@ -203,23 +203,20 @@ class File_Manager():
             optional_header_flag = 1
 
         fileid = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(8))
-        print  '111111111     ', FILE_TYPE_CODE_DICTIONARY[old_extension]
-        print  '222222222     ', rbac
-        print  '333333333     ', optional_header_flag
         file_header = FileHeaderStruct(MAGIC_NUMBER,
                                        fileid,
                                        int(FILE_TYPE_CODE_DICTIONARY[old_extension]),
                                        int(rbac),
                                        int(optional_header_flag),
                                        len(UID_List))
-        ##print "header created"
+
         """opening files"""
         new_file = open(new_path, "wb")
         current_file = open(path, "rb")
-        ##print "files open"
+
         """writing header to the file"""
         new_file.write(file_header)
-        ##print "header written"
+
         """adding hexed uids:"""
         for uid in UID_List:
             new_file.write(struct.pack('i', int(uid)))
@@ -232,18 +229,18 @@ class File_Manager():
                 users_rbac = [(rbac, UID_List), (second_rbac, second_UID_List)]
         else:
             users_rbac = [(rbac, UID_List)]
-        ##print "second header and uids written"
+
         """reading the original content
             and putting it in the file"""
-        print "-------------look here--------------"
-        ##print "users_rbac: " + str(users_rbac)
+
         content = current_file.read()
-        print "content saved: " + content + "len: " + str(len(content))
+
         current_file.close()
         b = AUXGenerator()
         aux = b.hash_generate(users_rbac)
 
-        original_key = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(32))
+        original_key = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(16))
+        dbm.AddFileInfo(fileid, original_key)
         crypto_obj = MyCrypto.MyCrypto(original_key, aux)
         crypto_obj.generator()
         insertion_content = crypto_obj.encrypt_content(content)
