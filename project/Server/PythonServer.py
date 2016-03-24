@@ -90,11 +90,11 @@ class  Gui(threading.Thread):
         threading.Thread.__init__(self)
                 
     # the main function
-    def  run(self):
+    def run(self):
         while True:
             # Wait message from GUI 
             data = self.guiSock.recv(1024)
-            if len(data) > 0 :
+            if len(data) > 0:
                 pass
                  
 #endregion
