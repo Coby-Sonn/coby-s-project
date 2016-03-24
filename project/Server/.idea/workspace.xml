@@ -20,12 +20,12 @@
     <favorites_list name="Server" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="DbManager.py" pinned="false" current-in-tab="false">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="DbManager.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/DbManager.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="15" column="24" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
+            <state vertical-scroll-proportion="0.8807212">
+              <caret line="171" column="20" selection-start-line="171" selection-start-column="20" selection-end-line="171" selection-end-column="20" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
                 <element signature="e#480#632#0" expanded="false" />
@@ -39,11 +39,8 @@
                 <element signature="e#3531#3804#0" expanded="false" />
                 <element signature="e#3831#3955#0" expanded="false" />
                 <element signature="e#3985#4278#0" expanded="false" />
-                <element signature="e#4408#4623#0" expanded="false" />
-                <element signature="e#4651#4962#0" expanded="false" />
-                <element signature="e#4998#5400#0" expanded="false" />
-                <element signature="e#5430#5533#0" expanded="false" />
-                <element signature="e#5563#5849#0" expanded="false" />
+                <element signature="e#4724#5035#0" expanded="false" />
+                <element signature="e#5738#6024#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -53,7 +50,7 @@
         <entry file="file://$PROJECT_DIR$/SocketServer.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="80" column="42" selection-start-line="80" selection-start-column="42" selection-end-line="80" selection-end-column="42" />
+              <caret line="99" column="0" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
                 <element signature="e#140#203#0" expanded="false" />
@@ -66,26 +63,41 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="File_Manager.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/File_Manager.py">
+      <file leaf-file-name="MyCrypto.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MyCrypto.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.6896553">
-              <caret line="167" column="0" selection-start-line="167" selection-start-column="0" selection-end-line="167" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="11" column="11" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
               <folding>
-                <element signature="e#0#43#0" expanded="true" />
-                <element signature="e#2589#3804#0" expanded="false" />
-                <element signature="e#3855#3997#0" expanded="false" />
+                <element signature="e#130#187#0" expanded="false" />
+                <element signature="e#230#354#0" expanded="false" />
+                <element signature="e#428#1757#0" expanded="false" />
+                <element signature="e#428#1306#1" expanded="false" />
+                <element signature="e#1828#2626#0" expanded="false" />
+                <element signature="e#1828#2221#1" expanded="false" />
+                <element signature="e#2693#3724#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AES.py" pinned="false" current-in-tab="true">
-        <entry file="file://C:/Python27/Lib/site-packages/Crypto/Cipher/AES.py">
+      <file leaf-file-name="File_Manager.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/File_Manager.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.3355155">
-              <caret line="94" column="0" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
-              <folding />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="116" column="40" selection-start-line="116" selection-start-column="40" selection-end-line="116" selection-end-column="40" />
+              <folding>
+                <element signature="e#0#9#0" expanded="true" />
+                <element signature="e#726#835#0" expanded="false" />
+                <element signature="e#862#2138#0" expanded="false" />
+                <element signature="e#907#1837#0" expanded="false" />
+                <element signature="e#1914#2138#0" expanded="false" />
+                <element signature="e#2225#2291#0" expanded="false" />
+                <element signature="e#2340#3524#0" expanded="false" />
+                <element signature="e#3563#3664#0" expanded="false" />
+                <element signature="e#3715#3857#0" expanded="false" />
+                <element signature="e#6955#9546#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -103,10 +115,11 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/piper.py" />
-        <option value="$PROJECT_DIR$/DbManager.py" />
         <option value="$PROJECT_DIR$/DbCreator.py" />
         <option value="$PROJECT_DIR$/SocketServer.py" />
+        <option value="$PROJECT_DIR$/MyCrypto.py" />
         <option value="$PROJECT_DIR$/File_Manager.py" />
+        <option value="$PROJECT_DIR$/DbManager.py" />
       </list>
     </option>
   </component>
@@ -390,7 +403,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1924" height="1056" extended-state="0" />
+    <frame x="-8" y="-8" width="1924" height="1056" extended-state="1" />
     <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -398,7 +411,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3245243" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20824525" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -451,11 +464,278 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="11" />
+      <option name="time" value="15" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/DbManager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+            <element signature="e#480#632#0" expanded="false" />
+            <element signature="e#768#1008#0" expanded="false" />
+            <element signature="e#1065#1555#0" expanded="false" />
+            <element signature="e#1581#1862#0" expanded="false" />
+            <element signature="e#1886#2320#0" expanded="false" />
+            <element signature="e#2349#3017#0" expanded="false" />
+            <element signature="e#3042#3348#0" expanded="false" />
+            <element signature="e#3377#3495#0" expanded="false" />
+            <element signature="e#3531#3804#0" expanded="false" />
+            <element signature="e#3831#3955#0" expanded="false" />
+            <element signature="e#3985#4278#0" expanded="false" />
+            <element signature="e#4724#5035#0" expanded="false" />
+            <element signature="e#5738#6024#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SocketServer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="99" column="0" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+            <element signature="e#140#203#0" expanded="false" />
+            <element signature="e#335#361#0" expanded="false" />
+            <element signature="e#390#423#0" expanded="false" />
+            <element signature="e#459#510#0" expanded="false" />
+            <element signature="e#553#698#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyCrypto.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="11" column="11" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
+          <folding>
+            <element signature="e#130#187#0" expanded="false" />
+            <element signature="e#230#354#0" expanded="false" />
+            <element signature="e#428#1757#0" expanded="false" />
+            <element signature="e#428#1306#1" expanded="false" />
+            <element signature="e#1828#2626#0" expanded="false" />
+            <element signature="e#1828#2221#1" expanded="false" />
+            <element signature="e#2693#3724#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/File_Manager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="116" column="40" selection-start-line="116" selection-start-column="40" selection-end-line="116" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#726#835#0" expanded="false" />
+            <element signature="e#862#2138#0" expanded="false" />
+            <element signature="e#907#1837#0" expanded="false" />
+            <element signature="e#1914#2138#0" expanded="false" />
+            <element signature="e#2225#2291#0" expanded="false" />
+            <element signature="e#2340#3524#0" expanded="false" />
+            <element signature="e#3563#3664#0" expanded="false" />
+            <element signature="e#3715#3857#0" expanded="false" />
+            <element signature="e#6955#9546#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DbManager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="146" column="0" selection-start-line="146" selection-start-column="0" selection-end-line="146" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+            <element signature="e#480#632#0" expanded="false" />
+            <element signature="e#768#1008#0" expanded="false" />
+            <element signature="e#1065#1555#0" expanded="false" />
+            <element signature="e#1581#1862#0" expanded="false" />
+            <element signature="e#1886#2320#0" expanded="false" />
+            <element signature="e#2349#3017#0" expanded="false" />
+            <element signature="e#3042#3348#0" expanded="false" />
+            <element signature="e#3377#3495#0" expanded="false" />
+            <element signature="e#3531#3804#0" expanded="false" />
+            <element signature="e#3831#3955#0" expanded="false" />
+            <element signature="e#3985#4278#0" expanded="false" />
+            <element signature="e#4724#5035#0" expanded="false" />
+            <element signature="e#5738#6024#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SocketServer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="99" column="0" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+            <element signature="e#140#203#0" expanded="false" />
+            <element signature="e#335#361#0" expanded="false" />
+            <element signature="e#390#423#0" expanded="false" />
+            <element signature="e#459#510#0" expanded="false" />
+            <element signature="e#553#698#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyCrypto.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="11" column="11" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
+          <folding>
+            <element signature="e#130#187#0" expanded="false" />
+            <element signature="e#230#354#0" expanded="false" />
+            <element signature="e#428#1757#0" expanded="false" />
+            <element signature="e#428#1306#1" expanded="false" />
+            <element signature="e#1828#2626#0" expanded="false" />
+            <element signature="e#1828#2221#1" expanded="false" />
+            <element signature="e#2693#3724#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/File_Manager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#726#835#0" expanded="false" />
+            <element signature="e#862#2138#0" expanded="false" />
+            <element signature="e#907#1837#0" expanded="false" />
+            <element signature="e#1914#2138#0" expanded="false" />
+            <element signature="e#2225#2291#0" expanded="false" />
+            <element signature="e#2340#3524#0" expanded="false" />
+            <element signature="e#3563#3664#0" expanded="false" />
+            <element signature="e#3715#3857#0" expanded="false" />
+            <element signature="e#6955#9546#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DbManager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="177" column="24" selection-start-line="177" selection-start-column="24" selection-end-line="177" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+            <element signature="e#480#632#0" expanded="false" />
+            <element signature="e#768#1008#0" expanded="false" />
+            <element signature="e#1065#1555#0" expanded="false" />
+            <element signature="e#1581#1862#0" expanded="false" />
+            <element signature="e#1886#2320#0" expanded="false" />
+            <element signature="e#2349#3017#0" expanded="false" />
+            <element signature="e#3042#3348#0" expanded="false" />
+            <element signature="e#3377#3495#0" expanded="false" />
+            <element signature="e#3531#3804#0" expanded="false" />
+            <element signature="e#3831#3955#0" expanded="false" />
+            <element signature="e#3985#4278#0" expanded="false" />
+            <element signature="e#4724#5035#0" expanded="false" />
+            <element signature="e#5738#6024#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SocketServer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="80" column="42" selection-start-line="80" selection-start-column="42" selection-end-line="80" selection-end-column="42" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+            <element signature="e#140#203#0" expanded="false" />
+            <element signature="e#335#361#0" expanded="false" />
+            <element signature="e#390#423#0" expanded="false" />
+            <element signature="e#459#510#0" expanded="false" />
+            <element signature="e#553#698#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/File_Manager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#726#835#0" expanded="false" />
+            <element signature="e#862#2138#0" expanded="false" />
+            <element signature="e#907#1837#0" expanded="false" />
+            <element signature="e#1914#2138#0" expanded="false" />
+            <element signature="e#2225#2291#0" expanded="false" />
+            <element signature="e#2340#3524#0" expanded="false" />
+            <element signature="e#3563#3664#0" expanded="false" />
+            <element signature="e#3715#3857#0" expanded="false" />
+            <element signature="e#6955#9546#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DbManager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="15" column="24" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+            <element signature="e#480#632#0" expanded="false" />
+            <element signature="e#768#1008#0" expanded="false" />
+            <element signature="e#1065#1555#0" expanded="false" />
+            <element signature="e#1581#1862#0" expanded="false" />
+            <element signature="e#1886#2320#0" expanded="false" />
+            <element signature="e#2349#3017#0" expanded="false" />
+            <element signature="e#3042#3348#0" expanded="false" />
+            <element signature="e#3377#3495#0" expanded="false" />
+            <element signature="e#3531#3804#0" expanded="false" />
+            <element signature="e#3831#3955#0" expanded="false" />
+            <element signature="e#3985#4278#0" expanded="false" />
+            <element signature="e#4724#5035#0" expanded="false" />
+            <element signature="e#5738#6024#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SocketServer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="80" column="42" selection-start-line="80" selection-start-column="42" selection-end-line="80" selection-end-column="42" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+            <element signature="e#140#203#0" expanded="false" />
+            <element signature="e#335#361#0" expanded="false" />
+            <element signature="e#390#423#0" expanded="false" />
+            <element signature="e#459#510#0" expanded="false" />
+            <element signature="e#553#698#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/File_Manager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="167" column="0" selection-start-line="167" selection-start-column="0" selection-end-line="167" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#726#835#0" expanded="false" />
+            <element signature="e#862#2138#0" expanded="false" />
+            <element signature="e#907#1837#0" expanded="false" />
+            <element signature="e#1914#2138#0" expanded="false" />
+            <element signature="e#2225#2291#0" expanded="false" />
+            <element signature="e#2340#3524#0" expanded="false" />
+            <element signature="e#3563#3664#0" expanded="false" />
+            <element signature="e#3715#3857#0" expanded="false" />
+            <element signature="e#6955#9546#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Python27/Lib/site-packages/Crypto/Cipher/AES.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/SocketServer.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -488,11 +768,8 @@
             <element signature="e#3531#3804#0" expanded="false" />
             <element signature="e#3831#3955#0" expanded="false" />
             <element signature="e#3985#4278#0" expanded="false" />
-            <element signature="e#4408#4623#0" expanded="false" />
-            <element signature="e#4651#4962#0" expanded="false" />
-            <element signature="e#4998#5400#0" expanded="false" />
-            <element signature="e#5430#5533#0" expanded="false" />
-            <element signature="e#5563#5849#0" expanded="false" />
+            <element signature="e#4724#5035#0" expanded="false" />
+            <element signature="e#5738#6024#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -521,11 +798,8 @@
             <element signature="e#3531#3804#0" expanded="false" />
             <element signature="e#3831#3955#0" expanded="false" />
             <element signature="e#3985#4278#0" expanded="false" />
-            <element signature="e#4408#4623#0" expanded="false" />
-            <element signature="e#4651#4962#0" expanded="false" />
-            <element signature="e#4998#5400#0" expanded="false" />
-            <element signature="e#5430#5533#0" expanded="false" />
-            <element signature="e#5563#5849#0" expanded="false" />
+            <element signature="e#4724#5035#0" expanded="false" />
+            <element signature="e#5738#6024#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -642,17 +916,74 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/DbCreator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.88870704">
+          <caret line="41" column="1" selection-start-line="41" selection-start-column="1" selection-end-line="41" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Python27/Lib/site-packages/Crypto/Cipher/AES.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3633842">
+          <caret line="94" column="0" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/File_Manager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="116" column="40" selection-start-line="116" selection-start-column="40" selection-end-line="116" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#726#835#0" expanded="false" />
+            <element signature="e#862#2138#0" expanded="false" />
+            <element signature="e#907#1837#0" expanded="false" />
+            <element signature="e#1914#2138#0" expanded="false" />
+            <element signature="e#2225#2291#0" expanded="false" />
+            <element signature="e#2340#3524#0" expanded="false" />
+            <element signature="e#3563#3664#0" expanded="false" />
+            <element signature="e#3715#3857#0" expanded="false" />
+            <element signature="e#6955#9546#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/MyCrypto.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="3" column="20" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="20" />
+          <caret line="11" column="11" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
+          <folding>
+            <element signature="e#130#187#0" expanded="false" />
+            <element signature="e#230#354#0" expanded="false" />
+            <element signature="e#428#1757#0" expanded="false" />
+            <element signature="e#428#1306#1" expanded="false" />
+            <element signature="e#1828#2626#0" expanded="false" />
+            <element signature="e#1828#2221#1" expanded="false" />
+            <element signature="e#2693#3724#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SocketServer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="99" column="0" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+            <element signature="e#140#203#0" expanded="false" />
+            <element signature="e#335#361#0" expanded="false" />
+            <element signature="e#390#423#0" expanded="false" />
+            <element signature="e#459#510#0" expanded="false" />
+            <element signature="e#553#698#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/DbManager.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="15" column="24" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
+        <state vertical-scroll-proportion="0.8807212">
+          <caret line="171" column="20" selection-start-line="171" selection-start-column="20" selection-end-line="171" selection-end-column="20" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
             <element signature="e#480#632#0" expanded="false" />
@@ -666,55 +997,9 @@
             <element signature="e#3531#3804#0" expanded="false" />
             <element signature="e#3831#3955#0" expanded="false" />
             <element signature="e#3985#4278#0" expanded="false" />
-            <element signature="e#4408#4623#0" expanded="false" />
-            <element signature="e#4651#4962#0" expanded="false" />
-            <element signature="e#4998#5400#0" expanded="false" />
-            <element signature="e#5430#5533#0" expanded="false" />
-            <element signature="e#5563#5849#0" expanded="false" />
+            <element signature="e#4724#5035#0" expanded="false" />
+            <element signature="e#5738#6024#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DbCreator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.88870704">
-          <caret line="41" column="1" selection-start-line="41" selection-start-column="1" selection-end-line="41" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SocketServer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="80" column="42" selection-start-line="80" selection-start-column="42" selection-end-line="80" selection-end-column="42" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-            <element signature="e#140#203#0" expanded="false" />
-            <element signature="e#335#361#0" expanded="false" />
-            <element signature="e#390#423#0" expanded="false" />
-            <element signature="e#459#510#0" expanded="false" />
-            <element signature="e#553#698#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/File_Manager.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.6896553">
-          <caret line="167" column="0" selection-start-line="167" selection-start-column="0" selection-end-line="167" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-            <element signature="e#2589#3804#0" expanded="false" />
-            <element signature="e#3855#3997#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Python27/Lib/site-packages/Crypto/Cipher/AES.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.3355155">
-          <caret line="94" column="0" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>

@@ -1,7 +1,10 @@
-import os, random, string, struct, MyCrypto
+import os
+import struct
+import MyCrypto
 from ctypes import *
 from Crypto.Hash import SHA256
 import DbManager as dbm
+from random import randint
 
 
 MAGIC_NUMBER = 0xCB
@@ -12,7 +15,6 @@ FILE_TYPE_CODE_DICTIONARY = {"txt": 1, "docx": 2, "ppt": 3, "mp3": 4, "jpeg": 5,
 
 class FileHeaderStruct(Structure):
     _fields_ = [("magicNumber"       , c_ubyte),
-                ("fileID"            , c_char_p),
                 ("fileTypeCode"      , c_uint),
                 ("rBac"              , c_uint),
                 ("optionalHeaderFlag", c_uint),
@@ -30,7 +32,7 @@ class AUXGenerator:
     def hash_generate(self, users_rbac):
         """users_rbac = [(1, [12345678,23456789]), (0, [23544445, 87342914])]"""
         first_UID_list = users_rbac[0][1]
-        print "first_UID_list " + str(first_UID_list)
+
         try:
             second_UID_List = users_rbac[1][1]
             uid_string = self.uid_string_generate(first_UID_list, second_UID_List)
@@ -39,7 +41,7 @@ class AUXGenerator:
             uid_string = self.uid_string_generate(first_UID_list)
 
             aux_str = str(users_rbac[0][0]) + uid_string
-            print "aux_str " + aux_str
+
 
         my_hash = SHA256.new()
         my_hash.update(aux_str)
@@ -51,18 +53,15 @@ class AUXGenerator:
         if len(my_hash_str) > 16:
             middle = (len(my_hash_str)/2)
             my_hash_str = my_hash_str[:middle]
-            print "my hash str: " + my_hash_str
         return my_hash_str
 
     def uid_string_generate(self, UID_List, second_UID_List=None):
         uid_string = ""
-        print str(UID_List) + " uid list"
         for uid in UID_List:
             uid_string += str(uid)
         if second_UID_List is not None:
             for uid in second_UID_List:
                 uid_string += str(uid)
-        print "uid_string " + uid_string
         return uid_string
   
             
@@ -77,7 +76,7 @@ class File_Manager():
     def Create_users_rbac(self, path):
         """receives the path of an encrypted file in order to strip the systems headers from it"""
 
-        ##print "path: " + path
+
         current_file = open(path, "rb")
         file_header = FileHeaderStruct()
         current_file.readinto(file_header)
@@ -108,6 +107,13 @@ class File_Manager():
         current_file.close()
         return users_rbac
 
+    def get_key_or_id(self):
+        item = ''
+        for i in range(8):
+            item = item + str(randint(0,9))
+
+        return item
+
     def get_original_key(self, file_id):
         """sends a message to the server asking for the file opener key"""
         received_key = dbm.GetKeyByID(file_id)
@@ -123,6 +129,8 @@ class File_Manager():
             """receives the path of an encrypted file in order to strip the systems headers from it"""
             file_header = FileHeaderStruct()
             current_file.readinto(file_header)
+
+
             
             dict_1 = {}
             for ext, index in FILE_TYPE_CODE_DICTIONARY.items():
@@ -133,9 +141,15 @@ class File_Manager():
             file_path_list = path.split(".")
             new_path = file_path_list[0]+"." + dict_1[file_header.fileTypeCode]
 
-            file_id = file_header.fileID
+
+
             """now the system asks the server for the key to open the file which is written in the file header"""
-            original_key = self.get_original_key(file_id)
+
+            print "reading the fileid"
+            file_id = struct.unpack('<L', current_file.read(4))
+            print file_id[0]
+            original_key = self.get_original_key(str(file_id[0]))
+
             UID_List = []
             for i in xrange(file_header.lenUIDS):
                 uid_s = current_file.read(4)
@@ -202,9 +216,8 @@ class File_Manager():
         else:
             optional_header_flag = 1
 
-        fileid = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(8))
+
         file_header = FileHeaderStruct(MAGIC_NUMBER,
-                                       fileid,
                                        int(FILE_TYPE_CODE_DICTIONARY[old_extension]),
                                        int(rbac),
                                        int(optional_header_flag),
@@ -215,7 +228,11 @@ class File_Manager():
         current_file = open(path, "rb")
 
         """writing header to the file"""
+
         new_file.write(file_header)
+        fileid = int(self.get_key_or_id())
+        print fileid
+        new_file.write(struct.pack('i', fileid))
 
         """adding hexed uids:"""
         for uid in UID_List:
@@ -239,8 +256,9 @@ class File_Manager():
         b = AUXGenerator()
         aux = b.hash_generate(users_rbac)
 
-        original_key = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(16))
-        dbm.AddFileInfo(fileid, original_key)
+        original_key = self.get_key_or_id() + self.get_key_or_id()  # os.urandom(16)  # ''.join(random.choice
+        # (string.ascii_uppercase + string.digits) for _ in range(8))
+        dbm.AddFileInfo(str(fileid), original_key)
         crypto_obj = MyCrypto.MyCrypto(original_key, aux)
         crypto_obj.generator()
         insertion_content = crypto_obj.encrypt_content(content)

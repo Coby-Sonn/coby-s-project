@@ -28,16 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SaveFile));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.browse2unlock = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.UserData = new System.Windows.Forms.CheckedListBox();
             this.namesender = new System.Windows.Forms.Button();
-            this.ChosenFileView = new System.Windows.Forms.Label();
             this.browse2lock = new System.Windows.Forms.Button();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.GreetingLabel = new System.Windows.Forms.Label();
-            this.browse2unlock = new System.Windows.Forms.Button();
+            this.ChosenFileView = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.UserButton = new System.Windows.Forms.Button();
             this.UserDatadel = new System.Windows.Forms.CheckedListBox();
             this.DeleteUser = new System.Windows.Forms.Button();
@@ -45,14 +47,15 @@
             this.Unlocker = new System.Windows.Forms.OpenFileDialog();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Location = new System.Drawing.Point(-1, -1);
             this.tabControl1.Name = "tabControl1";
@@ -62,10 +65,9 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.UserData);
-            this.tabPage1.Controls.Add(this.namesender);
+            this.tabPage1.Controls.Add(this.groupBox2);
+            this.tabPage1.Controls.Add(this.groupBox1);
             this.tabPage1.Controls.Add(this.ChosenFileView);
-            this.tabPage1.Controls.Add(this.browse2lock);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -74,26 +76,68 @@
             this.tabPage1.Text = "Lock";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.browse2unlock);
+            this.groupBox2.Location = new System.Drawing.Point(14, 209);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(241, 62);
+            this.groupBox2.TabIndex = 7;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Unlock";
+            // 
+            // browse2unlock
+            // 
+            this.browse2unlock.Location = new System.Drawing.Point(14, 24);
+            this.browse2unlock.Name = "browse2unlock";
+            this.browse2unlock.Size = new System.Drawing.Size(75, 23);
+            this.browse2unlock.TabIndex = 5;
+            this.browse2unlock.Text = "Browse Files";
+            this.browse2unlock.UseVisualStyleBackColor = true;
+            this.browse2unlock.Click += new System.EventHandler(this.browse2unlock_Click_1);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.UserData);
+            this.groupBox1.Controls.Add(this.namesender);
+            this.groupBox1.Controls.Add(this.browse2lock);
+            this.groupBox1.Location = new System.Drawing.Point(14, 15);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(241, 177);
+            this.groupBox1.TabIndex = 6;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Lock";
+            // 
             // UserData
             // 
             this.UserData.CheckOnClick = true;
             this.UserData.FormattingEnabled = true;
-            this.UserData.Location = new System.Drawing.Point(39, 65);
+            this.UserData.Location = new System.Drawing.Point(6, 19);
             this.UserData.Name = "UserData";
-            this.UserData.Size = new System.Drawing.Size(196, 154);
+            this.UserData.Size = new System.Drawing.Size(196, 79);
             this.UserData.Sorted = true;
             this.UserData.TabIndex = 4;
             this.UserData.ThreeDCheckBoxes = true;
             // 
             // namesender
             // 
-            this.namesender.Location = new System.Drawing.Point(75, 244);
+            this.namesender.Location = new System.Drawing.Point(6, 126);
             this.namesender.Name = "namesender";
             this.namesender.Size = new System.Drawing.Size(84, 23);
             this.namesender.TabIndex = 3;
             this.namesender.Text = "Send Names";
             this.namesender.UseVisualStyleBackColor = true;
             this.namesender.Click += new System.EventHandler(this.namesender_Click);
+            // 
+            // browse2lock
+            // 
+            this.browse2lock.Location = new System.Drawing.Point(118, 126);
+            this.browse2lock.Name = "browse2lock";
+            this.browse2lock.Size = new System.Drawing.Size(84, 23);
+            this.browse2lock.TabIndex = 0;
+            this.browse2lock.Text = "Browse Files";
+            this.browse2lock.UseVisualStyleBackColor = true;
+            this.browse2lock.Click += new System.EventHandler(this.browse2lock_Click);
             // 
             // ChosenFileView
             // 
@@ -104,64 +148,32 @@
             this.ChosenFileView.TabIndex = 2;
             this.ChosenFileView.Visible = false;
             // 
-            // browse2lock
-            // 
-            this.browse2lock.Location = new System.Drawing.Point(292, 196);
-            this.browse2lock.Name = "browse2lock";
-            this.browse2lock.Size = new System.Drawing.Size(75, 23);
-            this.browse2lock.TabIndex = 0;
-            this.browse2lock.Text = "Browse Files";
-            this.browse2lock.UseVisualStyleBackColor = true;
-            this.browse2lock.Click += new System.EventHandler(this.browse2lock_Click);
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.GreetingLabel);
-            this.tabPage2.Controls.Add(this.browse2unlock);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(488, 347);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Unlock";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // GreetingLabel
-            // 
-            this.GreetingLabel.AutoSize = true;
-            this.GreetingLabel.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.GreetingLabel.Font = new System.Drawing.Font("Cooper Black", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GreetingLabel.Location = new System.Drawing.Point(211, 50);
-            this.GreetingLabel.Name = "GreetingLabel";
-            this.GreetingLabel.Size = new System.Drawing.Size(0, 15);
-            this.GreetingLabel.TabIndex = 1;
-            // 
-            // browse2unlock
-            // 
-            this.browse2unlock.Location = new System.Drawing.Point(325, 164);
-            this.browse2unlock.Name = "browse2unlock";
-            this.browse2unlock.Size = new System.Drawing.Size(75, 23);
-            this.browse2unlock.TabIndex = 0;
-            this.browse2unlock.Text = "Browse Files";
-            this.browse2unlock.UseVisualStyleBackColor = true;
-            this.browse2unlock.Click += new System.EventHandler(this.browse2unlock_Click);
-            // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.UserButton);
-            this.tabPage3.Controls.Add(this.UserDatadel);
-            this.tabPage3.Controls.Add(this.DeleteUser);
+            this.tabPage3.Controls.Add(this.groupBox3);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage3.Size = new System.Drawing.Size(488, 347);
             this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Delete User";
+            this.tabPage3.Text = "User Options";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.UserButton);
+            this.groupBox3.Controls.Add(this.UserDatadel);
+            this.groupBox3.Controls.Add(this.DeleteUser);
+            this.groupBox3.Location = new System.Drawing.Point(14, 16);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(241, 139);
+            this.groupBox3.TabIndex = 3;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Delete User";
             // 
             // UserButton
             // 
-            this.UserButton.Location = new System.Drawing.Point(181, 84);
+            this.UserButton.Location = new System.Drawing.Point(18, 21);
             this.UserButton.Name = "UserButton";
             this.UserButton.Size = new System.Drawing.Size(75, 23);
             this.UserButton.TabIndex = 2;
@@ -172,15 +184,15 @@
             // UserDatadel
             // 
             this.UserDatadel.FormattingEnabled = true;
-            this.UserDatadel.Location = new System.Drawing.Point(160, 113);
+            this.UserDatadel.Location = new System.Drawing.Point(18, 50);
             this.UserDatadel.Name = "UserDatadel";
             this.UserDatadel.ScrollAlwaysVisible = true;
-            this.UserDatadel.Size = new System.Drawing.Size(120, 94);
+            this.UserDatadel.Size = new System.Drawing.Size(120, 49);
             this.UserDatadel.TabIndex = 1;
             // 
             // DeleteUser
             // 
-            this.DeleteUser.Location = new System.Drawing.Point(181, 213);
+            this.DeleteUser.Location = new System.Drawing.Point(18, 105);
             this.DeleteUser.Name = "DeleteUser";
             this.DeleteUser.Size = new System.Drawing.Size(75, 23);
             this.DeleteUser.TabIndex = 0;
@@ -198,16 +210,18 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(494, 370);
+            this.ClientSize = new System.Drawing.Size(285, 312);
             this.Controls.Add(this.tabControl1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SaveFile";
             this.Text = "SaveFile";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -217,9 +231,6 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Button browse2lock;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.Button browse2unlock;
-        private System.Windows.Forms.Label GreetingLabel;
         private System.Windows.Forms.OpenFileDialog Locker;
         private System.Windows.Forms.OpenFileDialog Unlocker;
         private System.Windows.Forms.Label ChosenFileView;
@@ -229,6 +240,10 @@
         private System.Windows.Forms.CheckedListBox UserDatadel;
         private System.Windows.Forms.Button DeleteUser;
         private System.Windows.Forms.Button UserButton;
+        private System.Windows.Forms.Button browse2unlock;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox3;
 
     }
 }

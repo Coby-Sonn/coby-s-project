@@ -165,6 +165,11 @@ namespace Server
             ConfirmPass.Clear();
         }
 
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
+        }
+
         
 
        

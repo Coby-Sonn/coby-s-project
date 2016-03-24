@@ -28,11 +28,10 @@ namespace Server
             this.my_uid = user_info.Split('#')[0];
             this.my_fname = user_info.Split('#')[1];
             this.my_lname = user_info.Split('#')[2];
-            string greeting_str = "Hello, " + this.my_lname + " " + this.my_fname + ".";
-            greeting_str = this.GreetingLabel.Text;
-            this.GreetingLabel.Show();
+            
             SocketClient sock_obj = new SocketClient();
             this.sock_obj = sock_obj;
+            namesender.Enabled = false;
 
         }
 
@@ -69,7 +68,7 @@ namespace Server
             
 
             string user_info_string = this.sock_obj.Recv(); // user_info_string = uid@fname@lname@uname@ph#.....
-            MessageBox.Show(user_info_string);
+            
             string[] users = user_info_string.Split('#');
 
 
@@ -92,6 +91,9 @@ namespace Server
             // Allow the ListBox to repaint and display the new items.
             UserData.EndUpdate();
             UserData.Show();
+            namesender.Enabled = true;
+            
+
             
 
             
@@ -105,7 +107,7 @@ namespace Server
             
 
             string message = this.to_send;
-            MessageBox.Show(message);
+            
             this.sock_obj.Send(message);
             string ack = this.sock_obj.Recv();
             MessageBox.Show(ack);
@@ -146,41 +148,41 @@ namespace Server
         }
 
 
-        private void browse2unlock_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog Unlocker = new OpenFileDialog();
+        //private void browse2unlock_Click(object sender, EventArgs e)
+        //{
+        //    OpenFileDialog Unlocker = new OpenFileDialog();
 
-            Unlocker.ShowDialog();
-            Unlocker.InitialDirectory = @"C:\";
-            Unlocker.Title = "Browse Files to Unlock";
-            string file_to_unlock = Unlocker.FileName;
+        //    Unlocker.ShowDialog();
+        //    Unlocker.InitialDirectory = @"C:\";
+        //    Unlocker.Title = "Browse Files to Unlock";
+        //    string file_to_unlock = Unlocker.FileName;
 
-            string uid = this.my_uid; // need to get the current user uid
-            string information_string = "Unlock#" + uid + "#" + file_to_unlock;
-            this.sock_obj.StartClient();
-            this.sock_obj.Send(information_string);
+        //    string uid = this.my_uid; // need to get the current user uid
+        //    string information_string = "Unlock#" + uid + "#" + file_to_unlock;
+        //    this.sock_obj.StartClient();
+        //    this.sock_obj.Send(information_string);
             
 
-            string message = this.sock_obj.Recv();
+        //    string message = this.sock_obj.Recv();
             
 
-            if (message == "File Unlocked")
-            {
-                MessageBox.Show(message);
-            }
-            else if (message == "The specified user is not allowed to open the file")
-            {
-                MessageBox.Show(message);
-            }
-            else if (message == "path error, can only unlock .cb files")
-            {
-                MessageBox.Show(message);
-            }
+        //    if (message == "File Unlocked")
+        //    {
+        //        MessageBox.Show(message);
+        //    }
+        //    else if (message == "The specified user is not allowed to open the file")
+        //    {
+        //        MessageBox.Show(message);
+        //    }
+        //    else if (message == "path error, can only unlock .cb files")
+        //    {
+        //        MessageBox.Show(message);
+        //    }
 
 
-            this.sock_obj.CloseClient();
+        //    this.sock_obj.CloseClient();
 
-        }
+        //}
 
         private void DeleteUser_Click(object sender, EventArgs e)
         {
@@ -236,6 +238,45 @@ namespace Server
             DeleteUser.Visible = true;
             
             
+
+        }
+
+        private void browse2unlock_Click_1(object sender, EventArgs e)
+        {
+
+            
+            OpenFileDialog Unlocker = new OpenFileDialog();
+
+            Unlocker.ShowDialog();
+            Unlocker.InitialDirectory = @"C:\";
+            Unlocker.Title = "Browse Files to Unlock";
+            string file_to_unlock = Unlocker.FileName;
+
+            string uid = this.my_uid; // need to get the current user uid
+            string information_string = "Unlock#" + uid + "#" + file_to_unlock;
+            this.sock_obj.StartClient();
+            this.sock_obj.Send(information_string);
+            
+
+            string message = this.sock_obj.Recv();
+            
+
+            if (message == "File Unlocked")
+            {
+                MessageBox.Show(message);
+            }
+            else if (message == "The specified user is not allowed to open the file")
+            {
+                MessageBox.Show(message);
+            }
+            else if (message == "path error, can only unlock .cb files")
+            {
+                MessageBox.Show(message);
+            }
+
+
+            this.sock_obj.CloseClient();
+
 
         }
 

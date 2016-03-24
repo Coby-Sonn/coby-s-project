@@ -141,8 +141,10 @@ def GetLoginInfo(uname):
 def AddFileInfo(file_id, file_key):
     conn = sqlite3.connect(SQLITE_FILE_PATH)
     c = conn.cursor()
-    row = "'" + file_id + "'", "'" + file_key + "'"
-    c.execute('insert or ignore into FileInfo values (?,?)', row)
+    # row = "'" + file_id + "'", "'" + str(file_key) + "'"
+    row = "insert or ignore into FileInfo values ('%s'," % str(file_id)
+    row = row + " '%s')" % str(file_key)
+    c.execute(row)
     conn.commit()
     conn.close()
 def IDExists(file_id):
@@ -165,15 +167,17 @@ def ReadFileInfoByID(file_id):
         execution_string = "SELECT * FROM FileInfo WHERE FID = %s" % file_id
         c.execute(execution_string)
         read_info = c.fetchone()
-        data_string = read_info[0][1:-1] + "#" + read_info[1][1:-1]
+        # data_string = read_info[0][1:-1] + "#" + read_info[1][1:-1]
         conn.commit()
         conn.close()
-        return data_string
+        return read_info[1]
     else:
         return False
 def GetKeyByID(file_id):
     try:
-        return ReadFileInfoByID(file_id).split("#")[1]
+        # print ReadFileInfoByID(file_id).split("#")[1]
+        # return ReadFileInfoByID(file_id).split("#")[1]
+        return ReadFileInfoByID(file_id)
     except:
         return "File Not Found"
 def DeleteFile(file_id):

@@ -9,7 +9,8 @@ class  MyCrypto:
             self.original_key = original_key
             self.iv = iv
 
-        def  generator(self):
+        def generator(self):
+            print "origin key: " + str(self.original_key)
             self.encryptor = AES.new(self.original_key, AES.MODE_CBC, self.iv)
     
         def encrypt_content(self,original_content):
@@ -41,7 +42,6 @@ class  MyCrypto:
                     
                 return encrypted_content
 
-
         def decrypt_content(self,encrypted_content):
                 """ Decrypts a file using AES (CBC mode) with the
                     given key. Parameters are similar to encrypt_file,
@@ -59,7 +59,6 @@ class  MyCrypto:
                     decrypted_content += self.encryptor.decrypt(part)
 
                 return decrypted_content
-
 
         def validate(self, user_uid, user_rbac):
                 """recieves the list of users and the local users uid
@@ -85,6 +84,3 @@ class  MyCrypto:
                     except:
                         pass
 
-
-
-                
