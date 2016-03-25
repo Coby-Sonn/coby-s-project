@@ -17,7 +17,7 @@
 import threading
 import socket
 from ServerCrypto import *
-import subprocess
+import DbManager as dbm
 from AES import *
 #endregion
 
@@ -84,10 +84,12 @@ class  SessionWithClient(threading.Thread):
     #-----------------------------------------------------------------------------------------------
     def send(self, message):
 
-        self.clientSock.send(AESCrypt().encryptAES(self.key, message))
+        self.clientSock.send(encryptAES(self.key, message))
+
     def recv(self):
 
-        return AESCrypt().decryptAES(self.key, self.clientSock.recv(LEN_UNIT_BUF))
+        return decryptAES(self.key, self.clientSock.recv(LEN_UNIT_BUF))
+
     def run(self):
 
         try:               
@@ -97,11 +99,31 @@ class  SessionWithClient(threading.Thread):
                 return
             self.clientSock.send(PROT_START + END_LINE)
             self.key = self.crypto.key_exchange(self.clientSock)  # in Crypto
+            print "here 0"
             if self.key:
+                print "here 1"
                 while True:
-                    data = self.recv()
-                    print data
-                    self.send(data)
+                    request = self.recv()
+                    print request
+                    if request.split('#')[0] == "GETHASH":
+                        password_hash = dbm.GetPassHashByUname(request.split('#')[1])
+                        self.send(password_hash)
+                        request = self.recv()
+                        if request.split('#')[0] == "GETINFO":
+                            self.send(dbm.GetLoginInfo(request.split('#')[1]))
+                    elif request.split('#')[0] == "GETKEYFOR":
+                        self.send(dbm.GetKeyByID(request.split('#')[1]))
+                    elif request.split('#')[0] == "GETALLUSERINFO":
+                        print dbm.GetInfoForLock()
+                        self.send(dbm.GetInfoForLock())
+                        request = self.recv()
+                        if request.split(':')[0] == "LOCKEDFILEDATA":
+                            file_id = request.split(':')[1].split('#')[0]
+                            file_key = request.split(':')[1].split('#')[1]
+                            dbm.AddFileInfo(file_id, file_key)
+
+
+
 
             self.clientSock.close()
 

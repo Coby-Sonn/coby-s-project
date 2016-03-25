@@ -58,7 +58,7 @@ class Crypto:
              # -----------  send  Base64 Hash of self.crypto.private_key.publickey()
              client_socket.send(b64encode(SHA256.new(pickle.dumps(self.private_key.publickey())).hexdigest()) + END_LINE)
              time.sleep(0.5)
-
+             print "level 1"
              #--------------------  2 ------------------------------------------------------------------------
              # --------------  Wait client private key  --------------------------------------------------------
              # get Pickled private  key
@@ -81,7 +81,7 @@ class Crypto:
                         We need to think how to tell the students about this behavior (another help message?)
                         And maybe we should implemented this approach in level 3 as well...
              '''
-
+             print "level 2"
              #--------------------  3 ------------------------------------------------------------------------
              #  -------------- Receive from client in parts message
              #  -------------- encrypted by server public key info containing symmetric key and
@@ -116,6 +116,7 @@ class Crypto:
              if calculated_client_sym_key_original != client_hash_sym_key:
                    print "Error : hash and original"
                    return   None
+             print "level 3"
              return  client_sym_key_original
          else:
              return  None

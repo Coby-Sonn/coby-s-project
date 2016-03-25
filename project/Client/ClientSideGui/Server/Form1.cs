@@ -58,6 +58,7 @@ namespace Server
 
                 this.sock_obj.StartClient();
                 this.sock_obj.Send(info);
+
                 string message_to_split = this.sock_obj.Recv();
                 string message = message_to_split.Split('#')[0];
                 if (message_to_split.Split('#')[1] != "0")
@@ -145,10 +146,7 @@ namespace Server
             }
     
         }
-        private void registerbutton_Click(object sender, EventArgs e)
-        {
-            Register(Fname.Text, Lname.Text, Uname.Text, Password.Text, ConfirmPass.Text);
-        }
+        
         private void SignInButton_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -158,17 +156,10 @@ namespace Server
         {
             LoginPassword.Clear();
             LoginUname.Clear();
-            Fname.Clear();
-            Lname.Clear();
-            Uname.Clear();
-            Password.Clear();
-            ConfirmPass.Clear();
+            
         }
 
-        private void groupBox2_Enter(object sender, EventArgs e)
-        {
-
-        }
+       
 
         
 

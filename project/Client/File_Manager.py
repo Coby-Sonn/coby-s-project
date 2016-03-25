@@ -3,7 +3,7 @@ import struct
 import MyCrypto
 from ctypes import *
 from Crypto.Hash import SHA256
-import DbManager as dbm
+#import DbManager as dbm
 from random import randint
 
 
@@ -265,7 +265,7 @@ class File_Manager():
 
         original_key = self.get_key_or_id() + self.get_key_or_id()  # os.urandom(16)  # ''.join(random.choice
         # (string.ascii_uppercase + string.digits) for _ in range(8))
-        dbm.AddFileInfo(str(fileid), original_key)
+
         crypto_obj = MyCrypto.MyCrypto(original_key, aux)
         crypto_obj.generator()
         insertion_content = crypto_obj.encrypt_content(content)

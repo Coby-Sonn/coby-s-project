@@ -4,9 +4,13 @@ from AES import *
 import subprocess
 
 # region ----------   CONSTANTS   ---------------------------------------------------------------
-SERVER_ADDRESS = '10.92.5.51'             # The default target server ip
+SERVER_ADDRESS = '192.168.4.127'             # The default target server ip
 SERVER_PORT = 6071                      # The default target server port
 PROT_START = "Hello"
+
+COMMUNICATION_HOST = "0.0.0.0"
+COMMUNICATION_PORT = 12345
+
 # endregion
 
 
@@ -30,6 +34,7 @@ class Client(object):
 
     # ==================================================================================================
     def start(self):
+        print "started start"
         self.socket.connect((SERVER_ADDRESS, SERVER_PORT))
         print "connected"
         self.socket.send('Hello\r\n')
@@ -38,15 +43,22 @@ class Client(object):
             self.socket.close()
             return
         if Crypto().key_exchange(self.key, self.socket):
-            pipe_obj = PipeCommunication()
+            print "finished key exchange"
+            subprocess.Popen("ClientEngine.py 1", shell=True)
+            socket_obj = local_python_communication()
+            socket_obj.StartServer()
+            i = 0
             while True:
-                request = pipe_obj.piperecv()
+                i += 1
+                request = socket_obj.Recv()
                 self.send(request)
-                print request
+                print "from client " + request + " request %d" % i
 
                 answer = self.recv()
-                pipe_obj.pipesend(answer)
-                print answer
+                socket_obj.Send(answer)
+                print "from client " + answer + " answer %d" % i
+
+
 
 
    
@@ -58,15 +70,32 @@ class Client(object):
 
 # ======================================================================================================
 
-class PipeCommunication():
-    def __init__(self):
-        self.pipe = subprocess.Popen(['python', 'ClientEngine.py'])
 
-    def pipesend(self, message):
-        self.pipe.stdin.write(message + "\n")
-        self.pipe.stdin.flush()
-    def piperecv(self):
-        return self.pipe.stdout.readline().strip()
+class local_python_communication():
+
+    def __init__(self):
+
+        self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+
+    def StartServer(self):
+
+        self.socket.bind((COMMUNICATION_HOST, COMMUNICATION_PORT))
+        self.socket.listen(1)
+        self.local_socket, self.addr = self.socket.accept()
+
+    def Send(self, data):
+
+        self.local_socket.send(data)
+
+    def Recv(self):
+
+        return self.local_socket.recv(1024)
+
+    def CloseServer(self):
+
+        self.local_socket.close()
+        self.socket.close()
 
 
 def main():
