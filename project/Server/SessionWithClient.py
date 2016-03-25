@@ -99,9 +99,9 @@ class  SessionWithClient(threading.Thread):
             self.key = self.crypto.key_exchange(self.clientSock)  # in Crypto
             if self.key:
                 while True:
-                    print "data from client: " + self.recv()
-                    self.send("Shalom faggotron = Ethan")
-
+                    data = self.recv()
+                    print data
+                    self.send(data)
 
             self.clientSock.close()
 

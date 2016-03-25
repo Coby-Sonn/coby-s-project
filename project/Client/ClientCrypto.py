@@ -68,6 +68,6 @@ class Crypto:
                    socket.send(pickled_part_encrypted_pickled_message + END_LINE)
                    pickled_encrypted_message += pickled_part_encrypted_pickled_message
                    time.sleep(0.5)
-            return  True
+            return True
         return False
     # endregion

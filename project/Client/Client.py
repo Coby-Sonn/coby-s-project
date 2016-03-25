@@ -38,14 +38,21 @@ class Client(object):
             self.socket.close()
             return
         if Crypto().key_exchange(self.key, self.socket):
+            pipe_obj = PipeCommunication()
             while True:
-                pipe_obj = PipeCommunication()
-                self.send(pipe_obj.piperecv())
+                request = pipe_obj.piperecv()
+                self.send(request)
+                print request
 
-                pipe_obj.pipesend(self.recv())
+                answer = self.recv()
+                pipe_obj.pipesend(answer)
+                print answer
+
+
    
     def send(self, msg):
         self.socket.send(encryptAES(self.key, msg))
+
     def recv(self):
         return decryptAES(self.key, self.socket.recv(LEN_UNIT_BUF))
 
