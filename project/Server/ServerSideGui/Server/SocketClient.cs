@@ -12,7 +12,7 @@ namespace Server
     public class SocketClient
     {
         
-        private int port = 1234;
+        private int port = 12344;
         public TcpClient client;
         public Stream stm;
         public ASCIIEncoding asen;

@@ -3,7 +3,7 @@ import DbManager as dbm
 import File_Manager as fm
 
 HOST = "0.0.0.0"
-PORT = 1234
+PORT = 12344
 class Socket:
     def __init__(self):
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -23,8 +23,10 @@ class Socket:
         return dbm.GetInfoForLock()
 
     def Communicate(self):
+
         while True:
             self.gui_socket, self.addr = self.socket.accept()
+            print "Connected to gui"
             info = self.Recv()
             info = info.split("#")
             state = info[0]
@@ -43,23 +45,26 @@ class Socket:
                     self.Send(message)
 
             elif state == "register":
-                print info
-                uid = info[1]
-                firstname = info[2]
-                lastname = info[3]
-                username = info[4]
-                password = info[5]
+                while state == "register":
+                    print info
+                    uid = info[1]
+                    firstname = info[2]
+                    lastname = info[3]
+                    username = info[4]
+                    password = info[5]
 
-                uname_exists = dbm.UnameExists(username)[0]
+                    uname_exists = dbm.UnameExists(username)[0]
 
-                if not uname_exists:
-                    dbm.AddInfo(firstname, uid, lastname, username, password)
-                    message = "Signed up"
-                    self.Send(message)
-                else:
-                    message = "username exists"
-                    self.Send(message)
-
+                    if not uname_exists:
+                        dbm.AddInfo(firstname, uid, lastname, username, password)
+                        message = "Signed up"
+                        self.Send(message)
+                    else:
+                        message = "username exists"
+                        self.Send(message)
+                        info = self.Recv()
+                        info = info.split("#")
+                        state = info[0]
             elif state == "Unlock":
                 uid = info[1]
                 path = info[2]
@@ -104,16 +109,15 @@ class Socket:
             elif state == "Delete":
                 all_user_info = self.GetUserInfoForLock()
                 self.Send(all_user_info)
-                print "sent all info"
-                print all_user_info
                 user_to_del = self.Recv()
-
-                print user_to_del, "here now"
+                while user_to_del == "":
+                    user_to_del = self.Recv()
+                user_info = dbm.ReadInfoByUID(user_to_del)
                 if dbm.DeleteInfo(user_to_del):
-                    print "user deleted"
-                    self.Send("User %s Deleted" % user_to_del)
+                    deleted_user_info = user_info.split('#')[1] + " " + user_info.split('#')[2] + \
+                                        " " + user_info.split('#')[3]
+                    self.Send("User %s Deleted" % deleted_user_info)
                 else:
-                    print "user not deleted"
                     self.Send("User %s can not be deleted, or does not exist" % user_to_del)
 
 

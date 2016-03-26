@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SaveFile));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -45,6 +46,8 @@
             this.DeleteUser = new System.Windows.Forms.Button();
             this.Locker = new System.Windows.Forms.OpenFileDialog();
             this.Unlocker = new System.Windows.Forms.OpenFileDialog();
+            this.label1 = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -98,6 +101,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.UserData);
             this.groupBox1.Controls.Add(this.namesender);
             this.groupBox1.Controls.Add(this.browse2lock);
@@ -206,6 +210,17 @@
             this.Unlocker.FileName = "openFileDialog1";
             this.Unlocker.Filter = "CB files|*.cb|All files|*.*";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(208, 51);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(13, 13);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "?";
+            this.toolTip1.SetToolTip(this.label1, "If you choose to lock the selected file for yourself only, do not choose any user" +
+                    " from the list.\r\n");
+            // 
             // SaveFile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -220,6 +235,7 @@
             this.tabPage1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -244,6 +260,8 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ToolTip toolTip1;
 
     }
 }

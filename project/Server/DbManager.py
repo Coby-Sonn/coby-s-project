@@ -78,12 +78,12 @@ def ReadInfoByUID(uid):
     if UIDExists:
         conn = sqlite3.connect(SQLITE_FILE_PATH)
         c = conn.cursor()
-        execution_string = "SELECT * FROM UserInfo WHERE UID = %s" %uid
+        execution_string = "SELECT * FROM UserInfo WHERE UID = %s" % uid
 
         c.execute(execution_string)
         read_info = c.fetchone()
         data_string = str(read_info[0]) + "#" + read_info[1][1:-1] + "#" + read_info[2][1:-1] + \
-              "#" + read_info[3][1:-1] + "#" + read_info[4][1:-1]
+            "#" + read_info[3][1:-1] + "#" + read_info[4][1:-1]
 
         conn.commit()
         conn.close()

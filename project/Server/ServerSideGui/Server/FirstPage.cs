@@ -8,14 +8,14 @@ using System.Text;
 
 namespace Server
 {
-    public partial class Form1 : Form
+    public partial class FirstPage : Form
     {
         public string my_uid;
         public string firstname;
         public string lastname;
         public SocketClient sock_obj;
 
-        public Form1()
+        public FirstPage()
         {
             InitializeComponent();
             SocketClient sock_obj = new SocketClient();
@@ -127,19 +127,21 @@ namespace Server
                 string information_string = "register#" + UID + "#" + firstname + "#" + lastname + "#" + username + "#" + hashed_password;
                 //send python all the information for registration
                 this.sock_obj.StartClient();
+                MessageBox.Show("stuck here");
                 this.sock_obj.Send(information_string);
                 string message = this.sock_obj.Recv();
 
-                this.sock_obj.CloseClient();
+                
                 if (message == "Signed up")
                 {
                     MessageBox.Show("User Signed Up");
+                    this.sock_obj.CloseClient();
                 }
                 else if (message == "username exists")
                 {
-                    this.Show();
                     MessageBox.Show("Username already exists");
-
+                    this.Show();
+                    this.sock_obj.CloseClient();
                 }
                 
             }

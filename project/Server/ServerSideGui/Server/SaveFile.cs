@@ -202,9 +202,10 @@ namespace Server
             }
 
             string user_to_del = uid_str;
+
             MessageBox.Show(user_to_del);
 
-            this.sock_obj.StartClient();
+           
             this.sock_obj.Send(user_to_del);
             MessageBox.Show(this.sock_obj.Recv());
             this.sock_obj.CloseClient();
@@ -216,7 +217,7 @@ namespace Server
             this.sock_obj.StartClient();
             this.sock_obj.Send("Delete#");
             string user_info_string = this.sock_obj.Recv(); // user_info_string = uid@fname@lname@uname#.....
-            this.sock_obj.CloseClient();
+            
 
             string[] users = user_info_string.Split('#');
 
