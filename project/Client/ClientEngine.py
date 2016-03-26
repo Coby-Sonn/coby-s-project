@@ -5,8 +5,13 @@ import socket
 
 import File_Manager as fm
 
+# Socket class
 HOST = "0.0.0.0"
-PORT = 1234
+PORT = 12347
+
+# local_python_communication class
+IP = "192.168.4.127"
+COM_PORT = 12345
 
 class local_python_communication():
 
@@ -16,7 +21,7 @@ class local_python_communication():
 
     def StartClient(self):
 
-        self.local_socket.connect(("192.168.4.127", 12345))
+        self.local_socket.connect((IP, COM_PORT))
 
     def Send(self, data):
 
@@ -60,12 +65,12 @@ class Socket:
         self.socket.close()
 
     def Communicate(self):
-
+        i = 1
+        local_socket_obj = local_python_communication()
+        local_socket_obj.StartClient()
         while True:
-            local_socket_obj = local_python_communication()
-            local_socket_obj.StartClient()
+            print i
             self.gui_socket, self.addr = self.socket.accept()
-
             info = self.Recv()
             print "printed from engine: " + info
             if info != "":
@@ -133,8 +138,9 @@ class Socket:
                         local_socket_obj.Send("LOCKEDFILEDATA: " + str(file_data[0]) + "#" + str(file_data[1]))
                         ack = local_socket_obj.Recv()
                         if ack == "Locked":
-                            self.Send("Locked")
-                print "printed from engine: " + message
+                            self.Send(ack)
+
+                i += 1
             else:
                 break
 

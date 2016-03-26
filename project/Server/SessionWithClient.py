@@ -104,7 +104,7 @@ class  SessionWithClient(threading.Thread):
                 print "here 1"
                 while True:
                     request = self.recv()
-                    print request
+                    print "request " + request
                     if request.split('#')[0] == "GETHASH":
                         password_hash = dbm.GetPassHashByUname(request.split('#')[1])
                         self.send(password_hash)
@@ -121,6 +121,7 @@ class  SessionWithClient(threading.Thread):
                             file_id = request.split(':')[1].split('#')[0]
                             file_key = request.split(':')[1].split('#')[1]
                             dbm.AddFileInfo(file_id, file_key)
+                            self.send("Locked")
 
 
 

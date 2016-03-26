@@ -51,12 +51,16 @@ class Client(object):
             while True:
                 i += 1
                 request = socket_obj.Recv()
+                while request == "":
+                    request = socket_obj.Recv()
                 self.send(request)
                 print "from client " + request + " request %d" % i
 
                 answer = self.recv()
                 socket_obj.Send(answer)
                 print "from client " + answer + " answer %d" % i
+
+
 
 
 

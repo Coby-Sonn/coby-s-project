@@ -140,8 +140,7 @@ class File_Manager():
             file_header = FileHeaderStruct()
             current_file.readinto(file_header)
 
-            content = current_file.read()
-            current_file.close()
+
 
 
 
@@ -156,7 +155,7 @@ class File_Manager():
 
 
 
-            """now the system asks the server for the key to open the file which is written in the file header"""
+            """now the system asks the server for the key to open the file which is in the database"""
 
             UID_List = []
             for i in xrange(file_header.lenUIDS):
@@ -180,7 +179,8 @@ class File_Manager():
             except:
                 users_rbac = [first_rbac_users]
 
-
+            content = current_file.read()
+            current_file.close()
             new_file = open(new_path, "wb")
             os.remove(path)
             aux_obj = AUXGenerator()

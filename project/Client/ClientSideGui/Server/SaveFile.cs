@@ -65,10 +65,10 @@ namespace Server
             
             this.sock_obj.StartClient();
             this.sock_obj.Send("Lock");
-            
 
+            MessageBox.Show("sent lock");
             string user_info_string = this.sock_obj.Recv(); // user_info_string = uid@fname@lname@uname@ph#.....
-            
+            MessageBox.Show("received data");
             string[] users = user_info_string.Split('#');
 
 
@@ -103,11 +103,7 @@ namespace Server
         private void continue_lock()
         {
             //MessageBox.Show(this.to_send);
-
-            
-
-            string message = this.to_send;
-            
+            string message = this.to_send;           
             this.sock_obj.Send(message);
             string ack = this.sock_obj.Recv();
             MessageBox.Show(ack);
