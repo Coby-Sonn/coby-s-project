@@ -7,10 +7,10 @@ import File_Manager as fm
 
 # Socket class
 HOST = "0.0.0.0"
-PORT = 12347
+PORT = 12346
 
 # local_python_communication class
-IP = "192.168.4.127"
+IP = "10.92.5.51"
 COM_PORT = 12345
 
 class local_python_communication():
@@ -92,6 +92,7 @@ class Socket:
                     else:
                         message = "Not#0"
                         self.Send(message)
+                        local_socket_obj.Send("Reset")
                         print "printed from engine: " + message
 
                 elif state == "Unlock":
@@ -106,9 +107,9 @@ class Socket:
                         if ack == "File unlocked":
                             message = ack
                         elif ack == "The specified user is not allowed to open the file":
-                             self.Send(ack)
+                            self.Send(ack)
                     else:
-                         self.Send("Path error, system can only unlock .cb files")
+                        self.Send("Path error, system can only unlock .cb files")
 
 
                 elif state == "Lock":

@@ -18,9 +18,7 @@ namespace Server
         public Form1()
         {
             InitializeComponent();
-            SocketClient sock_obj = new SocketClient();
-            this.sock_obj = sock_obj;
-            
+ 
         }
 
         
@@ -55,7 +53,8 @@ namespace Server
                 //send username and password to python and checks if correct
                 string info = "login#" + username + "#" + hashed_password;
 
-
+                SocketClient sock_obj = new SocketClient();
+                this.sock_obj = sock_obj;
                 this.sock_obj.StartClient();
                 this.sock_obj.Send(info);
 
@@ -66,9 +65,10 @@ namespace Server
                     this.my_uid = message_to_split.Split('#')[2];
                     this.firstname = message_to_split.Split('#')[1];
                     this.lastname = message_to_split.Split('#')[3];
-                    MessageBox.Show(my_uid + firstname + lastname);
+                    //MessageBox.Show(my_uid + firstname + lastname);
                 }
-                sock_obj.CloseClient();
+                this.sock_obj.CloseClient();
+                this.sock_obj = null;
 
                 //if receives true then send the user to the next gui.
                 if (message == "Signed in")
@@ -79,8 +79,7 @@ namespace Server
                 }
                 else
                 {
-
-                    MessageBox.Show("incorrect password or username");
+                    MessageBox.Show("Incorrect password or username");
                     this.Show();
                 }
             }

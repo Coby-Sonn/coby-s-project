@@ -99,10 +99,9 @@ class  SessionWithClient(threading.Thread):
                 return
             self.clientSock.send(PROT_START + END_LINE)
             self.key = self.crypto.key_exchange(self.clientSock)  # in Crypto
-            print "here 0"
             if self.key:
-                print "here 1"
                 while True:
+
                     request = self.recv()
                     print "request " + request
                     if request.split('#')[0] == "GETHASH":
@@ -111,6 +110,9 @@ class  SessionWithClient(threading.Thread):
                         request = self.recv()
                         if request.split('#')[0] == "GETINFO":
                             self.send(dbm.GetLoginInfo(request.split('#')[1]))
+                        else:
+                            print "from server: Reset"
+                            self.send("Reset")
                     elif request.split('#')[0] == "GETKEYFOR":
                         self.send(dbm.GetKeyByID(request.split('#')[1]))
                     elif request.split('#')[0] == "GETALLUSERINFO":
@@ -122,9 +124,9 @@ class  SessionWithClient(threading.Thread):
                             file_key = request.split(':')[1].split('#')[1]
                             dbm.AddFileInfo(file_id, file_key)
                             self.send("Locked")
-
-
-
+                        else:
+                            print "from server: Reset after locked file data"
+                            self.send("Reset")
 
             self.clientSock.close()
 

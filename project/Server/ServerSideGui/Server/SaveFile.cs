@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO.Pipes;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace Server
 {
@@ -29,8 +30,7 @@ namespace Server
             this.my_fname = user_info.Split('#')[1];
             this.my_lname = user_info.Split('#')[2];
             
-            SocketClient sock_obj = new SocketClient();
-            this.sock_obj = sock_obj;
+            
             namesender.Enabled = false;
 
         }
@@ -47,12 +47,11 @@ namespace Server
             }
             return hash.ToString();
         }
-        
-
         private void browse2lock_Click(object sender, EventArgs e)
         {
             OpenFileDialog Locker = new OpenFileDialog();
-
+            namesender.Enabled = true;
+            
             Locker.ShowDialog();
             Locker.InitialDirectory = @"C:\";
             Locker.Title = "Browse Files";
@@ -61,8 +60,9 @@ namespace Server
             this.file_to_lock = filename;
             filename = ChosenFileView.Text;
             ChosenFileView.Show();
-           
-            
+
+            SocketClient sock_obj = new SocketClient();
+            this.sock_obj = sock_obj;
             this.sock_obj.StartClient();
             this.sock_obj.Send("Lock");
             
@@ -86,8 +86,11 @@ namespace Server
                         string user_data = user_string.Split('@')[1] + " " + user_string.Split('@')[2] + " " + user_string.Split('@')[0];
                         UserData.Items.Add(user_data);
                     }
+                    
+
                 }
             }
+            
             // Allow the ListBox to repaint and display the new items.
             UserData.EndUpdate();
             UserData.Show();
@@ -112,6 +115,7 @@ namespace Server
             string ack = this.sock_obj.Recv();
             MessageBox.Show(ack);
             this.sock_obj.CloseClient();
+            this.sock_obj = null;
             
             
 
@@ -122,6 +126,7 @@ namespace Server
         {
             //str_to_send = LockReady#uid#path#uid@uid@...#rbac#optionality
             UserData.Enabled = false;
+            
             for (int i = 0; i < UserData.Items.Count; i++)
                 if (UserData.GetItemCheckState(i) == CheckState.Checked)
                 {
@@ -146,43 +151,6 @@ namespace Server
 
 
         }
-
-
-        //private void browse2unlock_Click(object sender, EventArgs e)
-        //{
-        //    OpenFileDialog Unlocker = new OpenFileDialog();
-
-        //    Unlocker.ShowDialog();
-        //    Unlocker.InitialDirectory = @"C:\";
-        //    Unlocker.Title = "Browse Files to Unlock";
-        //    string file_to_unlock = Unlocker.FileName;
-
-        //    string uid = this.my_uid; // need to get the current user uid
-        //    string information_string = "Unlock#" + uid + "#" + file_to_unlock;
-        //    this.sock_obj.StartClient();
-        //    this.sock_obj.Send(information_string);
-            
-
-        //    string message = this.sock_obj.Recv();
-            
-
-        //    if (message == "File Unlocked")
-        //    {
-        //        MessageBox.Show(message);
-        //    }
-        //    else if (message == "The specified user is not allowed to open the file")
-        //    {
-        //        MessageBox.Show(message);
-        //    }
-        //    else if (message == "path error, can only unlock .cb files")
-        //    {
-        //        MessageBox.Show(message);
-        //    }
-
-
-        //    this.sock_obj.CloseClient();
-
-        //}
 
         private void DeleteUser_Click(object sender, EventArgs e)
         {
@@ -209,11 +177,14 @@ namespace Server
             this.sock_obj.Send(user_to_del);
             MessageBox.Show(this.sock_obj.Recv());
             this.sock_obj.CloseClient();
+            this.sock_obj = null;
             
         }
   
         private void UserButton_Click(object sender, EventArgs e)
         {
+            SocketClient sock_obj = new SocketClient();
+            this.sock_obj = sock_obj;
             this.sock_obj.StartClient();
             this.sock_obj.Send("Delete#");
             string user_info_string = this.sock_obj.Recv(); // user_info_string = uid@fname@lname@uname#.....
@@ -255,6 +226,8 @@ namespace Server
 
             string uid = this.my_uid; // need to get the current user uid
             string information_string = "Unlock#" + uid + "#" + file_to_unlock;
+            SocketClient sock_obj = new SocketClient();
+            this.sock_obj = sock_obj;
             this.sock_obj.StartClient();
             this.sock_obj.Send(information_string);
             
@@ -277,10 +250,102 @@ namespace Server
 
 
             this.sock_obj.CloseClient();
+            this.sock_obj = null;
 
 
         }
 
+        private void signout_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            this.Hide();
+            FirstPage FirstPage = new FirstPage();
+            FirstPage.Show();
+        }
+
+        private void showuserschange_Click(object sender, EventArgs e)
+        {
+            SocketClient sock_obj = new SocketClient();
+            this.sock_obj = sock_obj;
+            this.sock_obj.StartClient();
+            this.sock_obj.Send("Change#");
+            string user_info_string = this.sock_obj.Recv(); // user_info_string = uid@fname@lname@uname#.....
+
+
+            string[] users = user_info_string.Split('#');
+
+
+            // Shutdown the painting of the ListBox as items are added.
+            UserDatachange.BeginUpdate();
+            // Loop through and add items to the listbox
+            foreach (string user_string in users)
+            {
+                string user_data = user_string.Split('@')[1] + " " + user_string.Split('@')[2] + " " + user_string.Split('@')[0];
+                UserDatachange.Items.Add(user_data);
+
+            }
+            // Allow the ListBox to repaint and display the new items.
+            UserDatachange.EndUpdate();
+            UserDatachange.Show();
+            SendChange.Visible = true;
+        }
+
+        private void SendChange_Click(object sender, EventArgs e)
+        {
+            UserChanges(whattochange.SelectedItem.ToString(), newitem.Text);
+        }
+        private void UserChanges(string what_to_change, string new_item)
+        {
+            
+            if (UserDatachange.Items.Count == 0)
+                MessageBox.Show("Please choose a user");
+            if (whattochange.Items.Count == 0)
+                MessageBox.Show("Please pick what you want to change for this user...");
+            string user_uid = UserDatachange.SelectedItem.ToString().Split(' ')[2];
+            string information = "";
+            if (what_to_change == "Last Name")
+            {
+                information = "Change#lname#" + user_uid + "#" + new_item;
+            }
+            else if (what_to_change == "First Name")
+            {
+                information = "Change#fname#" + user_uid + "#" + new_item;
+            }
+            else if (what_to_change == "Password")
+            {
+                Confirm.Enabled = true;
+                newitem.PasswordChar = '●';
+                string pattern = @"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{8,15}$";
+                if (!Regex.IsMatch(new_item, pattern))
+                {
+                    MessageBox.Show("Password must be between 8-15 characters and must contain at least one uppercase letter, one lowercase letter and one number");
+                }
+                else if (new_item != Confirm.Text)
+                {
+                    MessageBox.Show("Passwords don't match");
+                }
+                else
+                {
+                    information = "Change#password#" + user_uid + "#" + sha256(new_item);
+                }
+
+            }
+
+            this.sock_obj.Send(information);
+            MessageBox.Show(this.sock_obj.Recv());
+            this.sock_obj.CloseClient();
+            this.sock_obj = null;
+            
+
+            
+        }
+
+       
+        
+        
+
+        
+
+       
         
 
     }

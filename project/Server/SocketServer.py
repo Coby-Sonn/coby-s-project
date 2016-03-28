@@ -62,9 +62,9 @@ class Socket:
                     else:
                         message = "username exists"
                         self.Send(message)
-                        info = self.Recv()
-                        info = info.split("#")
-                        state = info[0]
+                    info = self.Recv()
+                    info = info.split("#")
+                    state = info[0]
             elif state == "Unlock":
                 uid = info[1]
                 path = info[2]
@@ -76,7 +76,7 @@ class Socket:
                     elif ack == "The specified user is not allowed to open the file":
                         message = ack
                 else:
-                    message = "path error, can only unlock .cb files"
+                    message = "Path error, can only unlock .cb files"
                 self.Send(message)
 
             elif state == "Lock":
@@ -105,6 +105,8 @@ class Socket:
                         file_obj.Create_New_Format(path, uid_list, rbac)
                     message = "Locked"
                     self.Send(message)
+                else:
+                    self.Send("Reset")
 
             elif state == "Delete":
                 all_user_info = self.GetUserInfoForLock()
@@ -112,6 +114,10 @@ class Socket:
                 user_to_del = self.Recv()
                 while user_to_del == "":
                     user_to_del = self.Recv()
+                try:
+                    user_to_del = int(user_to_del)
+                except:
+                    self.Send("Reset")
                 user_info = dbm.ReadInfoByUID(user_to_del)
                 if dbm.DeleteInfo(user_to_del):
                     deleted_user_info = user_info.split('#')[1] + " " + user_info.split('#')[2] + \
@@ -119,6 +125,32 @@ class Socket:
                     self.Send("User %s Deleted" % deleted_user_info)
                 else:
                     self.Send("User %s can not be deleted, or does not exist" % user_to_del)
+            elif state == "Change":
+                all_user_info = self.GetUserInfoForLock()
+                self.Send(all_user_info)
+                change_str = self.Recv()
+                while change_str == "":
+                    change_str = self.Recv()
+                if change_str.split('#')[0] == "Change":
+                    what_to_change = change_str.split('#')[1]
+                    user_id = change_str.split('#')[2]
+                    new_item = change_str.split('#')[3]
+                    if what_to_change == "fname":
+                        if dbm.UpdateInfo(1, new_item, user_id):
+                            self.Send("User info updated")
+                        else:
+                            self.Send("Could not Change...")
+                    elif what_to_change == "lname":
+                        if dbm.UpdateInfo(3, new_item, user_id):
+                            self.Send("User info updated")
+                        else:
+                            self.Send("Could not Change...")
+                    elif what_to_change == "password":
+                        if dbm.UpdateInfo(5, new_item, user_id):
+                            self.Send("User info updated")
+                        else:
+                            self.Send("Could not Change...")
+
 
 
 

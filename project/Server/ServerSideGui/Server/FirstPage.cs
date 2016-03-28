@@ -18,12 +18,9 @@ namespace Server
         public FirstPage()
         {
             InitializeComponent();
-            SocketClient sock_obj = new SocketClient();
-            this.sock_obj = sock_obj;
             
         }
 
-        
         static string sha256(string password)
         {
             System.Security.Cryptography.SHA256Managed crypt = new System.Security.Cryptography.SHA256Managed();
@@ -35,7 +32,6 @@ namespace Server
             }
             return hash.ToString();
         }
-
         private void UserSignIn(string username, string password)
         {
             if (username == "")
@@ -54,8 +50,9 @@ namespace Server
                 string hashed_password = sha256(password);
                 //send username and password to python and checks if correct
                 string info = "login#" + username + "#" + hashed_password;
-                
 
+                SocketClient sock_obj = new SocketClient();
+                this.sock_obj = sock_obj;
                 this.sock_obj.StartClient();
                 this.sock_obj.Send(info);
                 string message_to_split = this.sock_obj.Recv();
@@ -67,7 +64,8 @@ namespace Server
                     this.lastname = message_to_split.Split('#')[3];
                     //MessageBox.Show(my_uid + firstname + lastname);
                 }
-                sock_obj.CloseClient();
+                this.sock_obj.CloseClient();
+                this.sock_obj = null;
                 
                 //if receives true then send the user to the next gui.
                 if (message == "Signed in")
@@ -126,8 +124,10 @@ namespace Server
                 string hashed_password = sha256(password);
                 string information_string = "register#" + UID + "#" + firstname + "#" + lastname + "#" + username + "#" + hashed_password;
                 //send python all the information for registration
+                SocketClient sock_obj = new SocketClient();
+                this.sock_obj = sock_obj;
                 this.sock_obj.StartClient();
-                MessageBox.Show("stuck here");
+                
                 this.sock_obj.Send(information_string);
                 string message = this.sock_obj.Recv();
 
@@ -136,12 +136,16 @@ namespace Server
                 {
                     MessageBox.Show("User Signed Up");
                     this.sock_obj.CloseClient();
+                    this.sock_obj = null;
+                    this.Show();
                 }
                 else if (message == "username exists")
                 {
                     MessageBox.Show("Username already exists");
                     this.Show();
                     this.sock_obj.CloseClient();
+                    this.sock_obj = null;
+
                 }
                 
             }
@@ -167,11 +171,7 @@ namespace Server
             ConfirmPass.Clear();
         }
 
-        private void groupBox2_Enter(object sender, EventArgs e)
-        {
-
-        }
-
+        
         
 
        

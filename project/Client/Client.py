@@ -4,7 +4,7 @@ from AES import *
 import subprocess
 
 # region ----------   CONSTANTS   ---------------------------------------------------------------
-SERVER_ADDRESS = '192.168.4.127'             # The default target server ip
+SERVER_ADDRESS = '10.92.5.51'             # The default target server ip
 SERVER_PORT = 6071                      # The default target server port
 PROT_START = "Hello"
 

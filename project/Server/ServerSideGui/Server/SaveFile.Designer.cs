@@ -32,27 +32,37 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SaveFile));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.signout = new System.Windows.Forms.LinkLabel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.browse2unlock = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.UserData = new System.Windows.Forms.CheckedListBox();
             this.namesender = new System.Windows.Forms.Button();
             this.browse2lock = new System.Windows.Forms.Button();
             this.ChosenFileView = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.userchanges = new System.Windows.Forms.GroupBox();
+            this.Confirm = new System.Windows.Forms.TextBox();
+            this.SendChange = new System.Windows.Forms.Button();
+            this.newitem = new System.Windows.Forms.TextBox();
+            this.whattochange = new System.Windows.Forms.ComboBox();
+            this.UserDatachange = new System.Windows.Forms.CheckedListBox();
+            this.showuserschange = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.UserButton = new System.Windows.Forms.Button();
             this.UserDatadel = new System.Windows.Forms.CheckedListBox();
             this.DeleteUser = new System.Windows.Forms.Button();
             this.Locker = new System.Windows.Forms.OpenFileDialog();
             this.Unlocker = new System.Windows.Forms.OpenFileDialog();
-            this.label1 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.label2 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            this.userchanges.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -63,21 +73,33 @@
             this.tabControl1.Location = new System.Drawing.Point(-1, -1);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(496, 373);
+            this.tabControl1.Size = new System.Drawing.Size(288, 316);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.signout);
             this.tabPage1.Controls.Add(this.groupBox2);
             this.tabPage1.Controls.Add(this.groupBox1);
             this.tabPage1.Controls.Add(this.ChosenFileView);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(488, 347);
+            this.tabPage1.Size = new System.Drawing.Size(280, 290);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Lock";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // signout
+            // 
+            this.signout.AutoSize = true;
+            this.signout.Location = new System.Drawing.Point(232, 0);
+            this.signout.Name = "signout";
+            this.signout.Size = new System.Drawing.Size(48, 13);
+            this.signout.TabIndex = 8;
+            this.signout.TabStop = true;
+            this.signout.Text = "Sign Out";
+            this.signout.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.signout_LinkClicked);
             // 
             // groupBox2
             // 
@@ -111,6 +133,17 @@
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Lock";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(208, 51);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(13, 13);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "?";
+            this.toolTip1.SetToolTip(this.label1, "If you choose to lock the selected file for yourself only, do not choose any user" +
+        " from the list.\r\n");
             // 
             // UserData
             // 
@@ -154,14 +187,91 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.userchanges);
             this.tabPage3.Controls.Add(this.groupBox3);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(488, 347);
+            this.tabPage3.Size = new System.Drawing.Size(280, 290);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "User Options";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // userchanges
+            // 
+            this.userchanges.Controls.Add(this.label2);
+            this.userchanges.Controls.Add(this.Confirm);
+            this.userchanges.Controls.Add(this.SendChange);
+            this.userchanges.Controls.Add(this.newitem);
+            this.userchanges.Controls.Add(this.whattochange);
+            this.userchanges.Controls.Add(this.UserDatachange);
+            this.userchanges.Controls.Add(this.showuserschange);
+            this.userchanges.Location = new System.Drawing.Point(14, 162);
+            this.userchanges.Name = "userchanges";
+            this.userchanges.Size = new System.Drawing.Size(241, 117);
+            this.userchanges.TabIndex = 4;
+            this.userchanges.TabStop = false;
+            this.userchanges.Text = "User Data";
+            // 
+            // Confirm
+            // 
+            this.Confirm.Enabled = false;
+            this.Confirm.Location = new System.Drawing.Point(99, 75);
+            this.Confirm.Name = "Confirm";
+            this.Confirm.PasswordChar = '●';
+            this.Confirm.Size = new System.Drawing.Size(92, 20);
+            this.Confirm.TabIndex = 5;
+            // 
+            // SendChange
+            // 
+            this.SendChange.Location = new System.Drawing.Point(6, 88);
+            this.SendChange.Name = "SendChange";
+            this.SendChange.Size = new System.Drawing.Size(75, 23);
+            this.SendChange.TabIndex = 4;
+            this.SendChange.Text = "Send";
+            this.SendChange.UseVisualStyleBackColor = true;
+            this.SendChange.Click += new System.EventHandler(this.SendChange_Click);
+            // 
+            // newitem
+            // 
+            this.newitem.Location = new System.Drawing.Point(99, 49);
+            this.newitem.Name = "newitem";
+            this.newitem.Size = new System.Drawing.Size(92, 20);
+            this.newitem.TabIndex = 3;
+            this.toolTip1.SetToolTip(this.newitem, "Password must be between 8-15 characters and must contain at least one uppercase " +
+        "letter, one lowercase letter and one number");
+            // 
+            // whattochange
+            // 
+            this.whattochange.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.whattochange.FormattingEnabled = true;
+            this.whattochange.Items.AddRange(new object[] {
+            "First Name",
+            "Last Name",
+            "Password"});
+            this.whattochange.Location = new System.Drawing.Point(6, 48);
+            this.whattochange.Name = "whattochange";
+            this.whattochange.Size = new System.Drawing.Size(75, 21);
+            this.whattochange.TabIndex = 2;
+            // 
+            // UserDatachange
+            // 
+            this.UserDatachange.CheckOnClick = true;
+            this.UserDatachange.FormattingEnabled = true;
+            this.UserDatachange.Location = new System.Drawing.Point(99, 9);
+            this.UserDatachange.Name = "UserDatachange";
+            this.UserDatachange.Size = new System.Drawing.Size(120, 34);
+            this.UserDatachange.TabIndex = 1;
+            // 
+            // showuserschange
+            // 
+            this.showuserschange.Location = new System.Drawing.Point(6, 19);
+            this.showuserschange.Name = "showuserschange";
+            this.showuserschange.Size = new System.Drawing.Size(75, 23);
+            this.showuserschange.TabIndex = 0;
+            this.showuserschange.Text = "Show Users";
+            this.showuserschange.UseVisualStyleBackColor = true;
+            this.showuserschange.Click += new System.EventHandler(this.showuserschange_Click);
             // 
             // groupBox3
             // 
@@ -210,16 +320,14 @@
             this.Unlocker.FileName = "openFileDialog1";
             this.Unlocker.Filter = "CB files|*.cb|All files|*.*";
             // 
-            // label1
+            // label2
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(208, 51);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(13, 13);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "?";
-            this.toolTip1.SetToolTip(this.label1, "If you choose to lock the selected file for yourself only, do not choose any user" +
-                    " from the list.\r\n");
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(102, 98);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(89, 13);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "confirm password";
             // 
             // SaveFile
             // 
@@ -237,6 +345,8 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tabPage3.ResumeLayout(false);
+            this.userchanges.ResumeLayout(false);
+            this.userchanges.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -262,6 +372,15 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.LinkLabel signout;
+        private System.Windows.Forms.GroupBox userchanges;
+        private System.Windows.Forms.Button SendChange;
+        private System.Windows.Forms.TextBox newitem;
+        private System.Windows.Forms.ComboBox whattochange;
+        private System.Windows.Forms.CheckedListBox UserDatachange;
+        private System.Windows.Forms.Button showuserschange;
+        private System.Windows.Forms.TextBox Confirm;
+        private System.Windows.Forms.Label label2;
 
     }
 }

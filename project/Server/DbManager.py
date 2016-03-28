@@ -36,15 +36,19 @@ def UpdateInfo(serial_number, what_to_change, uid):
     """cannot get number 2, will not change the uid"""
     if serial_number == 2:
         raise ValueError("Cannot change uid number")
-        return
-    conn = sqlite3.connect(SQLITE_FILE_PATH)
-    c = conn.cursor()
-    execution_string = 'UPDATE UserInfo SET %s' %COLUMN_LIST[serial_number-1]
-    execution_string = execution_string + " = '%s'" %what_to_change
-    execution_string = execution_string + " WHERE UID = %s" %uid
-    c.execute(execution_string)
-    conn.commit()
-    conn.close()
+        return False
+    try:
+        conn = sqlite3.connect(SQLITE_FILE_PATH)
+        c = conn.cursor()
+        execution_string = 'UPDATE UserInfo SET %s' %COLUMN_LIST[serial_number-1]
+        execution_string = execution_string + " = '%s'" %what_to_change
+        execution_string = execution_string + " WHERE UID = %s" %uid
+        c.execute(execution_string)
+        conn.commit()
+        conn.close()
+        return True
+    except:
+        return False
 def DeleteInfo(uid):
     try:
         conn = sqlite3.connect(SQLITE_FILE_PATH)
