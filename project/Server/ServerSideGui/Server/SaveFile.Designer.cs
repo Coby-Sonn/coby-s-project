@@ -43,6 +43,7 @@
             this.ChosenFileView = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.userchanges = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.Confirm = new System.Windows.Forms.TextBox();
             this.SendChange = new System.Windows.Forms.Button();
             this.newitem = new System.Windows.Forms.TextBox();
@@ -56,7 +57,8 @@
             this.Locker = new System.Windows.Forms.OpenFileDialog();
             this.Unlocker = new System.Windows.Forms.OpenFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.label2 = new System.Windows.Forms.Label();
+            this.rwbox = new System.Windows.Forms.CheckBox();
+            this.rbox = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -123,6 +125,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.rbox);
+            this.groupBox1.Controls.Add(this.rwbox);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.UserData);
             this.groupBox1.Controls.Add(this.namesender);
@@ -143,7 +147,7 @@
             this.label1.TabIndex = 5;
             this.label1.Text = "?";
             this.toolTip1.SetToolTip(this.label1, "If you choose to lock the selected file for yourself only, do not choose any user" +
-        " from the list.\r\n");
+                    " from the list.\r\n");
             // 
             // UserData
             // 
@@ -213,6 +217,15 @@
             this.userchanges.TabStop = false;
             this.userchanges.Text = "User Data";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(102, 98);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(89, 13);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "confirm password";
+            // 
             // Confirm
             // 
             this.Confirm.Enabled = false;
@@ -239,7 +252,7 @@
             this.newitem.Size = new System.Drawing.Size(92, 20);
             this.newitem.TabIndex = 3;
             this.toolTip1.SetToolTip(this.newitem, "Password must be between 8-15 characters and must contain at least one uppercase " +
-        "letter, one lowercase letter and one number");
+                    "letter, one lowercase letter and one number");
             // 
             // whattochange
             // 
@@ -320,14 +333,28 @@
             this.Unlocker.FileName = "openFileDialog1";
             this.Unlocker.Filter = "CB files|*.cb|All files|*.*";
             // 
-            // label2
+            // rwbox
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(102, 98);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(89, 13);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "confirm password";
+            this.rwbox.AutoSize = true;
+            this.rwbox.Checked = true;
+            this.rwbox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.rwbox.Location = new System.Drawing.Point(9, 105);
+            this.rwbox.Name = "rwbox";
+            this.rwbox.Size = new System.Drawing.Size(101, 17);
+            this.rwbox.TabIndex = 6;
+            this.rwbox.Text = "Read and Write";
+            this.rwbox.UseVisualStyleBackColor = true;
+            // 
+            // rbox
+            // 
+            this.rbox.AutoSize = true;
+            this.rbox.Location = new System.Drawing.Point(122, 105);
+            this.rbox.Name = "rbox";
+            this.rbox.Size = new System.Drawing.Size(76, 17);
+            this.rbox.TabIndex = 7;
+            this.rbox.Text = "Read Only";
+            this.rbox.ThreeState = true;
+            this.rbox.UseVisualStyleBackColor = true;
             // 
             // SaveFile
             // 
@@ -381,6 +408,8 @@
         private System.Windows.Forms.Button showuserschange;
         private System.Windows.Forms.TextBox Confirm;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.CheckBox rbox;
+        private System.Windows.Forms.CheckBox rwbox;
 
     }
 }

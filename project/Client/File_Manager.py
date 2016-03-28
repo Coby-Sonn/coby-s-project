@@ -3,8 +3,9 @@ import struct
 import MyCrypto
 from ctypes import *
 from Crypto.Hash import SHA256
-#import DbManager as dbm
 from random import randint
+import stat
+
 
 
 MAGIC_NUMBER = 0xCB
@@ -193,6 +194,9 @@ class File_Manager():
                 insertion_content = crypto_obj.decrypt_content(content)
                 new_file.write(insertion_content)
                 new_file.close()
+                if first_rbac_users[0] == "1":
+                    os.chmod(new_path, stat.S_IREAD)
+                    return "File unlocked, user can only read the file"
                 return "File unlocked"
             else:
                 new_file.write(content)

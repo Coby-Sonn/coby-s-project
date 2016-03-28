@@ -25,12 +25,8 @@
         <entry file="file://$PROJECT_DIR$/SessionWithClient.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="109" column="42" selection-start-line="109" selection-start-column="42" selection-end-line="109" selection-end-column="42" />
-              <folding>
-                <element signature="e#3372#3724#0" expanded="false" />
-                <element signature="e#4032#4083#0" expanded="false" />
-                <element signature="e#4114#4177#0" expanded="false" />
-              </folding>
+              <caret line="112" column="29" selection-start-line="112" selection-start-column="29" selection-end-line="112" selection-end-column="29" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -39,39 +35,22 @@
         <entry file="file://$PROJECT_DIR$/DbManager.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="50" column="20" selection-start-line="50" selection-start-column="20" selection-end-line="50" selection-end-column="20" />
+              <caret line="54" column="20" selection-start-line="54" selection-start-column="20" selection-end-line="54" selection-end-column="20" />
               <folding>
-                <element signature="e#768#1008#0" expanded="false" />
-                <element signature="e#1065#1655#0" expanded="false" />
-                <element signature="e#1681#1962#0" expanded="false" />
-                <element signature="e#1986#2420#0" expanded="false" />
-                <element signature="e#2449#3116#0" expanded="false" />
-                <element signature="e#3141#3447#0" expanded="false" />
-                <element signature="e#3476#3594#0" expanded="false" />
-                <element signature="e#3630#3903#0" expanded="false" />
-                <element signature="e#3930#4054#0" expanded="false" />
-                <element signature="e#4084#4377#0" expanded="false" />
-                <element signature="e#4507#4795#0" expanded="false" />
-                <element signature="e#4823#5134#0" expanded="false" />
-                <element signature="e#5170#5575#0" expanded="false" />
-                <element signature="e#5605#5807#0" expanded="false" />
-                <element signature="e#5837#6123#0" expanded="false" />
+                <marker date="1459180384976" expanded="true" signature="475:632" placeholder="..." />
+                <marker date="1459180384976" expanded="false" signature="763:1008" placeholder="..." />
+                <marker date="1459180384976" expanded="true" signature="1060:1655" placeholder="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SocketServer.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/SocketServer.py">
+      <file leaf-file-name="File_Manager.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/File_Manager.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.12656641">
-              <caret line="116" column="20" selection-start-line="116" selection-start-column="20" selection-end-line="116" selection-end-column="20" />
-              <folding>
-                <element signature="e#241#301#0" expanded="false" />
-                <element signature="e#336#362#0" expanded="false" />
-                <element signature="e#460#511#0" expanded="false" />
-                <element signature="e#554#699#0" expanded="false" />
-              </folding>
+            <state vertical-scroll-proportion="0.0">
+              <caret line="191" column="71" selection-start-line="191" selection-start-column="71" selection-end-line="191" selection-end-column="71" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -82,6 +61,23 @@
             <state vertical-scroll-proportion="0.0">
               <caret line="76" column="35" selection-start-line="76" selection-start-column="35" selection-end-line="76" selection-end-column="35" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SocketServer.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/SocketServer.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding>
+                <element signature="e#241#301#0" expanded="false" />
+                <element signature="e#336#362#0" expanded="false" />
+                <element signature="e#391#424#0" expanded="false" />
+                <element signature="e#460#511#0" expanded="false" />
+                <element signature="e#554#699#0" expanded="false" />
+                <element signature="e#737#6218#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -101,21 +97,21 @@
         <option value="$PROJECT_DIR$/piper.py" />
         <option value="$PROJECT_DIR$/DbCreator.py" />
         <option value="$PROJECT_DIR$/MyCrypto.py" />
-        <option value="$PROJECT_DIR$/File_Manager.py" />
         <option value="$PROJECT_DIR$/ServerCrypto.py" />
         <option value="$PROJECT_DIR$/AES.py" />
         <option value="$PROJECT_DIR$/PythonServer.py" />
         <option value="$PROJECT_DIR$/SessionWithClient.py" />
         <option value="$PROJECT_DIR$/DbManager.py" />
         <option value="$PROJECT_DIR$/SocketServer.py" />
+        <option value="$PROJECT_DIR$/File_Manager.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="699" />
-    <option name="y" value="23" />
-    <option name="width" value="895" />
-    <option name="height" value="1146" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1924" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -166,7 +162,7 @@
     <panes />
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Client" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="full.screen.before.presentation.mode" value="false" />
@@ -410,15 +406,15 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="699" y="23" width="895" height="1146" extended-state="0" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1924" height="1056" extended-state="0" />
+    <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32916266" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20596728" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.205074" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -777,13 +773,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/File_Manager.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2948113">
-          <caret line="133" column="12" selection-start-line="133" selection-start-column="12" selection-end-line="133" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/Python27/Lib/threading.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33254716">
@@ -805,6 +794,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/SessionWithClient.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="112" column="29" selection-start-line="112" selection-start-column="29" selection-end-line="112" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DbManager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="54" column="20" selection-start-line="54" selection-start-column="20" selection-end-line="54" selection-end-column="20" />
+          <folding>
+            <marker date="1459180384976" expanded="true" signature="475:632" placeholder="..." />
+            <marker date="1459180384976" expanded="false" signature="763:1008" placeholder="..." />
+            <marker date="1459180384976" expanded="true" signature="1060:1655" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/PythonServer.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -813,51 +822,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SessionWithClient.py">
+    <entry file="file://$PROJECT_DIR$/File_Manager.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="109" column="42" selection-start-line="109" selection-start-column="42" selection-end-line="109" selection-end-column="42" />
-          <folding>
-            <element signature="e#3372#3724#0" expanded="false" />
-            <element signature="e#4032#4083#0" expanded="false" />
-            <element signature="e#4114#4177#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DbManager.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="50" column="20" selection-start-line="50" selection-start-column="20" selection-end-line="50" selection-end-column="20" />
-          <folding>
-            <element signature="e#768#1008#0" expanded="false" />
-            <element signature="e#1065#1655#0" expanded="false" />
-            <element signature="e#1681#1962#0" expanded="false" />
-            <element signature="e#1986#2420#0" expanded="false" />
-            <element signature="e#2449#3116#0" expanded="false" />
-            <element signature="e#3141#3447#0" expanded="false" />
-            <element signature="e#3476#3594#0" expanded="false" />
-            <element signature="e#3630#3903#0" expanded="false" />
-            <element signature="e#3930#4054#0" expanded="false" />
-            <element signature="e#4084#4377#0" expanded="false" />
-            <element signature="e#4507#4795#0" expanded="false" />
-            <element signature="e#4823#5134#0" expanded="false" />
-            <element signature="e#5170#5575#0" expanded="false" />
-            <element signature="e#5605#5807#0" expanded="false" />
-            <element signature="e#5837#6123#0" expanded="false" />
-          </folding>
+          <caret line="191" column="71" selection-start-line="191" selection-start-column="71" selection-end-line="191" selection-end-column="71" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/SocketServer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.12656641">
-          <caret line="116" column="20" selection-start-line="116" selection-start-column="20" selection-end-line="116" selection-end-column="20" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#241#301#0" expanded="false" />
             <element signature="e#336#362#0" expanded="false" />
+            <element signature="e#391#424#0" expanded="false" />
             <element signature="e#460#511#0" expanded="false" />
             <element signature="e#554#699#0" expanded="false" />
+            <element signature="e#737#6218#0" expanded="false" />
           </folding>
         </state>
       </provider>

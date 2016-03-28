@@ -32,17 +32,19 @@
             this.Locker = new System.Windows.Forms.OpenFileDialog();
             this.Unlocker = new System.Windows.Forms.OpenFileDialog();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.ChosenFileView = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.browse2lock = new System.Windows.Forms.Button();
-            this.namesender = new System.Windows.Forms.Button();
-            this.UserData = new System.Windows.Forms.CheckedListBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.browse2unlock = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.UserData = new System.Windows.Forms.CheckedListBox();
+            this.namesender = new System.Windows.Forms.Button();
+            this.browse2lock = new System.Windows.Forms.Button();
+            this.ChosenFileView = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.rwbox = new System.Windows.Forms.CheckBox();
+            this.rbox = new System.Windows.Forms.CheckBox();
             this.tabPage1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -64,58 +66,6 @@
             this.tabPage1.Text = "File Options";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // ChosenFileView
-            // 
-            this.ChosenFileView.AutoSize = true;
-            this.ChosenFileView.Location = new System.Drawing.Point(321, 163);
-            this.ChosenFileView.Name = "ChosenFileView";
-            this.ChosenFileView.Size = new System.Drawing.Size(0, 13);
-            this.ChosenFileView.TabIndex = 2;
-            this.ChosenFileView.Visible = false;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.UserData);
-            this.groupBox1.Controls.Add(this.namesender);
-            this.groupBox1.Controls.Add(this.browse2lock);
-            this.groupBox1.Location = new System.Drawing.Point(14, 15);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(241, 177);
-            this.groupBox1.TabIndex = 6;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Lock";
-            // 
-            // browse2lock
-            // 
-            this.browse2lock.Location = new System.Drawing.Point(118, 126);
-            this.browse2lock.Name = "browse2lock";
-            this.browse2lock.Size = new System.Drawing.Size(84, 23);
-            this.browse2lock.TabIndex = 0;
-            this.browse2lock.Text = "Browse Files";
-            this.browse2lock.UseVisualStyleBackColor = true;
-            this.browse2lock.Click += new System.EventHandler(this.browse2lock_Click);
-            // 
-            // namesender
-            // 
-            this.namesender.Location = new System.Drawing.Point(6, 126);
-            this.namesender.Name = "namesender";
-            this.namesender.Size = new System.Drawing.Size(84, 23);
-            this.namesender.TabIndex = 3;
-            this.namesender.Text = "Send Names";
-            this.namesender.UseVisualStyleBackColor = true;
-            this.namesender.Click += new System.EventHandler(this.namesender_Click);
-            // 
-            // UserData
-            // 
-            this.UserData.CheckOnClick = true;
-            this.UserData.FormattingEnabled = true;
-            this.UserData.Location = new System.Drawing.Point(6, 19);
-            this.UserData.Name = "UserData";
-            this.UserData.Size = new System.Drawing.Size(196, 79);
-            this.UserData.Sorted = true;
-            this.UserData.TabIndex = 4;
-            this.UserData.ThreeDCheckBoxes = true;
-            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.browse2unlock);
@@ -136,6 +86,60 @@
             this.browse2unlock.UseVisualStyleBackColor = true;
             this.browse2unlock.Click += new System.EventHandler(this.browse2unlock_Click_1);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.rbox);
+            this.groupBox1.Controls.Add(this.rwbox);
+            this.groupBox1.Controls.Add(this.UserData);
+            this.groupBox1.Controls.Add(this.namesender);
+            this.groupBox1.Controls.Add(this.browse2lock);
+            this.groupBox1.Location = new System.Drawing.Point(14, 15);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(241, 177);
+            this.groupBox1.TabIndex = 6;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Lock";
+            // 
+            // UserData
+            // 
+            this.UserData.CheckOnClick = true;
+            this.UserData.FormattingEnabled = true;
+            this.UserData.Location = new System.Drawing.Point(6, 19);
+            this.UserData.Name = "UserData";
+            this.UserData.Size = new System.Drawing.Size(196, 79);
+            this.UserData.Sorted = true;
+            this.UserData.TabIndex = 4;
+            this.UserData.ThreeDCheckBoxes = true;
+            // 
+            // namesender
+            // 
+            this.namesender.Location = new System.Drawing.Point(6, 126);
+            this.namesender.Name = "namesender";
+            this.namesender.Size = new System.Drawing.Size(84, 23);
+            this.namesender.TabIndex = 3;
+            this.namesender.Text = "Send Names";
+            this.namesender.UseVisualStyleBackColor = true;
+            this.namesender.Click += new System.EventHandler(this.namesender_Click);
+            // 
+            // browse2lock
+            // 
+            this.browse2lock.Location = new System.Drawing.Point(118, 126);
+            this.browse2lock.Name = "browse2lock";
+            this.browse2lock.Size = new System.Drawing.Size(84, 23);
+            this.browse2lock.TabIndex = 0;
+            this.browse2lock.Text = "Browse Files";
+            this.browse2lock.UseVisualStyleBackColor = true;
+            this.browse2lock.Click += new System.EventHandler(this.browse2lock_Click);
+            // 
+            // ChosenFileView
+            // 
+            this.ChosenFileView.AutoSize = true;
+            this.ChosenFileView.Location = new System.Drawing.Point(321, 163);
+            this.ChosenFileView.Name = "ChosenFileView";
+            this.ChosenFileView.Size = new System.Drawing.Size(0, 13);
+            this.ChosenFileView.TabIndex = 2;
+            this.ChosenFileView.Visible = false;
+            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
@@ -144,6 +148,26 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(289, 314);
             this.tabControl1.TabIndex = 0;
+            // 
+            // rwbox
+            // 
+            this.rwbox.AutoSize = true;
+            this.rwbox.Location = new System.Drawing.Point(7, 103);
+            this.rwbox.Name = "rwbox";
+            this.rwbox.Size = new System.Drawing.Size(101, 17);
+            this.rwbox.TabIndex = 5;
+            this.rwbox.Text = "Read and Write";
+            this.rwbox.UseVisualStyleBackColor = true;
+            // 
+            // rbox
+            // 
+            this.rbox.AutoSize = true;
+            this.rbox.Location = new System.Drawing.Point(118, 105);
+            this.rbox.Name = "rbox";
+            this.rbox.Size = new System.Drawing.Size(76, 17);
+            this.rbox.TabIndex = 6;
+            this.rbox.Text = "Read Only";
+            this.rbox.UseVisualStyleBackColor = true;
             // 
             // SaveFile
             // 
@@ -156,8 +180,9 @@
             this.Text = "SaveFile";
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -176,6 +201,8 @@
         private System.Windows.Forms.Button browse2lock;
         private System.Windows.Forms.Label ChosenFileView;
         private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.CheckBox rbox;
+        private System.Windows.Forms.CheckBox rwbox;
 
     }
 }

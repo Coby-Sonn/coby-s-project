@@ -134,7 +134,11 @@ namespace Server
                 }
            
             string path = this.file_to_lock;
-            string rbac = "1";
+            string rbac;
+            if (rwbox.Checked)
+                rbac = "0";
+            else
+                rbac = "1";
             string optionality = "0";
             string str_to_send = "LockReady#" + this.my_uid + "#" + path + "#";
             string uid_str = "";
