@@ -8,14 +8,14 @@ using System.Text;
 
 namespace Server
 {
-    public partial class Form1 : Form
+    public partial class FirstPage : Form
     {
         public string my_uid;
         public string firstname;
         public string lastname;
         public SocketClient sock_obj;
 
-        public Form1()
+        public FirstPage()
         {
             InitializeComponent();
  

@@ -71,7 +71,7 @@ class Socket:
                 if path.endswith(".cb"):
                     file_obj = fm.File_Manager(uid)
                     ack = file_obj.Strip_File(path)
-                    if ack == "File unlocked":
+                    if ack == "File unlocked" or ack == "File unlocked, user can only read the file":
                         message = ack
                     elif ack == "The specified user is not allowed to open the file":
                         message = ack

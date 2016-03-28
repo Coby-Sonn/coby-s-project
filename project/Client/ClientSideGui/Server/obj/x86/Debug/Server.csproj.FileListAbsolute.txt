@@ -72,7 +72,6 @@ C:\Users\David\Desktop\coby-s-project\project\Server\ServerSideGui\Server\obj\x8
 C:\Users\David\Desktop\coby-s-project\project\Client\ClientSideGui\Server\obj\x86\Debug\Server.exe
 C:\Users\David\Desktop\coby-s-project\project\Client\ClientSideGui\Server\obj\x86\Debug\Server.pdb
 C:\Users\David\Desktop\coby-s-project\project\Client\ClientSideGui\Server\obj\x86\Debug\Server.csprojResolveAssemblyReference.cache
-C:\Users\David\Desktop\coby-s-project\project\Client\ClientSideGui\Server\obj\x86\Debug\Server.Form1.resources
 C:\Users\David\Desktop\coby-s-project\project\Client\ClientSideGui\Server\obj\x86\Debug\Server.Properties.Resources.resources
 C:\Users\David\Desktop\coby-s-project\project\Client\ClientSideGui\Server\obj\x86\Debug\Server.SaveFile.resources
 C:\Users\David\Desktop\coby-s-project\project\Client\ClientSideGui\Server\obj\x86\Debug\Server.csproj.GenerateResource.Cache
@@ -87,3 +86,4 @@ C:\Users\User\Desktop\coby-s-project\project\Client\ClientSideGui\Server\obj\x86
 C:\Users\User\Desktop\coby-s-project\project\Client\ClientSideGui\Server\obj\x86\Debug\Server.Properties.Resources.resources
 C:\Users\User\Desktop\coby-s-project\project\Client\ClientSideGui\Server\obj\x86\Debug\Server.SaveFile.resources
 C:\Users\User\Desktop\coby-s-project\project\Client\ClientSideGui\Server\obj\x86\Debug\Server.csproj.GenerateResource.Cache
+C:\Users\David\Desktop\coby-s-project\project\Client\ClientSideGui\Server\obj\x86\Debug\Server.FirstPage.resources

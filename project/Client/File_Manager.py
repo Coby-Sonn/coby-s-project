@@ -194,7 +194,7 @@ class File_Manager():
                 insertion_content = crypto_obj.decrypt_content(content)
                 new_file.write(insertion_content)
                 new_file.close()
-                if first_rbac_users[0] == "1":
+                if first_rbac_users[0] == 1:
                     os.chmod(new_path, stat.S_IREAD)
                     return "File unlocked, user can only read the file"
                 return "File unlocked"

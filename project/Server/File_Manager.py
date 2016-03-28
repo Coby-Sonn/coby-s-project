@@ -187,15 +187,15 @@ class File_Manager():
                 insertion_content = crypto_obj.decrypt_content(content)
                 new_file.write(insertion_content)
                 new_file.close()
-                if first_rbac_users[0] == "1":
+                if first_rbac_users[0] == 1:
                     os.chmod(new_path, stat.S_IREAD)
                     return "File unlocked, user can only read the file"
-                return "File unlocked"
+                return "File unlocked "
             else:
                 new_file.write(content)
                 new_file.close()
                 os.rename(new_path, path)
-                return "The specified user is not allowed to open the file"
+                return "The specified user is not allowed to open the file "
             
             
             
@@ -268,8 +268,9 @@ class File_Manager():
         insertion_content = crypto_obj.encrypt_content(content)
         new_file.write(insertion_content)
 
-        """saving new file and removing the old one which was replaced"""
+
         new_file.close()
+        os.chmod(path, stat.S_IWRITE)
         os.remove(path)
 
 

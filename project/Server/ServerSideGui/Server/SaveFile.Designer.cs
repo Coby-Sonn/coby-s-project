@@ -57,8 +57,8 @@
             this.Locker = new System.Windows.Forms.OpenFileDialog();
             this.Unlocker = new System.Windows.Forms.OpenFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.rwbox = new System.Windows.Forms.CheckBox();
-            this.rbox = new System.Windows.Forms.CheckBox();
+            this.rbox = new System.Windows.Forms.RadioButton();
+            this.rwbox = new System.Windows.Forms.RadioButton();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -141,7 +141,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(208, 51);
+            this.label1.Location = new System.Drawing.Point(127, 19);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(13, 13);
             this.label1.TabIndex = 5;
@@ -155,14 +155,14 @@
             this.UserData.FormattingEnabled = true;
             this.UserData.Location = new System.Drawing.Point(6, 19);
             this.UserData.Name = "UserData";
-            this.UserData.Size = new System.Drawing.Size(196, 79);
+            this.UserData.Size = new System.Drawing.Size(115, 124);
             this.UserData.Sorted = true;
             this.UserData.TabIndex = 4;
             this.UserData.ThreeDCheckBoxes = true;
             // 
             // namesender
             // 
-            this.namesender.Location = new System.Drawing.Point(6, 126);
+            this.namesender.Location = new System.Drawing.Point(127, 120);
             this.namesender.Name = "namesender";
             this.namesender.Size = new System.Drawing.Size(84, 23);
             this.namesender.TabIndex = 3;
@@ -172,7 +172,7 @@
             // 
             // browse2lock
             // 
-            this.browse2lock.Location = new System.Drawing.Point(118, 126);
+            this.browse2lock.Location = new System.Drawing.Point(127, 91);
             this.browse2lock.Name = "browse2lock";
             this.browse2lock.Size = new System.Drawing.Size(84, 23);
             this.browse2lock.TabIndex = 0;
@@ -333,28 +333,28 @@
             this.Unlocker.FileName = "openFileDialog1";
             this.Unlocker.Filter = "CB files|*.cb|All files|*.*";
             // 
-            // rwbox
-            // 
-            this.rwbox.AutoSize = true;
-            this.rwbox.Checked = true;
-            this.rwbox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.rwbox.Location = new System.Drawing.Point(9, 105);
-            this.rwbox.Name = "rwbox";
-            this.rwbox.Size = new System.Drawing.Size(101, 17);
-            this.rwbox.TabIndex = 6;
-            this.rwbox.Text = "Read and Write";
-            this.rwbox.UseVisualStyleBackColor = true;
-            // 
             // rbox
             // 
             this.rbox.AutoSize = true;
-            this.rbox.Location = new System.Drawing.Point(122, 105);
+            this.rbox.Location = new System.Drawing.Point(127, 58);
             this.rbox.Name = "rbox";
-            this.rbox.Size = new System.Drawing.Size(76, 17);
-            this.rbox.TabIndex = 7;
+            this.rbox.Size = new System.Drawing.Size(75, 17);
+            this.rbox.TabIndex = 11;
+            this.rbox.TabStop = true;
             this.rbox.Text = "Read Only";
-            this.rbox.ThreeState = true;
             this.rbox.UseVisualStyleBackColor = true;
+            // 
+            // rwbox
+            // 
+            this.rwbox.AutoSize = true;
+            this.rwbox.Location = new System.Drawing.Point(127, 35);
+            this.rwbox.Name = "rwbox";
+            this.rwbox.Size = new System.Drawing.Size(100, 17);
+            this.rwbox.TabIndex = 10;
+            this.rwbox.TabStop = true;
+            this.rwbox.Text = "Read and Write";
+            this.rwbox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rwbox.UseVisualStyleBackColor = true;
             // 
             // SaveFile
             // 
@@ -408,8 +408,8 @@
         private System.Windows.Forms.Button showuserschange;
         private System.Windows.Forms.TextBox Confirm;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.CheckBox rbox;
-        private System.Windows.Forms.CheckBox rwbox;
+        private System.Windows.Forms.RadioButton rbox;
+        private System.Windows.Forms.RadioButton rwbox;
 
     }
 }

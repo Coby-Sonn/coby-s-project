@@ -20,7 +20,7 @@ namespace Server
             InitializeComponent();
             
         }
-
+        
         static string sha256(string password)
         {
             System.Security.Cryptography.SHA256Managed crypt = new System.Security.Cryptography.SHA256Managed();

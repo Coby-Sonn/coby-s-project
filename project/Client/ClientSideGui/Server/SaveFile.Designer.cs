@@ -35,13 +35,14 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.browse2unlock = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.rbox = new System.Windows.Forms.RadioButton();
+            this.rwbox = new System.Windows.Forms.RadioButton();
             this.UserData = new System.Windows.Forms.CheckedListBox();
             this.namesender = new System.Windows.Forms.Button();
             this.browse2lock = new System.Windows.Forms.Button();
             this.ChosenFileView = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.rwbox = new System.Windows.Forms.CheckBox();
-            this.rbox = new System.Windows.Forms.CheckBox();
+            this.signout = new System.Windows.Forms.LinkLabel();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -55,6 +56,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.signout);
             this.tabPage1.Controls.Add(this.groupBox2);
             this.tabPage1.Controls.Add(this.groupBox1);
             this.tabPage1.Controls.Add(this.ChosenFileView);
@@ -100,6 +102,29 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Lock";
             // 
+            // rbox
+            // 
+            this.rbox.AutoSize = true;
+            this.rbox.Location = new System.Drawing.Point(127, 116);
+            this.rbox.Name = "rbox";
+            this.rbox.Size = new System.Drawing.Size(75, 17);
+            this.rbox.TabIndex = 9;
+            this.rbox.TabStop = true;
+            this.rbox.Text = "Read Only";
+            this.rbox.UseVisualStyleBackColor = true;
+            // 
+            // rwbox
+            // 
+            this.rwbox.AutoSize = true;
+            this.rwbox.Location = new System.Drawing.Point(14, 116);
+            this.rwbox.Name = "rwbox";
+            this.rwbox.Size = new System.Drawing.Size(100, 17);
+            this.rwbox.TabIndex = 8;
+            this.rwbox.TabStop = true;
+            this.rwbox.Text = "Read and Write";
+            this.rwbox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rwbox.UseVisualStyleBackColor = true;
+            // 
             // UserData
             // 
             this.UserData.CheckOnClick = true;
@@ -113,7 +138,7 @@
             // 
             // namesender
             // 
-            this.namesender.Location = new System.Drawing.Point(6, 126);
+            this.namesender.Location = new System.Drawing.Point(14, 139);
             this.namesender.Name = "namesender";
             this.namesender.Size = new System.Drawing.Size(84, 23);
             this.namesender.TabIndex = 3;
@@ -123,7 +148,7 @@
             // 
             // browse2lock
             // 
-            this.browse2lock.Location = new System.Drawing.Point(118, 126);
+            this.browse2lock.Location = new System.Drawing.Point(118, 139);
             this.browse2lock.Name = "browse2lock";
             this.browse2lock.Size = new System.Drawing.Size(84, 23);
             this.browse2lock.TabIndex = 0;
@@ -149,25 +174,16 @@
             this.tabControl1.Size = new System.Drawing.Size(289, 314);
             this.tabControl1.TabIndex = 0;
             // 
-            // rwbox
+            // signout
             // 
-            this.rwbox.AutoSize = true;
-            this.rwbox.Location = new System.Drawing.Point(7, 103);
-            this.rwbox.Name = "rwbox";
-            this.rwbox.Size = new System.Drawing.Size(101, 17);
-            this.rwbox.TabIndex = 5;
-            this.rwbox.Text = "Read and Write";
-            this.rwbox.UseVisualStyleBackColor = true;
-            // 
-            // rbox
-            // 
-            this.rbox.AutoSize = true;
-            this.rbox.Location = new System.Drawing.Point(118, 105);
-            this.rbox.Name = "rbox";
-            this.rbox.Size = new System.Drawing.Size(76, 17);
-            this.rbox.TabIndex = 6;
-            this.rbox.Text = "Read Only";
-            this.rbox.UseVisualStyleBackColor = true;
+            this.signout.AutoSize = true;
+            this.signout.Location = new System.Drawing.Point(233, 0);
+            this.signout.Name = "signout";
+            this.signout.Size = new System.Drawing.Size(48, 13);
+            this.signout.TabIndex = 9;
+            this.signout.TabStop = true;
+            this.signout.Text = "Sign Out";
+            this.signout.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.signout_LinkClicked);
             // 
             // SaveFile
             // 
@@ -201,8 +217,9 @@
         private System.Windows.Forms.Button browse2lock;
         private System.Windows.Forms.Label ChosenFileView;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.CheckBox rbox;
-        private System.Windows.Forms.CheckBox rwbox;
+        private System.Windows.Forms.RadioButton rbox;
+        private System.Windows.Forms.RadioButton rwbox;
+        private System.Windows.Forms.LinkLabel signout;
 
     }
 }

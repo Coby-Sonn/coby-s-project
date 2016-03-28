@@ -104,8 +104,8 @@ class Socket:
                         local_socket_obj.Send("GETKEYFOR#" + str(file_id))
                         original_key = local_socket_obj.Recv()
                         ack = file_obj.Strip_File(path, original_key)
-                        if ack == "File unlocked":
-                            message = ack
+                        if ack == "File unlocked" or ack == "File unlocked, user can only read the file":
+                            self.Send(ack)
                         elif ack == "The specified user is not allowed to open the file":
                             self.Send(ack)
                     else:

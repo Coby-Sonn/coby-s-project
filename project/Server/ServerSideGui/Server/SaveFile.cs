@@ -29,13 +29,10 @@ namespace Server
             this.my_uid = user_info.Split('#')[0];
             this.my_fname = user_info.Split('#')[1];
             this.my_lname = user_info.Split('#')[2];
-            
-            
             namesender.Enabled = false;
 
         }
-
-
+        
         static string sha256(string password)
         {
             System.Security.Cryptography.SHA256Managed crypt = new System.Security.Cryptography.SHA256Managed();
@@ -51,6 +48,7 @@ namespace Server
         {
             OpenFileDialog Locker = new OpenFileDialog();
             namesender.Enabled = true;
+            browse2lock.Enabled = false;
             
             Locker.ShowDialog();
             Locker.InitialDirectory = @"C:\";
@@ -105,22 +103,16 @@ namespace Server
         }
         private void continue_lock()
         {
-            //MessageBox.Show(this.to_send);
-
-            
-
             string message = this.to_send;
-            
             this.sock_obj.Send(message);
             string ack = this.sock_obj.Recv();
             MessageBox.Show(ack);
             this.sock_obj.CloseClient();
             this.sock_obj = null;
-            
-            
-
-            
-
+            namesender.Enabled = false;
+            browse2lock.Enabled = true;
+            UserData.Enabled = true;
+            UserData.ClearSelected();  
         }
         private void namesender_Click(object sender, EventArgs e)
         {
@@ -140,6 +132,7 @@ namespace Server
             else
                 rbac = "1";
             string optionality = "0";
+            MessageBox.Show("rbac-" + rbac);
             string str_to_send = "LockReady#" + this.my_uid + "#" + path + "#";
             string uid_str = "";
             foreach (string uid in this.uid_list)
@@ -239,7 +232,7 @@ namespace Server
             string message = this.sock_obj.Recv();
             
 
-            if (message == "File Unlocked")
+            if (message == "File Unlocked" || message == "File unlocked, user can only read the file")
             {
                 MessageBox.Show(message);
             }

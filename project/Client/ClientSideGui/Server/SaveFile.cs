@@ -28,14 +28,11 @@ namespace Server
             this.my_uid = user_info.Split('#')[0];
             this.my_fname = user_info.Split('#')[1];
             this.my_lname = user_info.Split('#')[2];
-            
             SocketClient sock_obj = new SocketClient();
             this.sock_obj = sock_obj;
             namesender.Enabled = false;
 
         }
-
-
         static string sha256(string password)
         {
             System.Security.Cryptography.SHA256Managed crypt = new System.Security.Cryptography.SHA256Managed();
@@ -47,12 +44,12 @@ namespace Server
             }
             return hash.ToString();
         }
-        
 
         private void browse2lock_Click(object sender, EventArgs e)
         {
             OpenFileDialog Locker = new OpenFileDialog();
-
+            namesender.Enabled = true;
+            browse2lock.Enabled = false;
             Locker.ShowDialog();
             Locker.InitialDirectory = @"C:\";
             Locker.Title = "Browse Files";
@@ -61,24 +58,17 @@ namespace Server
             this.file_to_lock = filename;
             filename = ChosenFileView.Text;
             ChosenFileView.Show();
-           
-            
             this.sock_obj.StartClient();
             this.sock_obj.Send("Lock");
-
             MessageBox.Show("sent lock");
             string user_info_string = this.sock_obj.Recv(); // user_info_string = uid@fname@lname@uname@ph#.....
             MessageBox.Show("received data");
             string[] users = user_info_string.Split('#');
-
-
             // Shutdown the painting of the ListBox as items are added.
             UserData.BeginUpdate();
             // Loop through and add items to the listbox
-            
             foreach (string user_string in users)
             {
-                
                 if (user_string != "")
                 {
                     if (!(this.my_uid == user_string.Split('@')[0]))
@@ -91,28 +81,19 @@ namespace Server
             // Allow the ListBox to repaint and display the new items.
             UserData.EndUpdate();
             UserData.Show();
-            namesender.Enabled = true;
-            
-
-            
-
-            
-
-            
+            namesender.Enabled = true;   
         }
         private void continue_lock()
         {
-            //MessageBox.Show(this.to_send);
             string message = this.to_send;           
             this.sock_obj.Send(message);
             string ack = this.sock_obj.Recv();
             MessageBox.Show(ack);
             this.sock_obj.CloseClient();
-            
-            
-
-            
-
+            namesender.Enabled = false;
+            browse2lock.Enabled = true;
+            UserData.Enabled = true;
+            UserData.ClearSelected();
         }
         private void namesender_Click(object sender, EventArgs e)
         {
@@ -121,9 +102,8 @@ namespace Server
             for (int i = 0; i < UserData.Items.Count; i++)
                 if (UserData.GetItemCheckState(i) == CheckState.Checked)
                 {
-                   this.uid_list.Add(UserData.Items[i].ToString().Split(' ')[2]);
+                    this.uid_list.Add(UserData.Items[i].ToString().Split(' ')[2]);
                 }
-           
             string path = this.file_to_lock;
             string rbac;
             if (rwbox.Checked)
@@ -136,38 +116,29 @@ namespace Server
             foreach (string uid in this.uid_list)
             {
                 uid_str += uid + "@";
+                str_to_send = str_to_send + uid_str + "#" + rbac + "#" + optionality;
+                this.to_send = str_to_send;
+                this.continue_lock();
+
+
+
+
             }
-            
-            str_to_send = str_to_send + uid_str + "#" + rbac + "#" + optionality;
-            this.to_send = str_to_send;
-            this.continue_lock();
-            
-
-
-
         }
-
+   
         private void browse2unlock_Click_1(object sender, EventArgs e)
         {
-
-            
             OpenFileDialog Unlocker = new OpenFileDialog();
-
             Unlocker.ShowDialog();
             Unlocker.InitialDirectory = @"C:\";
             Unlocker.Title = "Browse Files to Unlock";
             string file_to_unlock = Unlocker.FileName;
-
             string uid = this.my_uid; // need to get the current user uid
             string information_string = "Unlock#" + uid + "#" + file_to_unlock;
             this.sock_obj.StartClient();
             this.sock_obj.Send(information_string);
-            
-
             string message = this.sock_obj.Recv();
-            
-
-            if (message == "File Unlocked")
+            if (message == "File Unlocked" || message == "File unlocked, user can only read the file")
             {
                 MessageBox.Show(message);
             }
@@ -179,13 +150,17 @@ namespace Server
             {
                 MessageBox.Show(message);
             }
-
-
             this.sock_obj.CloseClient();
-
-
         }
 
+        private void signout_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            this.Hide();
+            FirstPage FirstPage = new FirstPage();
+            FirstPage.Show();
+        }
+
+       
         
 
     }
