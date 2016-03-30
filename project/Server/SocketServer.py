@@ -65,19 +65,17 @@ class Socket:
                     info = self.Recv()
                     info = info.split("#")
                     state = info[0]
+
             elif state == "Unlock":
                 uid = info[1]
                 path = info[2]
                 if path.endswith(".cb"):
                     file_obj = fm.File_Manager(uid)
                     ack = file_obj.Strip_File(path)
-                    if ack == "File unlocked" or ack == "File unlocked, user can only read the file":
-                        message = ack
-                    elif ack == "The specified user is not allowed to open the file":
-                        message = ack
+                    self.Send(ack)
                 else:
-                    message = "Path error, can only unlock .cb files"
-                self.Send(message)
+                    self.Send("Path error, can only unlock .cb files")
+
 
             elif state == "Lock":
                 all_user_info = self.GetUserInfoForLock()

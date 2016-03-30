@@ -168,7 +168,7 @@ def ReadFileInfoByID(file_id):
     if IDExists:
         conn = sqlite3.connect(SQLITE_FILE_PATH)
         c = conn.cursor()
-        execution_string = "SELECT * FROM FileInfo WHERE FID = %s" % file_id
+        execution_string = "SELECT * FROM FileInfo WHERE FID = %s" % str(file_id)
         c.execute(execution_string)
         read_info = c.fetchone()
         # data_string = read_info[0][1:-1] + "#" + read_info[1][1:-1]
@@ -179,8 +179,6 @@ def ReadFileInfoByID(file_id):
         return False
 def GetKeyByID(file_id):
     try:
-        # print ReadFileInfoByID(file_id).split("#")[1]
-        # return ReadFileInfoByID(file_id).split("#")[1]
         return ReadFileInfoByID(file_id)
     except:
         return "File Not Found"

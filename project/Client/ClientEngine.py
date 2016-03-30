@@ -103,7 +103,9 @@ class Socket:
                         file_id = file_obj.get_file_id(path)
                         local_socket_obj.Send("GETKEYFOR#" + str(file_id))
                         original_key = local_socket_obj.Recv()
+                        print "original key from clientengine " + str(original_key)
                         ack = file_obj.Strip_File(path, original_key)
+                        print "from clientengine: " + ack
                         if ack == "File unlocked" or ack == "File unlocked, user can only read the file":
                             self.Send(ack)
                         elif ack == "The specified user is not allowed to open the file":

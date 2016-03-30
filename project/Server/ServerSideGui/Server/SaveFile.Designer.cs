@@ -36,6 +36,8 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.browse2unlock = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.rbox = new System.Windows.Forms.RadioButton();
+            this.rwbox = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
             this.UserData = new System.Windows.Forms.CheckedListBox();
             this.namesender = new System.Windows.Forms.Button();
@@ -57,8 +59,7 @@
             this.Locker = new System.Windows.Forms.OpenFileDialog();
             this.Unlocker = new System.Windows.Forms.OpenFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.rbox = new System.Windows.Forms.RadioButton();
-            this.rwbox = new System.Windows.Forms.RadioButton();
+            this.ChosenFile = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -125,6 +126,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.ChosenFile);
             this.groupBox1.Controls.Add(this.rbox);
             this.groupBox1.Controls.Add(this.rwbox);
             this.groupBox1.Controls.Add(this.label1);
@@ -137,6 +139,29 @@
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Lock";
+            // 
+            // rbox
+            // 
+            this.rbox.AutoSize = true;
+            this.rbox.Location = new System.Drawing.Point(127, 58);
+            this.rbox.Name = "rbox";
+            this.rbox.Size = new System.Drawing.Size(75, 17);
+            this.rbox.TabIndex = 11;
+            this.rbox.TabStop = true;
+            this.rbox.Text = "Read Only";
+            this.rbox.UseVisualStyleBackColor = true;
+            // 
+            // rwbox
+            // 
+            this.rwbox.AutoSize = true;
+            this.rwbox.Location = new System.Drawing.Point(127, 35);
+            this.rwbox.Name = "rwbox";
+            this.rwbox.Size = new System.Drawing.Size(100, 17);
+            this.rwbox.TabIndex = 10;
+            this.rwbox.TabStop = true;
+            this.rwbox.Text = "Read and Write";
+            this.rwbox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rwbox.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
@@ -333,28 +358,14 @@
             this.Unlocker.FileName = "openFileDialog1";
             this.Unlocker.Filter = "CB files|*.cb|All files|*.*";
             // 
-            // rbox
+            // ChosenFile
             // 
-            this.rbox.AutoSize = true;
-            this.rbox.Location = new System.Drawing.Point(127, 58);
-            this.rbox.Name = "rbox";
-            this.rbox.Size = new System.Drawing.Size(75, 17);
-            this.rbox.TabIndex = 11;
-            this.rbox.TabStop = true;
-            this.rbox.Text = "Read Only";
-            this.rbox.UseVisualStyleBackColor = true;
-            // 
-            // rwbox
-            // 
-            this.rwbox.AutoSize = true;
-            this.rwbox.Location = new System.Drawing.Point(127, 35);
-            this.rwbox.Name = "rwbox";
-            this.rwbox.Size = new System.Drawing.Size(100, 17);
-            this.rwbox.TabIndex = 10;
-            this.rwbox.TabStop = true;
-            this.rwbox.Text = "Read and Write";
-            this.rwbox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.rwbox.UseVisualStyleBackColor = true;
+            this.ChosenFile.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.ChosenFile.Location = new System.Drawing.Point(6, 149);
+            this.ChosenFile.Name = "ChosenFile";
+            this.ChosenFile.ReadOnly = true;
+            this.ChosenFile.Size = new System.Drawing.Size(205, 13);
+            this.ChosenFile.TabIndex = 12;
             // 
             // SaveFile
             // 
@@ -410,6 +421,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.RadioButton rbox;
         private System.Windows.Forms.RadioButton rwbox;
+        private System.Windows.Forms.TextBox ChosenFile;
 
     }
 }

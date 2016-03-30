@@ -114,13 +114,15 @@ class  SessionWithClient(threading.Thread):
                             print "from server: Reset"
                             self.send("Reset")
                     elif request.split('#')[0] == "GETKEYFOR":
-                        self.send(dbm.GetKeyByID(request.split('#')[1]))
+                        print "GETKEYFOR " + str(request.split("#")[1])
+                        self.send(dbm.GetKeyByID(str(request.split('#')[1])))
                     elif request.split('#')[0] == "GETALLUSERINFO":
                         print dbm.GetInfoForLock()
                         self.send(dbm.GetInfoForLock())
                         request = self.recv()
                         if request.split(':')[0] == "LOCKEDFILEDATA":
                             file_id = request.split(':')[1].split('#')[0]
+                            file_id = file_id[1:]
                             file_key = request.split(':')[1].split('#')[1]
                             dbm.AddFileInfo(file_id, file_key)
                             self.send("Locked")

@@ -32,6 +32,7 @@
             this.Locker = new System.Windows.Forms.OpenFileDialog();
             this.Unlocker = new System.Windows.Forms.OpenFileDialog();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.signout = new System.Windows.Forms.LinkLabel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.browse2unlock = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -42,7 +43,7 @@
             this.browse2lock = new System.Windows.Forms.Button();
             this.ChosenFileView = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.signout = new System.Windows.Forms.LinkLabel();
+            this.ChosenFile = new System.Windows.Forms.TextBox();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -68,6 +69,17 @@
             this.tabPage1.Text = "File Options";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // signout
+            // 
+            this.signout.AutoSize = true;
+            this.signout.Location = new System.Drawing.Point(233, 0);
+            this.signout.Name = "signout";
+            this.signout.Size = new System.Drawing.Size(48, 13);
+            this.signout.TabIndex = 9;
+            this.signout.TabStop = true;
+            this.signout.Text = "Sign Out";
+            this.signout.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.signout_LinkClicked);
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.browse2unlock);
@@ -90,6 +102,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.ChosenFile);
             this.groupBox1.Controls.Add(this.rbox);
             this.groupBox1.Controls.Add(this.rwbox);
             this.groupBox1.Controls.Add(this.UserData);
@@ -105,7 +118,7 @@
             // rbox
             // 
             this.rbox.AutoSize = true;
-            this.rbox.Location = new System.Drawing.Point(127, 116);
+            this.rbox.Location = new System.Drawing.Point(136, 125);
             this.rbox.Name = "rbox";
             this.rbox.Size = new System.Drawing.Size(75, 17);
             this.rbox.TabIndex = 9;
@@ -116,7 +129,7 @@
             // rwbox
             // 
             this.rwbox.AutoSize = true;
-            this.rwbox.Location = new System.Drawing.Point(14, 116);
+            this.rwbox.Location = new System.Drawing.Point(6, 125);
             this.rwbox.Name = "rwbox";
             this.rwbox.Size = new System.Drawing.Size(100, 17);
             this.rwbox.TabIndex = 8;
@@ -138,7 +151,7 @@
             // 
             // namesender
             // 
-            this.namesender.Location = new System.Drawing.Point(14, 139);
+            this.namesender.Location = new System.Drawing.Point(6, 148);
             this.namesender.Name = "namesender";
             this.namesender.Size = new System.Drawing.Size(84, 23);
             this.namesender.TabIndex = 3;
@@ -148,7 +161,7 @@
             // 
             // browse2lock
             // 
-            this.browse2lock.Location = new System.Drawing.Point(118, 139);
+            this.browse2lock.Location = new System.Drawing.Point(127, 148);
             this.browse2lock.Name = "browse2lock";
             this.browse2lock.Size = new System.Drawing.Size(84, 23);
             this.browse2lock.TabIndex = 0;
@@ -174,16 +187,14 @@
             this.tabControl1.Size = new System.Drawing.Size(289, 314);
             this.tabControl1.TabIndex = 0;
             // 
-            // signout
+            // ChosenFile
             // 
-            this.signout.AutoSize = true;
-            this.signout.Location = new System.Drawing.Point(233, 0);
-            this.signout.Name = "signout";
-            this.signout.Size = new System.Drawing.Size(48, 13);
-            this.signout.TabIndex = 9;
-            this.signout.TabStop = true;
-            this.signout.Text = "Sign Out";
-            this.signout.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.signout_LinkClicked);
+            this.ChosenFile.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.ChosenFile.Location = new System.Drawing.Point(6, 104);
+            this.ChosenFile.Name = "ChosenFile";
+            this.ChosenFile.ReadOnly = true;
+            this.ChosenFile.Size = new System.Drawing.Size(196, 13);
+            this.ChosenFile.TabIndex = 10;
             // 
             // SaveFile
             // 
@@ -220,6 +231,7 @@
         private System.Windows.Forms.RadioButton rbox;
         private System.Windows.Forms.RadioButton rwbox;
         private System.Windows.Forms.LinkLabel signout;
+        private System.Windows.Forms.TextBox ChosenFile;
 
     }
 }

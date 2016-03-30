@@ -190,7 +190,7 @@ class File_Manager():
                 if first_rbac_users[0] == 1:
                     os.chmod(new_path, stat.S_IREAD)
                     return "File unlocked, user can only read the file"
-                return "File unlocked "
+                return "File unlocked"
             else:
                 new_file.write(content)
                 new_file.close()

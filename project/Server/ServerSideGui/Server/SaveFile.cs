@@ -56,9 +56,7 @@ namespace Server
             string filename = "";
             filename += Locker.FileName;
             this.file_to_lock = filename;
-            filename = ChosenFileView.Text;
-            ChosenFileView.Show();
-
+            ChosenFile.Text = filename;
             SocketClient sock_obj = new SocketClient();
             this.sock_obj = sock_obj;
             this.sock_obj.StartClient();
@@ -112,6 +110,7 @@ namespace Server
             namesender.Enabled = false;
             browse2lock.Enabled = true;
             UserData.Enabled = true;
+            ChosenFile.Text = "";
             UserData.ClearSelected();  
         }
         private void namesender_Click(object sender, EventArgs e)
@@ -132,7 +131,7 @@ namespace Server
             else
                 rbac = "1";
             string optionality = "0";
-            MessageBox.Show("rbac-" + rbac);
+            
             string str_to_send = "LockReady#" + this.my_uid + "#" + path + "#";
             string uid_str = "";
             foreach (string uid in this.uid_list)
@@ -230,20 +229,20 @@ namespace Server
             
 
             string message = this.sock_obj.Recv();
-            
 
-            if (message == "File Unlocked" || message == "File unlocked, user can only read the file")
-            {
-                MessageBox.Show(message);
-            }
-            else if (message == "The specified user is not allowed to open the file")
-            {
-                MessageBox.Show(message);
-            }
-            else if (message == "path error, can only unlock .cb files")
-            {
-                MessageBox.Show(message);
-            }
+            MessageBox.Show(message);
+            //if (message == "File Unlocked" || message == "File unlocked, you can only read the file")
+            //{
+            //    MessageBox.Show(message);
+            //}
+            //else if (message == "You are not allowed to open the file")
+            //{
+            //    MessageBox.Show(message);
+            //}
+            //else if (message == "path error, can only unlock .cb files")
+            //{
+            //    MessageBox.Show(message);
+            //}
 
 
             this.sock_obj.CloseClient();

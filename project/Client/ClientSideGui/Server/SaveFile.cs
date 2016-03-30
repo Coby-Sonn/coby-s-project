@@ -28,8 +28,7 @@ namespace Server
             this.my_uid = user_info.Split('#')[0];
             this.my_fname = user_info.Split('#')[1];
             this.my_lname = user_info.Split('#')[2];
-            SocketClient sock_obj = new SocketClient();
-            this.sock_obj = sock_obj;
+            
             namesender.Enabled = false;
 
         }
@@ -56,8 +55,9 @@ namespace Server
             string filename = "";
             filename += Locker.FileName;
             this.file_to_lock = filename;
-            filename = ChosenFileView.Text;
-            ChosenFileView.Show();
+            ChosenFile.Text = filename;           
+            SocketClient sock_obj = new SocketClient();
+            this.sock_obj = sock_obj;
             this.sock_obj.StartClient();
             this.sock_obj.Send("Lock");
             MessageBox.Show("sent lock");
@@ -90,10 +90,12 @@ namespace Server
             string ack = this.sock_obj.Recv();
             MessageBox.Show(ack);
             this.sock_obj.CloseClient();
+            this.sock_obj = null;
             namesender.Enabled = false;
             browse2lock.Enabled = true;
             UserData.Enabled = true;
             UserData.ClearSelected();
+            ChosenFile.Text = "";
         }
         private void namesender_Click(object sender, EventArgs e)
         {
@@ -135,6 +137,8 @@ namespace Server
             string file_to_unlock = Unlocker.FileName;
             string uid = this.my_uid; // need to get the current user uid
             string information_string = "Unlock#" + uid + "#" + file_to_unlock;
+            SocketClient sock_obj = new SocketClient();
+            this.sock_obj = sock_obj;
             this.sock_obj.StartClient();
             this.sock_obj.Send(information_string);
             string message = this.sock_obj.Recv();
@@ -151,6 +155,7 @@ namespace Server
                 MessageBox.Show(message);
             }
             this.sock_obj.CloseClient();
+            this.sock_obj = null;
         }
 
         private void signout_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

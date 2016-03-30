@@ -141,10 +141,6 @@ class File_Manager():
             file_header = FileHeaderStruct()
             current_file.readinto(file_header)
 
-
-
-
-
             dict_1 = {}
             for ext, index in FILE_TYPE_CODE_DICTIONARY.items():
                 dict_1[index] = ext
@@ -154,11 +150,11 @@ class File_Manager():
             file_path_list = path.split(".")
             new_path = file_path_list[0]+"." + dict_1[file_header.fileTypeCode]
 
-
-
             """now the system asks the server for the key to open the file which is in the database"""
 
             UID_List = []
+            file_id = current_file.read(4)
+            print str(file_id) + " from clients file manager"
             for i in xrange(file_header.lenUIDS):
                 uid_s = current_file.read(4)
                 UID_List.append(struct.unpack('<L', uid_s)[0])
@@ -277,6 +273,7 @@ class File_Manager():
 
         """saving new file and removing the old one which was replaced"""
         new_file.close()
+        os.chmod(path, stat.S_IWRITE)
         os.remove(path)
         file_data = (fileid, original_key)
         return file_data
