@@ -231,18 +231,7 @@ namespace Server
             string message = this.sock_obj.Recv();
 
             MessageBox.Show(message);
-            //if (message == "File Unlocked" || message == "File unlocked, you can only read the file")
-            //{
-            //    MessageBox.Show(message);
-            //}
-            //else if (message == "You are not allowed to open the file")
-            //{
-            //    MessageBox.Show(message);
-            //}
-            //else if (message == "path error, can only unlock .cb files")
-            //{
-            //    MessageBox.Show(message);
-            //}
+            
 
 
             this.sock_obj.CloseClient();

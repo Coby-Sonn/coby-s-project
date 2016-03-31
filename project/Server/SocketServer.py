@@ -152,18 +152,6 @@ class Socket:
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 socket_obj = Socket()
 socket_obj.StartServer()
 socket_obj.Communicate()

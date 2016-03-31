@@ -62,7 +62,7 @@ class  PythonServer(threading.Thread):
                         # Check if client connected in pass
                         if clientIP in self.open_clients:
                             # Callback Connection by IP clientIP
-                            pass#self.gui.guiSock.send("Callback Connection by " + clientIP + " clientIP#")   # to GUI
+                            pass
                         else:
                             # First Connection by IP  clientIP
                             sessionWithClient = SessionWithClient(self, clientSock, addr)
@@ -71,11 +71,11 @@ class  PythonServer(threading.Thread):
         except socket.error, er_msg:
             error_code = er_msg[0]
             if error_code == 10048:
-                pass #self.gui.guiSock.send("Port " + str(self.listenerPort) + " is busy#")   # to GUI
+                pass 
             else:
-                pass #self.gui.guiSock.send(str(er_msg) + "#")   # to GUI
+                pass 
         except Exception as er_msg:
-            pass #self.gui.guiSock.send(str(er_msg) + "#")   # to GUI
+            pass 
 
 #endregion
 
@@ -95,11 +95,9 @@ class  Gui(threading.Thread):
             # Wait message from GUI 
             data = self.guiSock.recv(1024)
             if len(data) > 0:
-                pass
-                 
+                pass                
 #endregion
 #endregion
-
 
 #region ----------   MAIN   -----------------------------
 
@@ -112,28 +110,21 @@ def main(args):
                 1) - listener port
     """
     try:
-      #  gui = Gui()            #  connection to GUI process
-      #  gui.start()            #  start thtread loop for session with GUI
+      
         try:  
-            #from SessionWithClient import *
-            # construct server for sessions with clients     
-            #                                    listenerPort  
-        #     gui.pythonServer = PythonServer(gui, int(args[0]))
-        #    gui.pythonServer.start()
+           
             PythonServer(None, int(args[0])).start()
         except ImportError:
-            #gui.guiSock.send("pyCrypto module is not installed. " + SERVER_ABORT + "#")   # to GUI
+           
             sys.exit("# pyCrypto module is not installed. " + SERVER_ABORT)
     except socket.errors, e:
-            print e
-    
+            print e    
 
 if __name__ == "__main__":
-    #if len(sys.argv) == 2:
+    
     print "start"
     main('6071') #sys.argv[1:])
 
-    #else:
-    #    print "Usage: %s <clientPort> " % sys.argv[0]
+    
 
 #endregion
