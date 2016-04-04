@@ -1,66 +1,75 @@
+import os, struct
 from Crypto.Cipher import AES
 
+def encrypt_file(key, iv, in_filename, out_filename=None, chunksize=64*1024):
+    """ Encrypts a file using AES (CBC mode) with the
+    given key.
 
-CHUNK_SIZE = 64*1024
+    key:
+        The encryption key - a string that must be
+        either 16, 24 or 32 bytes long. Longer keys
+        are more secure.
 
-class  MyCrypto:
+    in_filename:
+        Name of the input file
 
-        def __init__(self, original_key, iv):
-            self.original_key = original_key
-            self.iv = iv
+    out_filename:
+        If None, '<in_filename>.enc' will be used.
 
-        def generator(self):
-            print "origin key: " + str(self.original_key)
-            self.encryptor = AES.new(self.original_key, AES.MODE_CBC, self.iv)
-    
-        def encrypt_content(self,original_content):
-                """ Encrypts a file using AES (CBC mode) with the
-                    given key.
-                    key:
-                        The enchunksizechunksizecryption key - a string that must be
-                        either 16, 24 or 32 bytes long. Longer keys
-                        are more secure.
-                    in_filename:
-                        Name of the input file
-                    out_filename:
-                        If None, '<in_filename>.enc' will be used.
-                    chunksize:
-                        Sets the size of the chunk which the function
-                        uses to read and encrypt the file. Larger chunk
-                        sizes can be fasterlength for some files and machines.
-                        chunksize must be divisimport os, random, struct
-            from Crypto.Cipher import AESible by 16.
-                """
-           
-                
-                parts = [original_content[i:i+CHUNK_SIZE] for i in range(0, len(original_content), CHUNK_SIZE)]
-                encrypted_content = ""
-                for part in parts:
-                    if len(part) % 16 != 0:
-                        part += ' ' * (16 - len(part) % 16)
-                    encrypted_content += self.encryptor.encrypt(part)
-                    
-                return encrypted_content
+    chunksize:
+        Sets the size of the chunk which the function
+        uses to read and encrypt the file. Larger chunk
+        sizes can be faster for some files and machines.
+        chunksize must be divisible by 16.
+    """
+    if not out_filename:
+        out_filename = "temp.txt"
 
-        def decrypt_content(self,encrypted_content):
-                """ Decrypts a file using AES (CBC mode) with the
-                    given key. Parameters are similar to encrypt_file,
-                    with one difference: out_filename, if not supplied
-                    will be in_filename without its last extension
-                    (i.e. if in_filename is 'aaa.zip.enc' then
-                    out_filename will be 'aaa.zip')
-                """
+    encryptor = AES.new(key, AES.MODE_CBC, iv)
+    filesize = os.path.getsize(in_filename)
 
-                parts = [encrypted_content[i:i+CHUNK_SIZE] for i in range(0, len(encrypted_content), CHUNK_SIZE)]
-                decrypted_content = ""
-                for part in parts:
-                    if len(part) % 16 != 0:
-                        part += ' ' * (16 - len(part) % 16)
-                    decrypted_content += self.encryptor.decrypt(part)
+    with open(in_filename, 'rb') as infile:
+        with open(out_filename, 'wb') as outfile:
+            outfile.write(struct.pack('<Q', filesize))
 
-                return decrypted_content
+            while True:
+                chunk = infile.read(chunksize)
+                print "chunk: " + chunk
+                if len(chunk) == 0:
+                    break
+                elif len(chunk) % 16 != 0:
+                    chunk += ' ' * (16 - len(chunk) % 16)
 
-        def validate(self, user_uid, user_rbac):
+                outfile.write(encryptor.encrypt(chunk))
+
+def decrypt_file(key, iv, in_filename, out_filename=None, chunksize=24*1024):
+    """ Decrypts a file using AES (CBC mode) with the
+    given key. Parameters are similar to encrypt_file,
+    with one difference: out_filename, if not supplied
+    will be in_filename without its last extension
+    (i.e. if in_filename is 'aaa.zip.enc' then
+    out_filename will be 'aaa.zip')
+    """
+    if not out_filename:
+        out_filename = "temp.txt"
+
+    if not os.path.isdir(in_filename):
+        with open(in_filename, 'rb') as infile:
+            original_size = struct.unpack('<Q', infile.read(struct.calcsize('Q')))[0]
+
+            decryptor = AES.new(key, AES.MODE_CBC, iv)
+
+            with open(out_filename, 'wb') as outfile:
+                while True:
+                    chunk = infile.read(chunksize)
+                    if len(chunk) == 0:
+                        break
+                    outfile.write(decryptor.decrypt(chunk))
+                    print "chunk: " + decryptor.decrypt(chunk)
+
+                outfile.truncate(original_size)
+
+def validate(user_uid, user_rbac):
                 """recieves the list of users and the local users uid
                     and send the path to get decrypted"""
                 """user_rbac = [(1, [12345678,23456789]), (0, [23544445, 87342914])]"""
@@ -83,4 +92,3 @@ class  MyCrypto:
                             return True
                     except:
                         pass
-

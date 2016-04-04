@@ -122,48 +122,33 @@ class File_Manager():
         return received_key
 
     def Strip_File(self, path):
-
         try:
-            """opening files"""
-            current_file = open(path, "rb")
-            
-            """receives the path of an encrypted file in order to strip the systems headers from it"""
+            encrypted_file = open(path, "rb")
             file_header = FileHeaderStruct()
-            current_file.readinto(file_header)
-
-
-            
+            encrypted_file.readinto(file_header)
             dict_1 = {}
             for ext, index in FILE_TYPE_CODE_DICTIONARY.items():
                 dict_1[index] = ext
+                file_path_list = path.split(".")
 
-            """removing old extension and saving it
-                and adding the new extension"""
-            file_path_list = path.split(".")
-            new_path = file_path_list[0]+"." + dict_1[file_header.fileTypeCode]
-
-
-
-            """now the system asks the server for the key to open the file which is written in the file header"""
-
-            print "reading the fileid"
-            file_id = struct.unpack('<L', current_file.read(4))
+            new_path = file_path_list[0] + "." + dict_1[file_header.fileTypeCode]
+            file_id = struct.unpack('<L', encrypted_file.read(4))
             print file_id[0]
             original_key = self.get_original_key(str(file_id[0]))
 
             UID_List = []
             for i in xrange(file_header.lenUIDS):
-                uid_s = current_file.read(4)
+                uid_s = encrypted_file.read(4)
                 UID_List.append(struct.unpack('<L', uid_s)[0])
 
             first_rbac_users = (file_header.rBac, UID_List)
 
             if file_header.optionalHeaderFlag:
                 file_optional_header = OptionalHeaderStructAdditions()
-                current_file.readinto(file_optional_header)
+                encrypted_file.readinto(file_optional_header)
                 second_UID_List = []
                 for i in xrange(file_optional_header.secondLenUIDS):
-                    uid_s = current_file.read(4)
+                    uid_s = encrypted_file.read(4)
                     second_UID_List.append(struct.unpack('<L', uid_s)[0])
                 second_rbac_users = (file_optional_header.secondRbac, second_UID_List)
 
@@ -173,72 +158,67 @@ class File_Manager():
             except:
                 users_rbac = [first_rbac_users]
 
-            content = current_file.read()
-            current_file.close()
-            new_file = open(new_path, "wb")
-            os.remove(path)
+            encrypted_file_content = encrypted_file.read()
+            encrypted_file.close()
+            temp_obj = open("temp.txt", "wb")
+            temp_obj.write(encrypted_file_content)
+            temp_obj.close()
             aux_obj = AUXGenerator()
             aux = aux_obj.hash_generate(users_rbac)
-            crypto_obj = MyCrypto.MyCrypto(original_key, aux)
-            crypto_obj.generator()
-            new_file = open(new_path, "w")
-            validated = crypto_obj.validate(self.user_uid, users_rbac)
+            validated = MyCrypto.validate(self.user_uid, users_rbac)
             if validated:
-                insertion_content = crypto_obj.decrypt_content(content)
-                new_file.write(insertion_content)
+                MyCrypto.decrypt_file(original_key, aux, "temp.txt")
+                temp_obj = open("temp.txt", "rb")
+                decrypted_content = temp_obj.read()
+                temp_obj.close()
+                new_file = open(new_path, "w")
+                new_file.write(decrypted_content)
                 new_file.close()
+                #os.chmod(path, stat.S_IREAD)
+                #os.remove(path)
+                import shutil
+                shutil.rmtree(path)
+                os.remove("temp.txt")
                 if first_rbac_users[0] == 1:
                     os.chmod(new_path, stat.S_IREAD)
                     return "File unlocked, user can only read the file"
                 return "File unlocked"
             else:
-                new_file.write(content)
-                new_file.close()
-                os.rename(new_path, path)
                 return "The specified user is not allowed to open the file "
-            
-            
-            
-            
-            
+
         except IOError: "Could not strip the file"
 
+
+
+
+
+
+            
+            
+            
+
+
     def Create_New_Format(self, path, UID_List, rbac, second_UID_List = None, second_rbac = None):
-        """receives the file path, a list of uids allowed to do what the rbac specifies, and a rbac
-            attaches the header and uses Encryption's function to encrypt the data"""
         users_rbac = []
         if self.user_uid not in UID_List:
             UID_List.append(str(self.user_uid))
-        """removing old extension and saving it
-            and adding the new extension"""
         file_path_list = path.split(".")
         old_extension = file_path_list[1]
-        new_path = file_path_list[0]+".cb"
-
+        new_path = file_path_list[0] + ".cb"
         if second_rbac is None and second_UID_List is None:
             optional_header_flag = 0
         else:
             optional_header_flag = 1
-
 
         file_header = FileHeaderStruct(MAGIC_NUMBER,
                                        int(FILE_TYPE_CODE_DICTIONARY[old_extension]),
                                        int(rbac),
                                        int(optional_header_flag),
                                        len(UID_List))
-
-        """opening files"""
         new_file = open(new_path, "wb")
-        current_file = open(path, "rb")
-
-        """writing header to the file"""
-
         new_file.write(file_header)
         fileid = int(self.get_key_or_id())
-        print fileid
         new_file.write(struct.pack('i', fileid))
-
-        """adding hexed uids:"""
         for uid in UID_List:
             new_file.write(struct.pack('i', int(uid)))
 
@@ -250,29 +230,19 @@ class File_Manager():
                 users_rbac = [(rbac, UID_List), (second_rbac, second_UID_List)]
         else:
             users_rbac = [(rbac, UID_List)]
-
-        """reading the original content
-            and putting it in the file"""
-
-        content = current_file.read()
-
-        current_file.close()
-        b = AUXGenerator()
-        aux = b.hash_generate(users_rbac)
-
-        original_key = self.get_key_or_id() + self.get_key_or_id()  # os.urandom(16)  # ''.join(random.choice
-        # (string.ascii_uppercase + string.digits) for _ in range(8))
-        dbm.AddFileInfo(str(fileid), original_key)
-        crypto_obj = MyCrypto.MyCrypto(original_key, aux)
-        crypto_obj.generator()
-        insertion_content = crypto_obj.encrypt_content(content)
-        new_file.write(insertion_content)
-
-
+        aux_obj = AUXGenerator()
+        aux = aux_obj.hash_generate(users_rbac)
+        original_key = self.get_key_or_id() + self.get_key_or_id()
+        MyCrypto.encrypt_file(original_key, aux, path)
+        temp_obj = open("temp.txt", "rb")
+        encrypted_content = temp_obj.read()
+        temp_obj.close()
+        new_file.write(encrypted_content)
         new_file.close()
         os.chmod(path, stat.S_IWRITE)
         os.remove(path)
-
+        os.remove("temp.txt")
+        dbm.AddFileInfo(str(fileid), original_key)
 
 
 
