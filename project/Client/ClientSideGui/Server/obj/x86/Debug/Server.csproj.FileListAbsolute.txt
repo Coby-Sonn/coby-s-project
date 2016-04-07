@@ -96,3 +96,12 @@ C:\Users\David\Desktop\project\Client\ClientSideGui\Server\obj\x86\Debug\Server.
 C:\Users\David\Desktop\project\Client\ClientSideGui\Server\obj\x86\Debug\Server.Properties.Resources.resources
 C:\Users\David\Desktop\project\Client\ClientSideGui\Server\obj\x86\Debug\Server.SaveFile.resources
 C:\Users\David\Desktop\project\Client\ClientSideGui\Server\obj\x86\Debug\Server.csproj.GenerateResource.Cache
+C:\Users\User\Desktop\project\Client\ClientSideGui\Server\obj\x86\Debug\Server.exe
+C:\Users\User\Desktop\project\Client\ClientSideGui\Server\obj\x86\Debug\Server.pdb
+C:\Users\User\Desktop\project\Client\ClientSideGui\Server\bin\Debug\Server.exe
+C:\Users\User\Desktop\project\Client\ClientSideGui\Server\bin\Debug\Server.pdb
+C:\Users\User\Desktop\project\Client\ClientSideGui\Server\obj\x86\Debug\Server.csprojResolveAssemblyReference.cache
+C:\Users\User\Desktop\project\Client\ClientSideGui\Server\obj\x86\Debug\Server.FirstPage.resources
+C:\Users\User\Desktop\project\Client\ClientSideGui\Server\obj\x86\Debug\Server.Properties.Resources.resources
+C:\Users\User\Desktop\project\Client\ClientSideGui\Server\obj\x86\Debug\Server.SaveFile.resources
+C:\Users\User\Desktop\project\Client\ClientSideGui\Server\obj\x86\Debug\Server.csproj.GenerateResource.Cache

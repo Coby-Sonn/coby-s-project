@@ -10,7 +10,7 @@ HOST = "0.0.0.0"
 PORT = 12348
 
 # local_python_communication class
-IP = "192.168.4.127"
+IP = "10.92.5.51"
 COM_PORT = 8484
 
 class local_python_communication():

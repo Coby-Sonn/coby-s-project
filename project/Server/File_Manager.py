@@ -171,13 +171,10 @@ class File_Manager():
                 temp_obj = open("temp.txt", "rb")
                 decrypted_content = temp_obj.read()
                 temp_obj.close()
-                new_file = open(new_path, "w")
+                new_file = open(new_path, "wb")
                 new_file.write(decrypted_content)
                 new_file.close()
-                #os.chmod(path, stat.S_IREAD)
-                #os.remove(path)
-                import shutil
-                shutil.rmtree(path)
+                os.remove(path)
                 os.remove("temp.txt")
                 if first_rbac_users[0] == 1:
                     os.chmod(new_path, stat.S_IREAD)
@@ -187,16 +184,6 @@ class File_Manager():
                 return "The specified user is not allowed to open the file "
 
         except IOError: "Could not strip the file"
-
-
-
-
-
-
-            
-            
-            
-
 
     def Create_New_Format(self, path, UID_List, rbac, second_UID_List = None, second_rbac = None):
         users_rbac = []
