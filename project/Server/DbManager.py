@@ -97,7 +97,7 @@ def ReadInfoByUID(uid):
 def UIDExists(uid):
     conn = sqlite3.connect(SQLITE_FILE_PATH)
     c = conn.cursor()
-    c.execute("SELECT * FROM UserInfo WHERE UID = %s" %uid)
+    c.execute("SELECT * FROM UserInfo WHERE UID = %s" % uid)
     read_info = c.fetchone()
     if read_info:
         conn.commit()

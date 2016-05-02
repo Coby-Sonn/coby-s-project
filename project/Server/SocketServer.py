@@ -3,11 +3,11 @@ import DbManager as dbm
 import File_Manager as fm
 
 HOST = "0.0.0.0"
-PORT = 12344
+PORT = 12348
 class Socket:
     def __init__(self):
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
+        
     def StartServer(self):
         self.socket.bind((HOST, PORT))
         self.socket.listen(1)
@@ -25,7 +25,13 @@ class Socket:
     def Communicate(self):
 
         while True:
-            self.gui_socket, self.addr = self.socket.accept()
+            connected = False
+            while not connected:
+                try: 
+                    self.gui_socket, self.addr = self.socket.accept()
+                    connected = True
+                except: pass
+                
             print "Connected to gui"
             info = self.Recv()
             info = info.split("#")

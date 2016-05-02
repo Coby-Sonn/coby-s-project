@@ -35,7 +35,15 @@ class Client(object):
     # ==================================================================================================
     def start(self):
         print "started start"
-        self.socket.connect((SERVER_ADDRESS, SERVER_PORT))
+        connected = False
+        while not connected:
+            try:
+                self.socket.connect((SERVER_ADDRESS, SERVER_PORT))
+                connected = True
+            except:
+                pass 
+        
+            
         print "connected"
         self.socket.send('Hello\r\n')
         data = self.socket.recv(LEN_UNIT_BUF).split(END_LINE)[0]

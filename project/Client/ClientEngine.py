@@ -10,7 +10,7 @@ HOST = "0.0.0.0"
 PORT = 12348
 
 # local_python_communication class
-IP = "10.92.5.51"
+IP = "10.92.5.51"  # a local ip ?
 COM_PORT = 8484
 
 class local_python_communication():
@@ -20,8 +20,17 @@ class local_python_communication():
         self.local_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     def StartClient(self):
+        connected = False
+        i = 0
+        while not connected and i != 5:
+            try:
+                self.local_socket.connect((IP, COM_PORT))
+                connected = True
+            except: i += 1
+        if i >= 5:
+            print "Connection error, make sure the server is running"
+            """ look for the ip again, gil sent a func that gets an ip (the servers ip) by the mac address """
 
-        self.local_socket.connect((IP, COM_PORT))
 
     def Send(self, data):
 
