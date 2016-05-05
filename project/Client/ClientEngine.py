@@ -5,13 +5,14 @@ import socket
 
 import File_Manager as fm
 
-# Socket class
+# Socket class for gui communication
 HOST = "0.0.0.0"
 PORT = 12348
 
-# local_python_communication class
-IP = "10.92.5.51"  # a local ip ?
+# local_python_communication class (with Client.py)
+IP = "10.92.5.57"  # a local ip
 COM_PORT = 8484
+
 
 class local_python_communication():
 
@@ -44,7 +45,6 @@ class local_python_communication():
 
         self.local_socket.close()
         self.socket.close()
-
 
 
 class Socket:
@@ -121,7 +121,6 @@ class Socket:
                             self.Send(ack)
                     else:
                         self.Send("Path error, system can only unlock .cb files")
-
 
                 elif state == "Lock":
                     local_socket_obj.Send("GETALLUSERINFO#")

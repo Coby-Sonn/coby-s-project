@@ -4,10 +4,12 @@ from AES import *
 import subprocess
 
 # region ----------   CONSTANTS   ---------------------------------------------------------------
-SERVER_ADDRESS = '10.92.5.51'             # The default target server ip
+"""remote server data"""
+SERVER_ADDRESS = '10.92.5.57'             # The default target server ip
 SERVER_PORT = 6071                      # The default target server port
 PROT_START = "Hello"
 
+"""local communication stream (withClientEngine.py)"""
 COMMUNICATION_HOST = "0.0.0.0"
 COMMUNICATION_PORT = 8484
 
@@ -34,16 +36,8 @@ class Client(object):
 
     # ==================================================================================================
     def start(self):
-        print "started start"
-        connected = False
-        while not connected:
-            try:
-                self.socket.connect((SERVER_ADDRESS, SERVER_PORT))
-                connected = True
-            except:
-                pass 
-        
-            
+        # print "started start"
+        self.socket.connect((SERVER_ADDRESS, SERVER_PORT))
         print "connected"
         self.socket.send('Hello\r\n')
         data = self.socket.recv(LEN_UNIT_BUF).split(END_LINE)[0]

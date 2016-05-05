@@ -1,9 +1,9 @@
 #region ----------   ABOUT   -----------------------------
 """
 ##################################################################
-# Created By:                                #
+# Created By:                                                    #
 # Date: 20/09/2014                                               #
-# Name: Server  between GUI and clients                          #
+# Name: Main Server for Clients                                  #
 # Version: 1.0                                                   #
 # Windows Tested Versions: Win 7 32-bit                          #
 # Python Tested Versions: 2.6 32-bit                             #
