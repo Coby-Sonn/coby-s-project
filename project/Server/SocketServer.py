@@ -1,9 +1,10 @@
+"""server's part of communication between the gui and the engine, through HOST and PORT"""
 import socket
 import DbManager as dbm
 import File_Manager as fm
 
-HOST = "0.0.0.0"
-PORT = 12348
+HOST = "0.0.0.0"  # for gui communication
+PORT = 12348      # for gui communication
 class Socket:
     def __init__(self):
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

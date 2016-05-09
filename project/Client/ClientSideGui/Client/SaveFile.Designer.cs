@@ -1,4 +1,4 @@
-﻿namespace Server
+﻿namespace Client
 {
     partial class SaveFile
     {
@@ -36,6 +36,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.browse2unlock = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.ChosenFile = new System.Windows.Forms.TextBox();
             this.rbox = new System.Windows.Forms.RadioButton();
             this.rwbox = new System.Windows.Forms.RadioButton();
             this.UserData = new System.Windows.Forms.CheckedListBox();
@@ -43,7 +44,6 @@
             this.browse2lock = new System.Windows.Forms.Button();
             this.ChosenFileView = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.ChosenFile = new System.Windows.Forms.TextBox();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -114,6 +114,15 @@
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Lock";
+            // 
+            // ChosenFile
+            // 
+            this.ChosenFile.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.ChosenFile.Location = new System.Drawing.Point(6, 104);
+            this.ChosenFile.Name = "ChosenFile";
+            this.ChosenFile.ReadOnly = true;
+            this.ChosenFile.Size = new System.Drawing.Size(196, 13);
+            this.ChosenFile.TabIndex = 10;
             // 
             // rbox
             // 
@@ -187,23 +196,17 @@
             this.tabControl1.Size = new System.Drawing.Size(289, 314);
             this.tabControl1.TabIndex = 0;
             // 
-            // ChosenFile
-            // 
-            this.ChosenFile.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.ChosenFile.Location = new System.Drawing.Point(6, 104);
-            this.ChosenFile.Name = "ChosenFile";
-            this.ChosenFile.ReadOnly = true;
-            this.ChosenFile.Size = new System.Drawing.Size(196, 13);
-            this.ChosenFile.TabIndex = 10;
-            // 
             // SaveFile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(285, 312);
             this.Controls.Add(this.tabControl1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "SaveFile";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SaveFile";
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();

@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using System.IO.Pipes;
 using System.IO;
 
-namespace Server
+namespace Client
 {
     public partial class SaveFile : Form
     {
@@ -52,17 +52,12 @@ namespace Server
             Locker.ShowDialog();
             Locker.InitialDirectory = @"C:\";
             Locker.Title = "Browse Files";
-            string filename = "";
-            filename += Locker.FileName;
-            this.file_to_lock = filename;
-            ChosenFile.Text = filename;           
-            SocketClient sock_obj = new SocketClient();
-            this.sock_obj = sock_obj;
+            this.file_to_lock = Locker.FileName;
+            ChosenFile.Text = Locker.FileName;           
+            this.sock_obj = new SocketClient(); 
             this.sock_obj.StartClient();
             this.sock_obj.Send("Lock");
-            MessageBox.Show("sent lock");
             string user_info_string = this.sock_obj.Recv(); // user_info_string = uid@fname@lname@uname@ph#.....
-            MessageBox.Show("received data");
             string[] users = user_info_string.Split('#');
             // Shutdown the painting of the ListBox as items are added.
             UserData.BeginUpdate();
@@ -83,20 +78,32 @@ namespace Server
             UserData.Show();
             namesender.Enabled = true;   
         }
+
         private void continue_lock()
         {
-            string message = this.to_send;           
-            this.sock_obj.Send(message);
-            string ack = this.sock_obj.Recv();
-            MessageBox.Show(ack);
-            this.sock_obj.CloseClient();
-            this.sock_obj = null;
-            namesender.Enabled = false;
-            browse2lock.Enabled = true;
-            UserData.Enabled = true;
-            UserData.ClearSelected();
-            ChosenFile.Text = "";
+            string ack = "";
+            string message = this.to_send;
+            if (this.sock_obj != null)
+            {
+                this.sock_obj.Send(message);
+                try
+                {
+                    ack = this.sock_obj.Recv();
+                }
+                catch
+                {
+                    ack = "there was an error, please try again";
+                }
+                MessageBox.Show(ack);
+                this.sock_obj.CloseClient();
+                this.sock_obj = null;
+                UserData.Items.Clear();
+                browse2lock.Enabled = true;
+            }
+            else
+                MessageBox.Show("there was an error, please try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
+
         private void namesender_Click(object sender, EventArgs e)
         {
             //str_to_send = LockReady#uid#path#uid@uid@...#rbac#optionality
@@ -107,11 +114,7 @@ namespace Server
                     this.uid_list.Add(UserData.Items[i].ToString().Split(' ')[2]);
                 }
             string path = this.file_to_lock;
-            string rbac;
-            if (rwbox.Checked)
-                rbac = "0";
-            else
-                rbac = "1";
+            string rbac = rwbox.Checked ? "0" : "1";
             string optionality = "0";
             string str_to_send = "LockReady#" + this.my_uid + "#" + path + "#";
             string uid_str = "";
@@ -121,10 +124,6 @@ namespace Server
                 str_to_send = str_to_send + uid_str + "#" + rbac + "#" + optionality;
                 this.to_send = str_to_send;
                 this.continue_lock();
-
-
-
-
             }
         }
    

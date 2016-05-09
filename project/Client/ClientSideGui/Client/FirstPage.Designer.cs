@@ -1,4 +1,4 @@
-﻿namespace Server
+﻿namespace Client
 {
     partial class FirstPage
     {
@@ -115,9 +115,8 @@
             this.groupBox2.TabIndex = 21;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Sign in";
-            
             // 
-            // Form1
+            // FirstPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -125,9 +124,12 @@
             this.ClientSize = new System.Drawing.Size(262, 235);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.resetbuttonregister);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "Form1";
+            this.MaximizeBox = false;
+            this.Name = "FirstPage";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Start";
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();

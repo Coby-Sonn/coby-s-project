@@ -1,6 +1,12 @@
 """ this script deals with the communication between the python engine and the communication with the server through
 session with client
-http://stackoverflow.com/questions/15396628/sending-strings-between-to-python-scripts-using-subprocess-pipes"""
+
+This is the client's part
+communicates with gui through HOST & PORT
+communicates with the Client communicator (Client.py) through IP & COM_PORT
+
+"""
+
 import socket
 
 import File_Manager as fm
@@ -10,7 +16,7 @@ HOST = "0.0.0.0"
 PORT = 12348
 
 # local_python_communication class (with Client.py)
-IP = "10.92.5.57"  # a local ip
+IP = "10.92.5.20"  # a local ip
 COM_PORT = 8484
 
 
@@ -146,6 +152,7 @@ class Socket:
                             file_data = file_obj.Create_New_Format(path, uid_list, rbac, second_uid_list, second_rbac)
                         else:
                             file_data = file_obj.Create_New_Format(path, uid_list, rbac)
+
                         local_socket_obj.Send("LOCKEDFILEDATA: " + str(file_data[0]) + "#" + str(file_data[1]))
                         ack = local_socket_obj.Recv()
                         if ack == "Locked":

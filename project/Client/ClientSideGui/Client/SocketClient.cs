@@ -7,7 +7,7 @@ using System.Net.Sockets;
 using System.Net;
 using System.Windows.Forms;
 
-namespace Server
+namespace Client
 {
     public class SocketClient
     {
@@ -33,23 +33,26 @@ namespace Server
             ASCIIEncoding asen = new ASCIIEncoding();
             this.asen = asen;
         }
+    
         private string GetLocalIPAddress()
-    {
-        var host = Dns.GetHostEntry(Dns.GetHostName());
-        foreach (var ip in host.AddressList)
         {
-            if (ip.AddressFamily == AddressFamily.InterNetwork)
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList)
             {
-                return ip.ToString();
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    return ip.ToString();
+                }
             }
+            throw new Exception("Local IP Address Not Found!");
         }
-        throw new Exception("Local IP Address Not Found!");
-    }
+
         public void Send(string data)
         {
             byte[] ba = this.asen.GetBytes(data);
             this.stm.Write(ba, 0, ba.Length);
         }
+
         public string Recv()
         {
             byte[] bb = new byte[1024];
@@ -60,6 +63,7 @@ namespace Server
             return info;
 
         }
+
         public void CloseClient()
         {
             this.client.Close();

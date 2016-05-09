@@ -6,7 +6,7 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Text;
 
-namespace Server
+namespace Client
 {
     public partial class FirstPage : Form
     {

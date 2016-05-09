@@ -119,6 +119,7 @@ class  SessionWithClient(threading.Thread):
                     elif request.split('#')[0] == "GETALLUSERINFO":
                         print dbm.GetInfoForLock()
                         self.send(dbm.GetInfoForLock())
+                        print '111111111111111111111111111111111111111111'
                         request = self.recv()
                         if request.split(':')[0] == "LOCKEDFILEDATA":
                             file_id = request.split(':')[1].split('#')[0]

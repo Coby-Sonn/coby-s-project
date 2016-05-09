@@ -1,3 +1,6 @@
+""" Deals with the files themselves, creates them (changes their format), sends for encryption and decryption,
+and creates the auxiliary"""
+
 import os
 import struct
 import MyCrypto
@@ -11,7 +14,7 @@ import stat
 MAGIC_NUMBER = 0xCB
 EXTENSION = '.cb'
 FILE_TYPE_CODE_DICTIONARY = {"txt": 1, "docx": 2, "ppt": 3, "mp3": 4, "jpeg": 5, "jpg": 6, "png": 7, "bmp": 8, "pdf": 9,
-                             "mp4": 10, "xml": 11, "doc": 12, "html": 13}
+                             "mp4": 10, "xml": 11, "doc": 12, "html": 13, "log": 14}
 
 
 class FileHeaderStruct(Structure):

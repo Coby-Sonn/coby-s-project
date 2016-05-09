@@ -1,7 +1,8 @@
 import os, struct
 from Crypto.Cipher import AES
 
-def encrypt_file(key, iv, in_filename, out_filename=None, chunksize=64*1024):
+#---------------------------------------------------------------------------------------------------------------------
+def encrypt_file(key, iv, in_filename, out_filename=None, chunksize=16*1024):
     """ Encrypts a file using AES (CBC mode) with the
     given key.
 
@@ -30,11 +31,8 @@ def encrypt_file(key, iv, in_filename, out_filename=None, chunksize=64*1024):
 
     with open(in_filename, 'rb') as infile:
         with open(out_filename, 'wb') as outfile:
-            outfile.write(struct.pack('<Q', filesize))
-
             while True:
                 chunk = infile.read(chunksize)
-                print "chunk: " + chunk
                 if len(chunk) == 0:
                     break
                 elif len(chunk) % 16 != 0:
@@ -42,7 +40,9 @@ def encrypt_file(key, iv, in_filename, out_filename=None, chunksize=64*1024):
 
                 outfile.write(encryptor.encrypt(chunk))
 
-def decrypt_file(key, iv, in_filename, out_filename=None, chunksize=24*1024):
+#---------------------------------------------------------------------------------------------------------------------
+
+def decrypt_file(key, iv, in_filename, out_filename=None, chunksize=16*1024):
     """ Decrypts a file using AES (CBC mode) with the
     given key. Parameters are similar to encrypt_file,
     with one difference: out_filename, if not supplied
@@ -52,11 +52,8 @@ def decrypt_file(key, iv, in_filename, out_filename=None, chunksize=24*1024):
     """
     if not out_filename:
         out_filename = "temp.txt"
-
     if not os.path.isdir(in_filename):
         with open(in_filename, 'rb') as infile:
-            original_size = struct.unpack('<Q', infile.read(struct.calcsize('Q')))[0]
-
             decryptor = AES.new(key, AES.MODE_CBC, iv)
 
             with open(out_filename, 'wb') as outfile:
@@ -65,9 +62,6 @@ def decrypt_file(key, iv, in_filename, out_filename=None, chunksize=24*1024):
                     if len(chunk) == 0:
                         break
                     outfile.write(decryptor.decrypt(chunk))
-                    print "chunk: " + decryptor.decrypt(chunk)
-
-                outfile.truncate(original_size)
 
 def validate(user_uid, user_rbac):
                 """recieves the list of users and the local users uid

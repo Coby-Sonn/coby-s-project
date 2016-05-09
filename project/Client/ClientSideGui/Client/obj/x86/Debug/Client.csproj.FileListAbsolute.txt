@@ -1,0 +1,8 @@
+C:\Users\User\Desktop\coby-s-project\project\Client\ClientSideGui\Client\bin\Debug\Client.exe
+C:\Users\User\Desktop\coby-s-project\project\Client\ClientSideGui\Client\bin\Debug\Client.pdb
+C:\Users\User\Desktop\coby-s-project\project\Client\ClientSideGui\Client\obj\x86\Debug\Client.FirstPage.resources
+C:\Users\User\Desktop\coby-s-project\project\Client\ClientSideGui\Client\obj\x86\Debug\Client.Properties.Resources.resources
+C:\Users\User\Desktop\coby-s-project\project\Client\ClientSideGui\Client\obj\x86\Debug\Client.SaveFile.resources
+C:\Users\User\Desktop\coby-s-project\project\Client\ClientSideGui\Client\obj\x86\Debug\Client.csproj.GenerateResource.Cache
+C:\Users\User\Desktop\coby-s-project\project\Client\ClientSideGui\Client\obj\x86\Debug\Client.exe
+C:\Users\User\Desktop\coby-s-project\project\Client\ClientSideGui\Client\obj\x86\Debug\Client.pdb

@@ -163,14 +163,15 @@ class File_Manager():
                 users_rbac = [first_rbac_users]
             encrypted_file_content = encrypted_file.read()
             encrypted_file.close()
-            temp_obj = open("temp.txt", "wb")
+            temp_obj = open("temp2.txt", "wb")
             temp_obj.write(encrypted_file_content)
             temp_obj.close()
+
             aux_obj = AUXGenerator()
             aux = aux_obj.hash_generate(users_rbac)
             validated = MyCrypto.validate(self.user_uid, users_rbac)
             if validated:
-                MyCrypto.decrypt_file(original_key, aux, "temp.txt")
+                MyCrypto.decrypt_file(original_key, aux, "temp2.txt")
                 temp_obj = open("temp.txt", "rb")
                 decrypted_content = temp_obj.read()
                 temp_obj.close()
@@ -178,6 +179,7 @@ class File_Manager():
                 new_file.write(decrypted_content)
                 new_file.close()
                 os.remove(path)
+                os.remove("temp2.txt")
                 os.remove("temp.txt")
                 if first_rbac_users[0] == 1:
                     os.chmod(new_path, stat.S_IREAD)
@@ -246,19 +248,5 @@ class File_Manager():
         file_data = (fileid, original_key)
         return file_data
 
-
-
-
-
-##path1 = 'C:\Users\User\Desktop\coby.txt'
-##path2 = 'C:\Users\User\Desktop\\coby.cb'
-##uid_list = [12345678, 23456789, 67423972]
-##second_uid_list = [45454545, 75642985]
-##user_uid = "12345678"
-
-##print "starting... "
-##File_Manager.Create_New_Format(File_Manager(user_uid), path1, uid_list, 1, second_uid_list, 0)
-##raw_input("continue? ")
-##File_Manager.Strip_File(File_Manager(user_uid), path2)
 
 

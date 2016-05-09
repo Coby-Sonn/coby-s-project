@@ -1,3 +1,5 @@
+"""Deals with checking if a DB exists' creating one and extracting or writing into the db tables."""
+
 import sqlite3
 import DbCreator
 import os.path
