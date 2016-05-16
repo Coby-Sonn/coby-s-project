@@ -8,7 +8,7 @@ communicates with the Client communicator (Client.py) through IP & COM_PORT
 """
 
 import socket
-
+import DriveManager as dm
 import File_Manager as fm
 
 # Socket class for gui communication
@@ -104,6 +104,12 @@ class Socket:
                         information = local_socket_obj.Recv()  # fname#lname#uid
                         print "printed from engine: " + information
                         self.Send("Signed in#" + information)
+                        ack = self.Recv()
+                        if ack == "ok":
+                            local_socket_obj.Send("GETTHISUSERSAVAILABLEFILES@" + information.split('#')[2] + "#")
+                            available_files = local_socket_obj.Recv()  # -> filename#filename#...
+                            self.Send("FILES: " + available_files)
+
                     else:
                         message = "Not#0"
                         self.Send(message)
@@ -157,6 +163,43 @@ class Socket:
                         ack = local_socket_obj.Recv()
                         if ack == "Locked":
                             self.Send(ack)
+
+                elif state == "Upload": # Upload#path#username
+                    path = info[1]
+                    uid = info[2]
+                    file_data_tuple = dm.get_upload_file_data(uid, path)
+                    try:
+                        local_socket_obj.Send("UPLOAD#")
+                        ack = local_socket_obj.Recv()
+                        if ack == "ok":
+                            local_socket_obj.Send(file_data_tuple)
+                            ack = local_socket_obj.Recv()
+                            if ack == "File Successfully Uploaded":
+
+                                """DELETE THE FILE"""
+
+                                self.Send(ack)
+                            else:
+                                self.Send("An error has occurred, please try again.")
+                        else:
+                            self.Send("An error has occurred, please try again.")
+                    except:
+                        self.Send("An error has occurred, please try again.")
+
+                elif state == "Download":
+                    file_name = info[1]
+                    local_socket_obj.Send("DOWNLOAD#" + file_name)
+                    file_info_tuple = local_socket_obj.Recv()
+
+
+
+
+
+
+
+
+
+
 
                 i += 1
             else:

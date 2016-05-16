@@ -17,6 +17,8 @@ namespace Client
         private string my_fname;
         private string my_lname;
         private string file_to_lock;
+        private string file_to_upload;
+        private string available_files;
         private List<string> uid_list = new List<string>();
         private string to_send;
         public SocketClient sock_obj;
@@ -25,9 +27,12 @@ namespace Client
         public SaveFile(string user_info)
         {
             InitializeComponent();
-            this.my_uid = user_info.Split('#')[0];
-            this.my_fname = user_info.Split('#')[1];
-            this.my_lname = user_info.Split('#')[2];
+            this.my_uid = user_info.Split('$')[0];
+            this.my_fname = user_info.Split('$')[1];
+            this.my_lname = user_info.Split('$')[2];
+            this.available_files = user_info.Split('$')[3];
+            ResetDriveView();
+
             
             namesender.Enabled = false;
 
@@ -43,7 +48,18 @@ namespace Client
             }
             return hash.ToString();
         }
+        private void ResetDriveView()
+        {
+            string[] files = this.available_files.Split('#');
+            DownloadableBox.BeginUpdate();
+            foreach (string file in files)
+                DownloadableBox.Items.Add(file);
+            DownloadableBox.EndUpdate();
+            
 
+            
+
+        }
         private void browse2lock_Click(object sender, EventArgs e)
         {
             OpenFileDialog Locker = new OpenFileDialog();
@@ -163,6 +179,48 @@ namespace Client
             FirstPage FirstPage = new FirstPage();
             FirstPage.Show();
         }
+
+        private void FileChooser_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog Uploader = new OpenFileDialog();
+            Uploader.ShowDialog();
+            Uploader.InitialDirectory = @"C:\";
+            Uploader.Title = "Choose file to upload";
+            this.file_to_upload = Uploader.FileName;
+            string file_information = "Upload#" + this.file_to_upload + "#" + this.my_uid;
+            SocketClient sock_obj = new SocketClient();
+            this.sock_obj = sock_obj;
+            this.sock_obj.StartClient();
+            this.sock_obj.Send(file_information);
+            string ack = this.sock_obj.Recv();
+            MessageBox.Show(ack);
+
+        }
+
+        private void DownloadButton_Click(object sender, EventArgs e)
+        {
+            string file_to_download = "";
+            DownloadableBox.Enabled = false;
+            for (int i = 0; i < DownloadableBox.Items.Count; i++)
+                if (DownloadableBox.GetItemCheckState(i) == CheckState.Checked)
+                {
+                    file_to_download = DownloadableBox.Items[i].ToString();
+                }
+            if (!(file_to_download == ""))
+            {
+                this.sock_obj = new SocketClient();
+                this.sock_obj.StartClient();
+                this.sock_obj.Send("Upload#" + file_to_download);
+                string ack = this.sock_obj.Recv();
+                MessageBox.Show(ack);
+                
+
+            }
+            else
+                MessageBox.Show("Please choose a file to download");
+        }
+
+        
 
        
         

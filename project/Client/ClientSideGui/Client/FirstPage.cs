@@ -67,13 +67,14 @@ namespace Client
                     this.lastname = message_to_split.Split('#')[3];
                     //MessageBox.Show(my_uid + firstname + lastname);
                 }
-                this.sock_obj.CloseClient();
-                this.sock_obj = null;
+                
 
                 //if receives true then send the user to the next gui.
                 if (message == "Signed in")
                 {
-                    string user_info = this.my_uid + "#" + this.firstname + "#" + this.lastname;
+                    this.sock_obj.Send("ok");
+                    string available_files = this.sock_obj.Recv();
+                    string user_info = this.my_uid + "$" + this.firstname + "$" + this.lastname + "$" + available_files;
                     SaveFile form = new SaveFile(user_info);
                     form.Show();
                 }
@@ -82,6 +83,8 @@ namespace Client
                     MessageBox.Show("Incorrect password or username");
                     this.Show();
                 }
+                this.sock_obj.CloseClient();
+                this.sock_obj = null;
             }
         }
             

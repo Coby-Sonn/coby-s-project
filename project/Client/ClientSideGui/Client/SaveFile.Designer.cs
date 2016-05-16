@@ -44,10 +44,21 @@
             this.browse2lock = new System.Windows.Forms.Button();
             this.ChosenFileView = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.DriveTab = new System.Windows.Forms.TabPage();
+            this.RefreshDrive = new System.Windows.Forms.Button();
+            this.UploadBox = new System.Windows.Forms.GroupBox();
+            this.FileChooser = new System.Windows.Forms.Button();
+            this.DownloadBox = new System.Windows.Forms.GroupBox();
+            this.Uploader = new System.Windows.Forms.OpenFileDialog();
+            this.DownloadableBox = new System.Windows.Forms.CheckedListBox();
+            this.DownloadButton = new System.Windows.Forms.Button();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
+            this.DriveTab.SuspendLayout();
+            this.UploadBox.SuspendLayout();
+            this.DownloadBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // Unlocker
@@ -190,11 +201,86 @@
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.DriveTab);
             this.tabControl1.Location = new System.Drawing.Point(-1, -1);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(289, 314);
             this.tabControl1.TabIndex = 0;
+            // 
+            // DriveTab
+            // 
+            this.DriveTab.Controls.Add(this.RefreshDrive);
+            this.DriveTab.Controls.Add(this.UploadBox);
+            this.DriveTab.Controls.Add(this.DownloadBox);
+            this.DriveTab.Location = new System.Drawing.Point(4, 22);
+            this.DriveTab.Name = "DriveTab";
+            this.DriveTab.Size = new System.Drawing.Size(281, 288);
+            this.DriveTab.TabIndex = 1;
+            this.DriveTab.Text = "Drive";
+            this.DriveTab.UseVisualStyleBackColor = true;
+            // 
+            // RefreshDrive
+            // 
+            this.RefreshDrive.Location = new System.Drawing.Point(178, 227);
+            this.RefreshDrive.Name = "RefreshDrive";
+            this.RefreshDrive.Size = new System.Drawing.Size(92, 23);
+            this.RefreshDrive.TabIndex = 2;
+            this.RefreshDrive.Text = "Refresh";
+            this.RefreshDrive.UseVisualStyleBackColor = true;
+            // 
+            // UploadBox
+            // 
+            this.UploadBox.Controls.Add(this.FileChooser);
+            this.UploadBox.Location = new System.Drawing.Point(4, 203);
+            this.UploadBox.Name = "UploadBox";
+            this.UploadBox.Size = new System.Drawing.Size(168, 76);
+            this.UploadBox.TabIndex = 1;
+            this.UploadBox.TabStop = false;
+            this.UploadBox.Text = "Upload";
+            // 
+            // FileChooser
+            // 
+            this.FileChooser.Location = new System.Drawing.Point(39, 24);
+            this.FileChooser.Name = "FileChooser";
+            this.FileChooser.Size = new System.Drawing.Size(75, 23);
+            this.FileChooser.TabIndex = 0;
+            this.FileChooser.Text = "Choose file";
+            this.FileChooser.UseVisualStyleBackColor = true;
+            this.FileChooser.Click += new System.EventHandler(this.FileChooser_Click);
+            // 
+            // DownloadBox
+            // 
+            this.DownloadBox.Controls.Add(this.DownloadButton);
+            this.DownloadBox.Controls.Add(this.DownloadableBox);
+            this.DownloadBox.Location = new System.Drawing.Point(4, 3);
+            this.DownloadBox.Name = "DownloadBox";
+            this.DownloadBox.Size = new System.Drawing.Size(274, 194);
+            this.DownloadBox.TabIndex = 0;
+            this.DownloadBox.TabStop = false;
+            this.DownloadBox.Text = "Download";
+            // 
+            // Uploader
+            // 
+            this.Uploader.FileName = "openFileDialog1";
+            // 
+            // DownloadableBox
+            // 
+            this.DownloadableBox.FormattingEnabled = true;
+            this.DownloadableBox.Location = new System.Drawing.Point(6, 19);
+            this.DownloadableBox.Name = "DownloadableBox";
+            this.DownloadableBox.Size = new System.Drawing.Size(262, 139);
+            this.DownloadableBox.TabIndex = 0;
+            // 
+            // DownloadButton
+            // 
+            this.DownloadButton.Location = new System.Drawing.Point(93, 165);
+            this.DownloadButton.Name = "DownloadButton";
+            this.DownloadButton.Size = new System.Drawing.Size(75, 23);
+            this.DownloadButton.TabIndex = 1;
+            this.DownloadButton.Text = "Download";
+            this.DownloadButton.UseVisualStyleBackColor = true;
+            this.DownloadButton.Click += new System.EventHandler(this.DownloadButton_Click);
             // 
             // SaveFile
             // 
@@ -214,6 +300,9 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
+            this.DriveTab.ResumeLayout(false);
+            this.UploadBox.ResumeLayout(false);
+            this.DownloadBox.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -235,6 +324,14 @@
         private System.Windows.Forms.RadioButton rwbox;
         private System.Windows.Forms.LinkLabel signout;
         private System.Windows.Forms.TextBox ChosenFile;
+        private System.Windows.Forms.TabPage DriveTab;
+        private System.Windows.Forms.Button RefreshDrive;
+        private System.Windows.Forms.GroupBox UploadBox;
+        private System.Windows.Forms.Button FileChooser;
+        private System.Windows.Forms.GroupBox DownloadBox;
+        private System.Windows.Forms.OpenFileDialog Uploader;
+        private System.Windows.Forms.CheckedListBox DownloadableBox;
+        private System.Windows.Forms.Button DownloadButton;
 
     }
 }

@@ -19,6 +19,8 @@ import socket
 from ServerCrypto import *
 import DbManager as dbm
 from AES import *
+import DriveManager as dm
+import os
 #endregion
 
 #region ----------   C O N S T A N T S  ------------------------------------------------------
@@ -110,6 +112,11 @@ class  SessionWithClient(threading.Thread):
                         request = self.recv()
                         if request.split('#')[0] == "GETINFO":
                             self.send(dbm.GetLoginInfo(request.split('#')[1]))
+
+                            """the login continues"""
+
+
+
                         else:
                             print "from server: Reset"
                             self.send("Reset")
@@ -119,7 +126,6 @@ class  SessionWithClient(threading.Thread):
                     elif request.split('#')[0] == "GETALLUSERINFO":
                         print dbm.GetInfoForLock()
                         self.send(dbm.GetInfoForLock())
-                        print '111111111111111111111111111111111111111111'
                         request = self.recv()
                         if request.split(':')[0] == "LOCKEDFILEDATA":
                             file_id = request.split(':')[1].split('#')[0]
@@ -130,6 +136,32 @@ class  SessionWithClient(threading.Thread):
                         else:
                             print "from server: Reset after locked file data"
                             self.send("Reset")
+
+                    elif request.split('#')[0] == "UPLOAD":
+                        self.send("ok")
+                        file_info_tuple = self.recv()  #(uid#file_name.ext, file_content)
+                        result = dm.Create(file_info_tuple)
+                        print "from server: " + result
+                        self.send(result)
+
+                    elif request.split('#')[0].split('@')[0] == "GETTHISUSERSAVAILABLEFILES":
+                        requested_uid = request.split('#')[0].split('@')[1]
+                        users_path = "TheDrive\\" + requested_uid
+                        files_list = os.listdir(users_path)
+                        files_string = ""
+                        for saved_file in files_list:
+                            files_string += saved_file + "#"
+
+                    elif request.split('#')[0] == "DOWNLOAD":
+                        file_name = request.split('#')[1]
+                        uid = request.split('#')[2]
+                        file_info_tuple = dm.get_download_file_data(uid, file_name)
+
+
+
+
+
+
 
             self.clientSock.close()
 
