@@ -139,7 +139,7 @@ class  SessionWithClient(threading.Thread):
 
                     elif request.split('#')[0] == "UPLOAD":
                         self.send("ok")
-                        file_info_tuple = self.recv()  #(uid#file_name.ext, file_content)
+                        file_info_tuple = pickle.loads(self.recv())  #(uid#file_name.ext, file_content)
                         result = dm.Create(file_info_tuple)
                         print "from server: " + result
                         self.send(result)
@@ -151,11 +151,15 @@ class  SessionWithClient(threading.Thread):
                         files_string = ""
                         for saved_file in files_list:
                             files_string += saved_file + "#"
+                        self.send(files_string)
 
                     elif request.split('#')[0] == "DOWNLOAD":
                         file_name = request.split('#')[1]
                         uid = request.split('#')[2]
                         file_info_tuple = dm.get_download_file_data(uid, file_name)
+                        print file_info_tuple
+                        print "here"
+                        self.send(pickle.dumps(file_info_tuple))
 
 
 

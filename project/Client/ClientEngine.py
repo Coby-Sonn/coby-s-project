@@ -10,13 +10,14 @@ communicates with the Client communicator (Client.py) through IP & COM_PORT
 import socket
 import DriveManager as dm
 import File_Manager as fm
+import pickle
 
 # Socket class for gui communication
 HOST = "0.0.0.0"
-PORT = 12348
+PORT = 12381
 
 # local_python_communication class (with Client.py)
-IP = "10.92.5.20"  # a local ip
+IP = "10.100.102.6"  # a local ip
 COM_PORT = 8484
 
 
@@ -106,9 +107,9 @@ class Socket:
                         self.Send("Signed in#" + information)
                         ack = self.Recv()
                         if ack == "ok":
-                            local_socket_obj.Send("GETTHISUSERSAVAILABLEFILES@" + information.split('#')[2] + "#")
+                            local_socket_obj.Send("GETTHISUSERSAVAILABLEFILES@" + information.split('#')[1] + "#")
                             available_files = local_socket_obj.Recv()  # -> filename#filename#...
-                            self.Send("FILES: " + available_files)
+                            self.Send(available_files)
 
                     else:
                         message = "Not#0"
@@ -164,7 +165,8 @@ class Socket:
                         if ack == "Locked":
                             self.Send(ack)
 
-                elif state == "Upload": # Upload#path#username
+                elif state == "Upload":  # Upload#path#uid
+                    print info
                     path = info[1]
                     uid = info[2]
                     file_data_tuple = dm.get_upload_file_data(uid, path)
@@ -172,7 +174,7 @@ class Socket:
                         local_socket_obj.Send("UPLOAD#")
                         ack = local_socket_obj.Recv()
                         if ack == "ok":
-                            local_socket_obj.Send(file_data_tuple)
+                            local_socket_obj.Send(pickle.dumps(file_data_tuple))
                             ack = local_socket_obj.Recv()
                             if ack == "File Successfully Uploaded":
 
@@ -188,8 +190,14 @@ class Socket:
 
                 elif state == "Download":
                     file_name = info[1]
-                    local_socket_obj.Send("DOWNLOAD#" + file_name)
-                    file_info_tuple = local_socket_obj.Recv()
+                    uid = info[2]
+                    download_path = info[3]
+                    local_socket_obj.Send("DOWNLOAD#" + file_name + "#" + uid)
+                    file_info_tuple = pickle.loads(local_socket_obj.Recv())
+
+                    self.Send(dm.Create(file_info_tuple, download_path))
+
+
 
 
 

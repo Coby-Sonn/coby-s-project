@@ -187,6 +187,7 @@ namespace Client
             Uploader.InitialDirectory = @"C:\";
             Uploader.Title = "Choose file to upload";
             this.file_to_upload = Uploader.FileName;
+            MessageBox.Show(this.my_uid);
             string file_information = "Upload#" + this.file_to_upload + "#" + this.my_uid;
             SocketClient sock_obj = new SocketClient();
             this.sock_obj = sock_obj;
@@ -199,6 +200,10 @@ namespace Client
 
         private void DownloadButton_Click(object sender, EventArgs e)
         {
+            FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
+            MessageBox.Show("Please choose a download location");
+            folderBrowserDialog.ShowDialog();
+            string folder_location = folderBrowserDialog.SelectedPath;
             string file_to_download = "";
             DownloadableBox.Enabled = false;
             for (int i = 0; i < DownloadableBox.Items.Count; i++)
@@ -210,7 +215,7 @@ namespace Client
             {
                 this.sock_obj = new SocketClient();
                 this.sock_obj.StartClient();
-                this.sock_obj.Send("Upload#" + file_to_download);
+                this.sock_obj.Send("Download#" + file_to_download + "#" + this.my_uid + "#" + folder_location);
                 string ack = this.sock_obj.Recv();
                 MessageBox.Show(ack);
                 

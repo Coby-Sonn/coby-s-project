@@ -24,15 +24,15 @@ def Create(file_info_tuple):
         new_file = open(path, "wb")
         new_file.write(file_content)
         new_file.close()
-        return "File Successfully Uploaded"
+        return "File Successfully Downloaded"
     except:
         return "Error"
 
 def get_download_file_data(uid, file_name):
 
-
-    the_file = open(uid+ "\\" + file_name, "rb")
+    the_file = open(PATH_START + uid + "\\" + file_name, "rb")
     file_content = the_file.read()
+    print "file_content: " + file_content
     the_file.close()
     file_info = uid + "#" + file_name
     file_tuple = (file_info, file_content)  # (uid#file_name.ext, file_content)
