@@ -17,7 +17,7 @@ import subprocess
 
 # Socket class for gui communication
 HOST = "0.0.0.0"
-PORT = 12382
+PORT = 12244
 
 # LocalPythonCommunication class (with Client.py)
 IP = ""  # a local ip, run my_ip() to get it
@@ -105,7 +105,7 @@ class Socket:
                 info = info.split("#")
                 state = info[0]
                 print "printed from engine: " + state
-                message = "none"
+                # message = "none"
                 if state == "login":
                     username = info[1]
                     password = info[2]
@@ -114,9 +114,13 @@ class Socket:
                     print "printed from engine: " + password_hash
                     if password_hash == password:
                         local_socket_obj.Send("GETINFO#" + username)
-                        information = local_socket_obj.Recv()  # fname#lname#uid
+                        information = local_socket_obj.Recv()  # fname#lname#uid optionaly it will end with '$'
+                                                                # depends if the user is the admin
                         print "printed from engine: " + information
-                        self.Send("Signed in#" + information)
+                        if information.endswith("$"):
+                            self.Send("Signed in, admin#" + information)
+                        else:
+                            self.Send("Signed in#" + information)
                         ack = self.Recv()
                         if ack == "ok":
                             local_socket_obj.Send("GETTHISUSERSAVAILABLEFILES@" + information.split('#')[1] + "#")
@@ -207,8 +211,81 @@ class Socket:
                     download_path = info[3]
                     local_socket_obj.Send("DOWNLOAD#" + file_name + "#" + uid)
                     file_info_tuple = pickle.loads(local_socket_obj.Recv())
-
                     self.Send(dm.Create(file_info_tuple, download_path))
+
+                elif state == "register":
+                    while state == "register":
+                        print info
+                        uid = info[1]
+                        firstname = info[2]
+                        lastname = info[3]
+                        username = info[4]
+                        password = info[5]
+                        local_socket_obj.Send("CHECKIFEXISTS#" + username)
+                        uname_exists = local_socket_obj.Recv()  # 0 = does not exist, 1 = does exist
+                        if uname_exists == "0":
+                            print "sending the new user's data"
+                            local_socket_obj.Send(firstname + "#" + uid + "#" + lastname + "#" + username + "#" +
+                                                  password)
+                            message = local_socket_obj.Recv()
+                            self.Send(message)
+                            state = ""
+                        else:
+                            self.Send("Username already exists")
+                            state = ""
+                        # info = self.Recv()
+                        # info = info.split("#")
+                        # state = info[0]
+
+                elif state == "Delete":
+                    local_socket_obj.Send("GETALLUSERINFO2#")
+                    all_user_info = local_socket_obj.Recv()
+                    self.Send(all_user_info)
+                    user_to_del = self.Recv()
+                    while user_to_del == "":
+                        user_to_del = self.Recv()
+                    try:
+                        user_to_del = int(user_to_del)
+                    except:
+                        self.Send("Reset")
+                    local_socket_obj.Send("DELETEUSER#" + str(user_to_del))
+                    # user_info = dbm.ReadInfoByUID(user_to_del)
+                    ack = local_socket_obj.Recv()
+                    self.Send(ack)
+
+                elif state == "Change":
+                    local_socket_obj.Send("GETALLUSERINFO3#")
+                    all_user_info = local_socket_obj.Recv()
+                    self.Send(all_user_info)
+                    change_str = self.Recv()
+                    while change_str == "":
+                        change_str = self.Recv()
+                    if change_str.split('#')[0] == "Change":
+                        what_to_change = change_str.split('#')[1]
+                        user_id = change_str.split('#')[2]
+                        new_item = change_str.split('#')[3]
+                        if what_to_change == "fname":
+                            local_socket_obj.Send("FNAME#" + new_item + "#" + user_id)
+                            ack = local_socket_obj.Recv()
+                            if ack == "1":
+                                self.Send("User info updated")
+                            else:
+                                self.Send("Could not Change...")
+                        elif what_to_change == "lname":
+                            local_socket_obj.Send("LNAME#" + new_item + "#" + user_id)
+                            ack = local_socket_obj.Recv()
+                            if ack == "1":
+                                self.Send("User info updated")
+                            else:
+                                self.Send("Could not Change...")
+                        elif what_to_change == "password":
+                            local_socket_obj.Send("PASS#" + new_item + "#" + user_id)
+                            ack = local_socket_obj.Recv()
+                            if ack == "1":
+                                self.Send("User info updated")
+                            else:
+                                self.Send("Could not Change...")
+
 
 
 

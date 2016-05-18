@@ -5,6 +5,7 @@ import File_Manager as fm
 
 HOST = "0.0.0.0"  # for gui communication
 PORT = 12348      # for gui communication
+
 class Socket:
     def __init__(self):
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -64,11 +65,9 @@ class Socket:
 
                     if not uname_exists:
                         dbm.AddInfo(firstname, uid, lastname, username, password)
-                        message = "Signed up"
-                        self.Send(message)
+                        self.Send("Signed up")
                     else:
-                        message = "username exists"
-                        self.Send(message)
+                        self.Send("username exists")
                     info = self.Recv()
                     info = info.split("#")
                     state = info[0]
@@ -82,7 +81,6 @@ class Socket:
                     self.Send(ack)
                 else:
                     self.Send("Path error, can only unlock .cb files")
-
 
             elif state == "Lock":
                 all_user_info = self.GetUserInfoForLock()

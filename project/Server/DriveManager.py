@@ -3,15 +3,24 @@ import os
 PATH_START = "TheDrive\\"
 
 
-def CheckifExists(username):
+def CheckifExists(uid):
     """checks if a directorey exists
         if it does not then it will create it"""
-    path = PATH_START + username
+    path = PATH_START + uid
     if not os.path.exists(path):
         os.makedirs(path)
         print "created"
     else:
         print "exists"
+
+def deletedir(uid):
+    path = PATH_START + uid
+    try:
+        if not os.path.exists(path):
+            os.remove(path)
+            print "Deleted"
+    except: pass
+
 
 def Create(file_info_tuple):
 
@@ -27,6 +36,7 @@ def Create(file_info_tuple):
         return "File Successfully Downloaded"
     except:
         return "Error"
+
 
 def get_download_file_data(uid, file_name):
     path = PATH_START + uid + "\\" + file_name

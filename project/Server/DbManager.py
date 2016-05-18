@@ -27,6 +27,8 @@ def CheckifExists():
         DbCreator.CreateTable()
 
 """user db funcs-------------------------------------------------------------------"""
+
+
 def AddInfo(fname, uid, lname, uname, ph):
     conn = sqlite3.connect(SQLITE_FILE_PATH)
     c = conn.cursor()
@@ -34,6 +36,8 @@ def AddInfo(fname, uid, lname, uname, ph):
     c.execute('insert or ignore into UserInfo values (?,?,?,?,?)', row)
     conn.commit()
     conn.close()
+
+
 def UpdateInfo(serial_number, what_to_change, uid):
     """cannot get number 2, will not change the uid"""
     if serial_number == 2:
@@ -42,26 +46,31 @@ def UpdateInfo(serial_number, what_to_change, uid):
     try:
         conn = sqlite3.connect(SQLITE_FILE_PATH)
         c = conn.cursor()
-        execution_string = 'UPDATE UserInfo SET %s' %COLUMN_LIST[serial_number-1]
-        execution_string = execution_string + " = '%s'" %what_to_change
-        execution_string = execution_string + " WHERE UID = %s" %uid
+        print what_to_change, "-------"
+        execution_string = 'UPDATE UserInfo SET %s' % COLUMN_LIST[serial_number-1]
+        execution_string = execution_string + " = %s" % what_to_change
+        execution_string = execution_string + " WHERE UID = %s" % uid
         c.execute(execution_string)
         conn.commit()
         conn.close()
         return True
     except:
         return False
+
+
 def DeleteInfo(uid):
     try:
         conn = sqlite3.connect(SQLITE_FILE_PATH)
         c = conn.cursor()
-        execution_string = "DELETE FROM UserInfo WHERE UID = %s" %uid
+        execution_string = "DELETE FROM UserInfo WHERE UID = %s" % uid
         c.execute(execution_string)
         conn.commit()
         conn.close()
         return True
     except:
         return False
+
+
 def ReadAllRows():
     conn = sqlite3.connect(SQLITE_FILE_PATH)
     c = conn.cursor()
@@ -70,14 +79,15 @@ def ReadAllRows():
     temp = rows
     rows = []
     for row in temp:
-        data_string = str(row[0]) + "@" + row[1][1:-1] + "@" + row[2][1:-1] + \
+        data_string = str(row[0]) + "@" + row[1] + "@" + row[2][1:-1] + \
               "@" + row[3][1:-1] + "@" + row[4][1:-1]
-        ##uid@fname@lname@uname#.....
+        # uid@fname@lname@uname#.....
         rows.append(data_string)
-
     conn.commit()
     conn.close()
     return rows
+
+
 def ReadInfoByUID(uid):
     """recvs a user uid in order to read all info about a specific user,
      if he exists then func will return a string with his information else it will return False"""
@@ -88,7 +98,7 @@ def ReadInfoByUID(uid):
 
         c.execute(execution_string)
         read_info = c.fetchone()
-        data_string = str(read_info[0]) + "#" + read_info[1][1:-1] + "#" + read_info[2][1:-1] + \
+        data_string = str(read_info[0]) + "#" + read_info[1] + "#" + read_info[2][1:-1] + \
             "#" + read_info[3][1:-1] + "#" + read_info[4][1:-1]
 
         conn.commit()
@@ -96,6 +106,8 @@ def ReadInfoByUID(uid):
         return data_string
     else:
         return False
+
+
 def UIDExists(uid):
     conn = sqlite3.connect(SQLITE_FILE_PATH)
     c = conn.cursor()
@@ -109,12 +121,16 @@ def UIDExists(uid):
         conn.commit()
         conn.close()
         return False
+
+
 def UnameExists(uname):
     rows = ReadAllRows()
     for row in rows:
         if uname in row:
             return (True, row)
     return (False, )
+
+
 def GetPassHashByUname(uname):
     """receives a username (that was entered by the user and returns the hash of the compatible password"""
     checked = UnameExists(uname)
@@ -123,6 +139,8 @@ def GetPassHashByUname(uname):
         print row
         return row.split("@")[4]
     return "the user name does not exist"
+
+
 def GetInfoForLock():
     rows_string = ""
     rows = ReadAllRows()
@@ -130,6 +148,8 @@ def GetInfoForLock():
         rows_string += row + "#"
 
     return rows_string[:-1]
+
+
 def GetLoginInfo(uname):
     checked = UnameExists(uname)
     if checked[0]:
@@ -142,7 +162,10 @@ def GetLoginInfo(uname):
     else:
         return "user not found"
 
+
+
 """file db funcs-------------------------------------------------------------------"""
+
 
 def AddFileInfo(file_id, file_key):
     conn = sqlite3.connect(SQLITE_FILE_PATH)
@@ -153,6 +176,8 @@ def AddFileInfo(file_id, file_key):
     c.execute(row)
     conn.commit()
     conn.close()
+
+
 def IDExists(file_id):
     conn = sqlite3.connect(SQLITE_FILE_PATH)
     c = conn.cursor()
@@ -166,6 +191,8 @@ def IDExists(file_id):
         conn.commit()
         conn.close()
         return False
+
+
 def ReadFileInfoByID(file_id):
     if IDExists:
         conn = sqlite3.connect(SQLITE_FILE_PATH)
@@ -179,11 +206,15 @@ def ReadFileInfoByID(file_id):
         return read_info[1]
     else:
         return False
+
+
 def GetKeyByID(file_id):
     try:
         return ReadFileInfoByID(file_id)
     except:
         return "File Not Found"
+
+
 def DeleteFile(file_id):
     try:
         conn = sqlite3.connect(SQLITE_FILE_PATH)
@@ -195,6 +226,8 @@ def DeleteFile(file_id):
         return True
     except:
         return False
+
+
 
 
 

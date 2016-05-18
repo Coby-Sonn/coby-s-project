@@ -71,7 +71,7 @@ namespace Server
                 if (message == "Signed in")
                 {
                     string user_info = this.my_uid + "#" + this.firstname + "#" + this.lastname;
-                    SaveFile form = new SaveFile(user_info);
+                    AdminSaveFile form = new AdminSaveFile(user_info);
                     form.Show();
                 }
                 else

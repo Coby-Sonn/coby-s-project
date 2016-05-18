@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminSaveFile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminSaveFile.designer.cs">
+      <DependentUpon>AdminSaveFile.cs</DependentUpon>
+    </Compile>
     <Compile Include="FirstPage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -61,6 +67,9 @@
       <DependentUpon>SaveFile.cs</DependentUpon>
     </Compile>
     <Compile Include="SocketClient.cs" />
+    <EmbeddedResource Include="AdminSaveFile.resx">
+      <DependentUpon>AdminSaveFile.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FirstPage.resx">
       <DependentUpon>FirstPage.cs</DependentUpon>
     </EmbeddedResource>

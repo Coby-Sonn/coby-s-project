@@ -46,23 +46,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FirstPage.cs">
+    <Compile Include="1FirstPage.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FirstPage.Designer.cs">
-      <DependentUpon>FirstPage.cs</DependentUpon>
+    <Compile Include="1FirstPage.Designer.cs">
+      <DependentUpon>1FirstPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SaveFile.cs">
+    <Compile Include="AdminSaveFile.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SaveFile.Designer.cs">
-      <DependentUpon>SaveFile.cs</DependentUpon>
+    <Compile Include="AdminSaveFile.Designer.cs">
+      <DependentUpon>AdminSaveFile.cs</DependentUpon>
     </Compile>
     <Compile Include="SocketClient.cs" />
-    <EmbeddedResource Include="FirstPage.resx">
-      <DependentUpon>FirstPage.cs</DependentUpon>
+    <EmbeddedResource Include="1FirstPage.resx">
+      <DependentUpon>1FirstPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -73,8 +73,8 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="SaveFile.resx">
-      <DependentUpon>SaveFile.cs</DependentUpon>
+    <EmbeddedResource Include="AdminSaveFile.resx">
+      <DependentUpon>AdminSaveFile.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

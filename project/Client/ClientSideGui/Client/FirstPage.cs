@@ -78,6 +78,15 @@ namespace Client
                     SaveFile form = new SaveFile(user_info);
                     form.Show();
                 }
+                else if (message == "Signed in, admin")
+                {
+                    this.sock_obj.Send("ok");
+                    string available_files = this.sock_obj.Recv();
+                    string user_info = this.my_uid + "$" + this.firstname + "$" + this.lastname + "$" + available_files;
+                    AdminSaveFile form = new AdminSaveFile(user_info);
+                    form.Show();
+                }
+                    
                 else
                 {
                     MessageBox.Show("Incorrect password or username");

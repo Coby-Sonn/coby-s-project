@@ -1,6 +1,6 @@
-﻿namespace Server
+﻿namespace Client
 {
-    partial class SaveFile
+    partial class AdminSaveFile
     {
         /// <summary>
         /// Required designer variable.
@@ -29,13 +29,14 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SaveFile));
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdminSaveFile));
+            this.Tabs = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.signout = new System.Windows.Forms.LinkLabel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.browse2unlock = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.ChosenFile = new System.Windows.Forms.TextBox();
             this.rbox = new System.Windows.Forms.RadioButton();
             this.rwbox = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
@@ -56,28 +57,56 @@
             this.UserButton = new System.Windows.Forms.Button();
             this.UserDatadel = new System.Windows.Forms.CheckedListBox();
             this.DeleteUser = new System.Windows.Forms.Button();
+            this.DriveTab = new System.Windows.Forms.TabPage();
+            this.RefreshDrive = new System.Windows.Forms.Button();
+            this.UploadBox = new System.Windows.Forms.GroupBox();
+            this.FileChooser = new System.Windows.Forms.Button();
+            this.DownloadBox = new System.Windows.Forms.GroupBox();
+            this.DownloadButton = new System.Windows.Forms.Button();
+            this.DownloadableBox = new System.Windows.Forms.CheckedListBox();
+            this.NewUser = new System.Windows.Forms.TabPage();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.PassHelp = new System.Windows.Forms.Label();
+            this.ConfirmPass = new System.Windows.Forms.TextBox();
+            this.Password = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.Uname = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.Lname = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.Fname = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.registerbutton = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
             this.Locker = new System.Windows.Forms.OpenFileDialog();
             this.Unlocker = new System.Windows.Forms.OpenFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.ChosenFile = new System.Windows.Forms.TextBox();
-            this.tabControl1.SuspendLayout();
+            this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
+            this.Tabs.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.userchanges.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.DriveTab.SuspendLayout();
+            this.UploadBox.SuspendLayout();
+            this.DownloadBox.SuspendLayout();
+            this.NewUser.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
-            // tabControl1
+            // Tabs
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Location = new System.Drawing.Point(-1, -1);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(288, 316);
-            this.tabControl1.TabIndex = 0;
+            this.Tabs.Controls.Add(this.tabPage1);
+            this.Tabs.Controls.Add(this.tabPage3);
+            this.Tabs.Controls.Add(this.DriveTab);
+            this.Tabs.Controls.Add(this.NewUser);
+            this.Tabs.Location = new System.Drawing.Point(-1, -1);
+            this.Tabs.Name = "Tabs";
+            this.Tabs.SelectedIndex = 0;
+            this.Tabs.Size = new System.Drawing.Size(288, 316);
+            this.Tabs.TabIndex = 0;
             // 
             // tabPage1
             // 
@@ -139,6 +168,15 @@
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Lock";
+            // 
+            // ChosenFile
+            // 
+            this.ChosenFile.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.ChosenFile.Location = new System.Drawing.Point(6, 149);
+            this.ChosenFile.Name = "ChosenFile";
+            this.ChosenFile.ReadOnly = true;
+            this.ChosenFile.Size = new System.Drawing.Size(205, 13);
+            this.ChosenFile.TabIndex = 12;
             // 
             // rbox
             // 
@@ -353,30 +391,237 @@
             this.DeleteUser.Visible = false;
             this.DeleteUser.Click += new System.EventHandler(this.DeleteUser_Click);
             // 
+            // DriveTab
+            // 
+            this.DriveTab.Controls.Add(this.RefreshDrive);
+            this.DriveTab.Controls.Add(this.UploadBox);
+            this.DriveTab.Controls.Add(this.DownloadBox);
+            this.DriveTab.Location = new System.Drawing.Point(4, 22);
+            this.DriveTab.Name = "DriveTab";
+            this.DriveTab.Padding = new System.Windows.Forms.Padding(3);
+            this.DriveTab.Size = new System.Drawing.Size(280, 290);
+            this.DriveTab.TabIndex = 3;
+            this.DriveTab.Text = "Drive";
+            this.DriveTab.UseVisualStyleBackColor = true;
+            // 
+            // RefreshDrive
+            // 
+            this.RefreshDrive.Location = new System.Drawing.Point(177, 231);
+            this.RefreshDrive.Name = "RefreshDrive";
+            this.RefreshDrive.Size = new System.Drawing.Size(92, 23);
+            this.RefreshDrive.TabIndex = 5;
+            this.RefreshDrive.Text = "Refresh";
+            this.RefreshDrive.UseVisualStyleBackColor = true;
+            // 
+            // UploadBox
+            // 
+            this.UploadBox.Controls.Add(this.FileChooser);
+            this.UploadBox.Location = new System.Drawing.Point(3, 207);
+            this.UploadBox.Name = "UploadBox";
+            this.UploadBox.Size = new System.Drawing.Size(168, 76);
+            this.UploadBox.TabIndex = 4;
+            this.UploadBox.TabStop = false;
+            this.UploadBox.Text = "Upload";
+            // 
+            // FileChooser
+            // 
+            this.FileChooser.Location = new System.Drawing.Point(39, 24);
+            this.FileChooser.Name = "FileChooser";
+            this.FileChooser.Size = new System.Drawing.Size(75, 23);
+            this.FileChooser.TabIndex = 0;
+            this.FileChooser.Text = "Choose file";
+            this.FileChooser.UseVisualStyleBackColor = true;
+            // 
+            // DownloadBox
+            // 
+            this.DownloadBox.Controls.Add(this.DownloadButton);
+            this.DownloadBox.Controls.Add(this.DownloadableBox);
+            this.DownloadBox.Location = new System.Drawing.Point(3, 7);
+            this.DownloadBox.Name = "DownloadBox";
+            this.DownloadBox.Size = new System.Drawing.Size(274, 194);
+            this.DownloadBox.TabIndex = 3;
+            this.DownloadBox.TabStop = false;
+            this.DownloadBox.Text = "Download";
+            // 
+            // DownloadButton
+            // 
+            this.DownloadButton.Location = new System.Drawing.Point(93, 165);
+            this.DownloadButton.Name = "DownloadButton";
+            this.DownloadButton.Size = new System.Drawing.Size(75, 23);
+            this.DownloadButton.TabIndex = 1;
+            this.DownloadButton.Text = "Download";
+            this.DownloadButton.UseVisualStyleBackColor = true;
+            // 
+            // DownloadableBox
+            // 
+            this.DownloadableBox.FormattingEnabled = true;
+            this.DownloadableBox.Location = new System.Drawing.Point(6, 19);
+            this.DownloadableBox.Name = "DownloadableBox";
+            this.DownloadableBox.Size = new System.Drawing.Size(262, 124);
+            this.DownloadableBox.TabIndex = 0;
+            // 
+            // NewUser
+            // 
+            this.NewUser.Controls.Add(this.groupBox4);
+            this.NewUser.Location = new System.Drawing.Point(4, 22);
+            this.NewUser.Name = "NewUser";
+            this.NewUser.Padding = new System.Windows.Forms.Padding(3);
+            this.NewUser.Size = new System.Drawing.Size(280, 290);
+            this.NewUser.TabIndex = 4;
+            this.NewUser.Text = "Register new user";
+            this.NewUser.UseVisualStyleBackColor = true;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.PassHelp);
+            this.groupBox4.Controls.Add(this.ConfirmPass);
+            this.groupBox4.Controls.Add(this.Password);
+            this.groupBox4.Controls.Add(this.label3);
+            this.groupBox4.Controls.Add(this.Uname);
+            this.groupBox4.Controls.Add(this.label5);
+            this.groupBox4.Controls.Add(this.Lname);
+            this.groupBox4.Controls.Add(this.label4);
+            this.groupBox4.Controls.Add(this.Fname);
+            this.groupBox4.Controls.Add(this.label6);
+            this.groupBox4.Controls.Add(this.registerbutton);
+            this.groupBox4.Controls.Add(this.label7);
+            this.groupBox4.Location = new System.Drawing.Point(9, 5);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox4.Size = new System.Drawing.Size(265, 275);
+            this.groupBox4.TabIndex = 21;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Sign up";
+            // 
+            // PassHelp
+            // 
+            this.PassHelp.AutoSize = true;
+            this.PassHelp.Location = new System.Drawing.Point(228, 106);
+            this.PassHelp.Name = "PassHelp";
+            this.PassHelp.Size = new System.Drawing.Size(13, 13);
+            this.PassHelp.TabIndex = 19;
+            this.PassHelp.Text = "?";
+            this.toolTip1.SetToolTip(this.PassHelp, "Password must be between 8-15 characters and must contain at least one uppercase " +
+                    "letter, one lowercase letter and one number");
+            // 
+            // ConfirmPass
+            // 
+            this.ConfirmPass.Location = new System.Drawing.Point(122, 134);
+            this.ConfirmPass.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ConfirmPass.Name = "ConfirmPass";
+            this.ConfirmPass.PasswordChar = '•';
+            this.ConfirmPass.Size = new System.Drawing.Size(100, 20);
+            this.ConfirmPass.TabIndex = 18;
+            // 
+            // Password
+            // 
+            this.Password.Location = new System.Drawing.Point(122, 104);
+            this.Password.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Password.Name = "Password";
+            this.Password.PasswordChar = '•';
+            this.Password.Size = new System.Drawing.Size(100, 20);
+            this.Password.TabIndex = 17;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(13, 51);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(58, 13);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Last Name";
+            // 
+            // Uname
+            // 
+            this.Uname.Location = new System.Drawing.Point(122, 76);
+            this.Uname.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Uname.Name = "Uname";
+            this.Uname.Size = new System.Drawing.Size(100, 20);
+            this.Uname.TabIndex = 16;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(13, 79);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(55, 13);
+            this.label5.TabIndex = 9;
+            this.label5.Text = "Username";
+            // 
+            // Lname
+            // 
+            this.Lname.Location = new System.Drawing.Point(122, 48);
+            this.Lname.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Lname.Name = "Lname";
+            this.Lname.Size = new System.Drawing.Size(100, 20);
+            this.Lname.TabIndex = 15;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(13, 111);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(53, 13);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Password";
+            // 
+            // Fname
+            // 
+            this.Fname.Location = new System.Drawing.Point(122, 17);
+            this.Fname.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Fname.Name = "Fname";
+            this.Fname.Size = new System.Drawing.Size(100, 20);
+            this.Fname.TabIndex = 14;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(13, 140);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(91, 13);
+            this.label6.TabIndex = 12;
+            this.label6.Text = "Confirm Password";
+            // 
+            // registerbutton
+            // 
+            this.registerbutton.Location = new System.Drawing.Point(84, 183);
+            this.registerbutton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.registerbutton.Name = "registerbutton";
+            this.registerbutton.Size = new System.Drawing.Size(75, 24);
+            this.registerbutton.TabIndex = 1;
+            this.registerbutton.Text = "Register";
+            this.registerbutton.UseVisualStyleBackColor = true;
+            this.registerbutton.Click += new System.EventHandler(this.registerbutton_Click_1);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(13, 19);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(57, 13);
+            this.label7.TabIndex = 10;
+            this.label7.Text = "First Name";
+            // 
             // Unlocker
             // 
             this.Unlocker.FileName = "openFileDialog1";
             this.Unlocker.Filter = "CB files|*.cb|All files|*.*";
             // 
-            // ChosenFile
+            // folderBrowserDialog
             // 
-            this.ChosenFile.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.ChosenFile.Location = new System.Drawing.Point(6, 149);
-            this.ChosenFile.Name = "ChosenFile";
-            this.ChosenFile.ReadOnly = true;
-            this.ChosenFile.Size = new System.Drawing.Size(205, 13);
-            this.ChosenFile.TabIndex = 12;
+            this.folderBrowserDialog.Description = "Choose a download location";
             // 
-            // SaveFile
+            // AdminSaveFile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(285, 312);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.Tabs);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "SaveFile";
+            this.Name = "AdminSaveFile";
             this.Text = "SaveFile";
-            this.tabControl1.ResumeLayout(false);
+            this.Tabs.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -386,13 +631,19 @@
             this.userchanges.ResumeLayout(false);
             this.userchanges.PerformLayout();
             this.groupBox3.ResumeLayout(false);
+            this.DriveTab.ResumeLayout(false);
+            this.UploadBox.ResumeLayout(false);
+            this.DownloadBox.ResumeLayout(false);
+            this.NewUser.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl Tabs;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Button browse2lock;
         private System.Windows.Forms.OpenFileDialog Locker;
@@ -422,6 +673,28 @@
         private System.Windows.Forms.RadioButton rbox;
         private System.Windows.Forms.RadioButton rwbox;
         private System.Windows.Forms.TextBox ChosenFile;
+        private System.Windows.Forms.TabPage DriveTab;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
+        private System.Windows.Forms.Button RefreshDrive;
+        private System.Windows.Forms.GroupBox UploadBox;
+        private System.Windows.Forms.Button FileChooser;
+        private System.Windows.Forms.GroupBox DownloadBox;
+        private System.Windows.Forms.Button DownloadButton;
+        private System.Windows.Forms.CheckedListBox DownloadableBox;
+        private System.Windows.Forms.TabPage NewUser;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Label PassHelp;
+        private System.Windows.Forms.TextBox ConfirmPass;
+        private System.Windows.Forms.TextBox Password;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox Uname;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox Lname;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox Fname;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button registerbutton;
+        private System.Windows.Forms.Label label7;
 
     }
 }

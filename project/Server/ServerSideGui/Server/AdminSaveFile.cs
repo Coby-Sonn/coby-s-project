@@ -12,7 +12,7 @@ using System.Text.RegularExpressions;
 
 namespace Server
 {
-    public partial class SaveFile : Form
+    public partial class AdminSaveFile : Form
     {
         private string my_uid;
         private string my_fname;
@@ -23,7 +23,7 @@ namespace Server
         public SocketClient sock_obj;
         
         
-        public SaveFile(string user_info)
+        public AdminSaveFile(string user_info)
         {
             InitializeComponent();
             this.my_uid = user_info.Split('#')[0];

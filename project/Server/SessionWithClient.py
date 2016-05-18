@@ -80,10 +80,10 @@ class  SessionWithClient(threading.Thread):
                 return False
             return True
         return False
-  
-    #-----------------------------------------------------------------------------------------------
+    # -----------------------------------------------------------------------------------------------
     # the main function of the THREAD sessionWithClient class  
-    #-----------------------------------------------------------------------------------------------
+    # -----------------------------------------------------------------------------------------------
+
     def send(self, message):
 
         self.clientSock.send(encryptAES(self.key, message))
@@ -106,23 +106,35 @@ class  SessionWithClient(threading.Thread):
 
                     request = self.recv()
                     print "request " + request
+
                     if request.split('#')[0] == "GETHASH":
                         password_hash = dbm.GetPassHashByUname(request.split('#')[1])
                         self.send(password_hash)
                         request = self.recv()
                         if request.split('#')[0] == "GETINFO":
-                            self.send(dbm.GetLoginInfo(request.split('#')[1]))
-
-                            """the login continues"""
-
-
-
+                            if password_hash == "248f14d5b74dae0d2c317188f3d4484a52f0538aac05ba25d0b32c578b455b21" and \
+                                            request.split('#')[1] == "coby567":  # means this is the admin
+                                self.send(dbm.GetLoginInfo(request.split('#')[1]) + "$")
+                            else:
+                                self.send(dbm.GetLoginInfo(request.split('#')[1]))
                         else:
                             print "from server: Reset"
                             self.send("Reset")
+                    elif request.split('#')[0] == "CHECKIFEXISTS":
+                        username = request.split('#')[1]
+                        uname_exists = dbm.UnameExists(username)[0]
+                        if not uname_exists:  # means it does not exist
+                            print "0"
+                            self.send("0")
+                            user_info = self.recv().split('#')
+                            dbm.AddInfo(user_info[0], user_info[1], user_info[2], user_info[3], user_info[4])
+                            self.send("Signed up")
+                            dm.CheckifExists(user_info[1])  # creates a folder for the users drive
+
                     elif request.split('#')[0] == "GETKEYFOR":
                         print "GETKEYFOR " + str(request.split("#")[1])
                         self.send(dbm.GetKeyByID(str(request.split('#')[1])))
+
                     elif request.split('#')[0] == "GETALLUSERINFO":
                         print dbm.GetInfoForLock()
                         self.send(dbm.GetInfoForLock())
@@ -136,6 +148,41 @@ class  SessionWithClient(threading.Thread):
                         else:
                             print "from server: Reset after locked file data"
                             self.send("Reset")
+
+                    elif request.split('#')[0] == "GETALLUSERINFO2":  # for deleting a user
+                        self.send(dbm.GetInfoForLock())
+                        user_to_del = self.recv().split('#')[1]
+                        user_info = dbm.ReadInfoByUID(user_to_del)
+                        if dbm.DeleteInfo(user_to_del):
+                            deleted_user_info = user_info.split('#')[1] + " " + user_info.split('#')[2] + \
+                                            " " + user_info.split('#')[3]
+                            dm.deletedir(user_to_del)
+                            self.send("User %s Deleted" % deleted_user_info)
+
+                        else:
+                            self.send("User %s can not be deleted, or does not exist" % user_to_del)
+
+                    elif request.split('#')[0] == "GETALLUSERINFO3":  # for changing user info
+                        self.send(dbm.GetInfoForLock())
+                        change_info = self.recv()
+                        what_to_change = change_info.split('#')[0]
+                        new_item = change_info.split('#')[1]
+                        user_id = change_info.split('#')[2]
+                        if what_to_change == "FNAME":
+                            if dbm.UpdateInfo(1, new_item, user_id):
+                                self.send("1")
+                            else:
+                                self.send("0")
+                        if what_to_change == "LNAME":
+                            if dbm.UpdateInfo(3, new_item, user_id):
+                                self.send("1")
+                            else:
+                                self.send("0")
+                        if what_to_change == "PASS":
+                            if dbm.UpdateInfo(5, new_item, user_id):
+                                self.send("1")
+                            else:
+                                self.send("0")
 
                     elif request.split('#')[0] == "UPLOAD":
                         self.send("ok")
