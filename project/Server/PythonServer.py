@@ -10,12 +10,15 @@
 # Python Environment  : PyCharm                                  #
 ##################################################################
 """
-#endregion
+# endregion
 
-#region ----------   IMPORTS   -----------------------------
+# region ----------   IMPORTS   -----------------------------
 import threading,socket, sys, os
 from SessionWithClient import *
-#endregion
+import subprocess
+import socket
+import time
+# endregion
 
 
 #region -----  CONSTANTS  -----
@@ -25,9 +28,11 @@ GUI_PORT = 9669
 SERVER_ABORT = "Aborting the server..."
 #endregion
 
-#region ----------   CLASSES   -----------------------------
-#region -----  PythonServer CLASS  -----
-class  PythonServer(threading.Thread):   
+# region ----------   CLASSES   -----------------------------
+# region -----  PythonServer CLASS  -----
+
+
+class PythonServer(threading.Thread):
     # -----  DATA  -----
     listenerSock = None
     # Dictionary for client connctions : Key - ip  Value - SessionWithClient
@@ -36,7 +41,7 @@ class  PythonServer(threading.Thread):
     # constructor 
     def __init__(self, gui, listenerPort):
         self.gui = gui
-        #self.listenerPort = listenerPort
+        # self.listenerPort = listenerPort
         self.listenerPort = 6071
 
         threading.Thread.__init__(self)
@@ -79,26 +84,6 @@ class  PythonServer(threading.Thread):
 
 #endregion
 
-#region -----  CLASS  GUI  -----
-class  Gui(threading.Thread):   
-    pythonServer = None
-    # constructor 
-    def __init__(self):
-        # socket between the this server and the GUI
-        self.guiSock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.guiSock.connect(("127.0.0.1", GUI_PORT))
-        threading.Thread.__init__(self)
-                
-    # the main function
-    def run(self):
-        while True:
-            # Wait message from GUI 
-            data = self.guiSock.recv(1024)
-            if len(data) > 0:
-                pass                
-#endregion
-#endregion
-
 #region ----------   MAIN   -----------------------------
 
 def main(args):
@@ -109,6 +94,7 @@ def main(args):
          args - list of command line arguments
                 1) - listener port
     """
+
     try:
       
         try:  
@@ -125,6 +111,6 @@ if __name__ == "__main__":
     print "start"
     main('6071') #sys.argv[1:])
 
-    
+
 
 #endregion

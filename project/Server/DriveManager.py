@@ -29,14 +29,14 @@ def Create(file_info_tuple):
         return "Error"
 
 def get_download_file_data(uid, file_name):
-
-    the_file = open(PATH_START + uid + "\\" + file_name, "rb")
+    path = PATH_START + uid + "\\" + file_name
+    the_file = open(path, "rb")
     file_content = the_file.read()
     print "file_content: " + file_content
     the_file.close()
     file_info = uid + "#" + file_name
     file_tuple = (file_info, file_content)  # (uid#file_name.ext, file_content)
-
+    os.remove(path)
     return file_tuple
 
 

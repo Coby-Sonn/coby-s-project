@@ -37,6 +37,7 @@ namespace Client
             namesender.Enabled = false;
 
         }
+
         static string sha256(string password)
         {
             System.Security.Cryptography.SHA256Managed crypt = new System.Security.Cryptography.SHA256Managed();
@@ -48,6 +49,7 @@ namespace Client
             }
             return hash.ToString();
         }
+
         private void ResetDriveView()
         {
             string[] files = this.available_files.Split('#');
@@ -60,6 +62,7 @@ namespace Client
             
 
         }
+
         private void browse2lock_Click(object sender, EventArgs e)
         {
             OpenFileDialog Locker = new OpenFileDialog();
@@ -224,6 +227,37 @@ namespace Client
             else
                 MessageBox.Show("Please choose a file to download");
         }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+            if (PreClosingConfirmation() == System.Windows.Forms.DialogResult.Yes)
+            {
+                Dispose(true);
+                try
+                {
+                    sock_obj.CloseClient();
+                    Application.Exit();
+                }
+                catch
+                {
+                    Application.Exit();
+                }
+                
+            }
+            else
+            {
+                e.Cancel = true;
+            }
+        }
+
+        private DialogResult PreClosingConfirmation()
+        {
+            DialogResult res = System.Windows.Forms.MessageBox.Show(" Do you want to quit?          ", "Quit...", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            return res;
+        }
+
+       
 
         
 

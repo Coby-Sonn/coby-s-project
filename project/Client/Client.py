@@ -2,16 +2,20 @@ import socket
 from ClientCrypto import *
 from AES import *
 import subprocess
+import Error
 
 # region ----------   CONSTANTS   ---------------------------------------------------------------
 """remote server data"""
-SERVER_ADDRESS = '10.100.102.6'             # The default target server ip
+SERVER_ADDRESS = '192.168.4.127'             # The default target server ip
 SERVER_PORT = 6071                      # The default target server port
 PROT_START = "Hello"
 
 """local communication stream (withClientEngine.py)"""
 COMMUNICATION_HOST = "0.0.0.0"
 COMMUNICATION_PORT = 8484
+
+"""max number of attempted connection"""
+MAX_CONNECTIONS = 1
 
 # endregion
 
@@ -36,9 +40,18 @@ class Client(object):
 
     # ==================================================================================================
     def start(self):
-        # print "started start"
-        self.socket.connect((SERVER_ADDRESS, SERVER_PORT))
-        print "connected"
+        i = 0
+        while i < MAX_CONNECTIONS:
+            try:
+                self.socket.connect((SERVER_ADDRESS, SERVER_PORT))
+                print "connected"
+                break
+            except:
+                i += 1
+        if i == MAX_CONNECTIONS or i > MAX_CONNECTIONS:
+            Error.server_error_msg()
+            return
+
         self.socket.send('Hello\r\n')
         data = self.socket.recv(LEN_UNIT_BUF).split(END_LINE)[0]
         if not self.verify_hello(data):
@@ -46,8 +59,12 @@ class Client(object):
             return
         if Crypto().key_exchange(self.key, self.socket):
             print "finished key exchange"
-            subprocess.Popen("ClientEngine.py 1", shell=True)
-            socket_obj = local_python_communication()
+            try:
+                subprocess.Popen("ClientEngine.py 1", shell=True)
+            except:
+                Error.error_msg()
+                return
+            socket_obj = LocalPythonCommunication()
             socket_obj.StartServer()
             i = 0
             while True:
@@ -62,12 +79,6 @@ class Client(object):
                 socket_obj.Send(answer)
                 print "from client " + answer + " answer %d" % i
 
-
-
-
-
-
-   
     def send(self, msg):
         self.socket.send(encryptAES(self.key, msg))
 
@@ -77,12 +88,10 @@ class Client(object):
 # ======================================================================================================
 
 
-class local_python_communication():
-
+class LocalPythonCommunication():
     def __init__(self):
 
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
 
     def StartServer(self):
 
@@ -99,7 +108,6 @@ class local_python_communication():
         return self.local_socket.recv(1024)
 
     def CloseServer(self):
-
         self.local_socket.close()
         self.socket.close()
 
@@ -111,4 +119,4 @@ def main():
 if __name__ == "__main__":
     print "start"
     main()
-print "done."
+

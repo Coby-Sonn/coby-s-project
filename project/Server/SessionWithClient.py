@@ -139,8 +139,14 @@ class  SessionWithClient(threading.Thread):
 
                     elif request.split('#')[0] == "UPLOAD":
                         self.send("ok")
-                        file_info_tuple = pickle.loads(self.recv())  #(uid#file_name.ext, file_content)
-                        result = dm.Create(file_info_tuple)
+                        print "here"
+                        # file_info_tuple = pickle.loads(self.recv())  #(uid#file_name.ext, file_content)
+                        first = self.recv()
+                        self.send("ok")
+                        second = self.recv()
+
+                        print "stuck here"
+                        result = dm.Create((first, second))
                         print "from server: " + result
                         self.send(result)
 
@@ -160,6 +166,7 @@ class  SessionWithClient(threading.Thread):
                         print file_info_tuple
                         print "here"
                         self.send(pickle.dumps(file_info_tuple))
+
 
 
 

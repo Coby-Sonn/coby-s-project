@@ -1,7 +1,6 @@
 import os
 
-ADDR_START = "TheDrive\\"
-PATH_START = "C:\\"
+
 
 def get_upload_file_data(uid, file_path):
 

@@ -11,17 +11,30 @@ import socket
 import DriveManager as dm
 import File_Manager as fm
 import pickle
+import os
+import Error
+import subprocess
 
 # Socket class for gui communication
 HOST = "0.0.0.0"
-PORT = 12381
+PORT = 12382
 
-# local_python_communication class (with Client.py)
-IP = "10.100.102.6"  # a local ip
+# LocalPythonCommunication class (with Client.py)
+IP = ""  # a local ip, run my_ip() to get it
 COM_PORT = 8484
 
+MAX_CONNECTIONS = 3
 
-class local_python_communication():
+
+def my_ip():
+    output = subprocess.check_output(['cmd.exe', '/c ipconfig'])
+    output=output[output.find("Ethernet adapter Local Area Connection:"):]
+    output=output[output.find("IPv4 Address"):]
+    output=output[output.find(":")+1:]
+    ip=output[:15].strip()
+    return ip.split('\r\n')[0]
+
+class LocalPythonCommunication():
 
     def __init__(self):
 
@@ -32,11 +45,11 @@ class local_python_communication():
         i = 0
         while not connected and i != 5:
             try:
-                self.local_socket.connect((IP, COM_PORT))
+                self.local_socket.connect((my_ip(), COM_PORT))
                 connected = True
             except: i += 1
         if i >= 5:
-            print "Connection error, make sure the server is running"
+            Error.error_msg()
             """ look for the ip again, gil sent a func that gets an ip (the servers ip) by the mac address """
 
 
@@ -55,7 +68,6 @@ class local_python_communication():
 
 
 class Socket:
-
     def __init__(self):
 
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -82,7 +94,7 @@ class Socket:
 
     def Communicate(self):
         i = 1
-        local_socket_obj = local_python_communication()
+        local_socket_obj = LocalPythonCommunication()
         local_socket_obj.StartClient()
         while True:
             print i
@@ -174,12 +186,13 @@ class Socket:
                         local_socket_obj.Send("UPLOAD#")
                         ack = local_socket_obj.Recv()
                         if ack == "ok":
-                            local_socket_obj.Send(pickle.dumps(file_data_tuple))
+                            print "here---------------------------------------------------------"
+                            pickled_info = pickle.dumps(file_data_tuple)
+                            local_socket_obj.Send(pickled_info)
                             ack = local_socket_obj.Recv()
+                            print "ack: " + ack
                             if ack == "File Successfully Uploaded":
-
-                                """DELETE THE FILE"""
-
+                                os.remove(path)
                                 self.Send(ack)
                             else:
                                 self.Send("An error has occurred, please try again.")
