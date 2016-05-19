@@ -17,7 +17,7 @@ import subprocess
 
 # Socket class for gui communication
 HOST = "0.0.0.0"
-PORT = 12244
+PORT = 12243
 
 # LocalPythonCommunication class (with Client.py)
 IP = ""  # a local ip, run my_ip() to get it
@@ -28,10 +28,10 @@ MAX_CONNECTIONS = 3
 
 def my_ip():
     output = subprocess.check_output(['cmd.exe', '/c ipconfig'])
-    output=output[output.find("Ethernet adapter Local Area Connection:"):]
-    output=output[output.find("IPv4 Address"):]
-    output=output[output.find(":")+1:]
-    ip=output[:15].strip()
+    output = output[output.find("Ethernet adapter Local Area Connection:"):]
+    output = output[output.find("IPv4 Address"):]
+    output = output[output.find(":")+1:]
+    ip = output[:15].strip()
     return ip.split('\r\n')[0]
 
 class LocalPythonCommunication():
@@ -45,7 +45,8 @@ class LocalPythonCommunication():
         i = 0
         while not connected and i != 5:
             try:
-                self.local_socket.connect((my_ip(), COM_PORT))
+
+                self.local_socket.connect(("10.92.5.20", COM_PORT))
                 connected = True
             except: i += 1
         if i >= 5:

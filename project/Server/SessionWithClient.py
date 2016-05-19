@@ -184,7 +184,7 @@ class  SessionWithClient(threading.Thread):
                             else:
                                 self.send("0")
 
-                    elif request.split('#')[0] == "UPLOAD":
+                    elif request.split('#')[0] == "UPLOAD":  # user uploading file to server
                         self.send("ok")
                         print "here"
                         # file_info_tuple = pickle.loads(self.recv())  #(uid#file_name.ext, file_content)
@@ -204,6 +204,7 @@ class  SessionWithClient(threading.Thread):
                         files_string = ""
                         for saved_file in files_list:
                             files_string += saved_file + "#"
+                        print files_string
                         self.send(files_string)
 
                     elif request.split('#')[0] == "DOWNLOAD":

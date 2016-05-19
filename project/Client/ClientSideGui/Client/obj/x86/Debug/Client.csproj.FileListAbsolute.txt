@@ -16,3 +16,5 @@ C:\Users\David\Desktop\coby-s-project\project\Client\ClientSideGui\Client\obj\x8
 C:\Users\David\Desktop\coby-s-project\project\Client\ClientSideGui\Client\obj\x86\Debug\Client.csproj.GenerateResource.Cache
 C:\Users\David\Desktop\coby-s-project\project\Client\ClientSideGui\Client\obj\x86\Debug\Client.csprojResolveAssemblyReference.cache
 C:\Users\David\Desktop\coby-s-project\project\Client\ClientSideGui\Client\obj\x86\Debug\Client.AdminSaveFile.resources
+C:\Users\User\Desktop\coby-s-project\project\Client\ClientSideGui\Client\obj\x86\Debug\Client.csprojResolveAssemblyReference.cache
+C:\Users\User\Desktop\coby-s-project\project\Client\ClientSideGui\Client\obj\x86\Debug\Client.AdminSaveFile.resources

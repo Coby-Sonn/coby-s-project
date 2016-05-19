@@ -32,8 +32,6 @@ namespace Client
             this.my_lname = user_info.Split('$')[2];
             this.available_files = user_info.Split('$')[3];
             ResetDriveView();
-
-            
             namesender.Enabled = false;
 
         }

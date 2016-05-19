@@ -18,11 +18,12 @@ namespace Client
         private string my_fname;
         private string my_lname;
         private string file_to_lock;
+        private string file_to_upload;
+        private string available_files;
         private List<string> uid_list = new List<string>();
         private string to_send;
         public SocketClient sock_obj;
-        private string file_to_upload;
-        private string available_files;
+        
        
         
         
@@ -39,6 +40,7 @@ namespace Client
 
         private void ResetDriveView()
         {
+            MessageBox.Show("here");
             string[] files = this.available_files.Split('#');
             DownloadableBox.BeginUpdate();
             foreach (string file in files)

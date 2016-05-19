@@ -6,7 +6,7 @@ import Error
 
 # region ----------   CONSTANTS   ---------------------------------------------------------------
 """remote server data"""
-SERVER_ADDRESS = '192.168.4.127'             # The default target server ip
+SERVER_ADDRESS = '10.92.5.20'             # The default target server ip
 SERVER_PORT = 6071                      # The default target server port
 PROT_START = "Hello"
 
